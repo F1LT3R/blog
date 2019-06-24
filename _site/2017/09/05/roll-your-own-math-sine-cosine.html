@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Roll Your Own Math - Sine &amp; Cosine | F1LT3R</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Roll Your Own Math - Sine &amp; Cosine" />
+<meta name="author" content="Alistair MacDonald" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="For years I have been using JavaScript’s Math.sin() and Math.cos() to create games, animations and interactive graphs on the &lt;canvas&gt; element. But how do Sine and Cosine work? I had to know…" />
+<meta property="og:description" content="For years I have been using JavaScript’s Math.sin() and Math.cos() to create games, animations and interactive graphs on the &lt;canvas&gt; element. But how do Sine and Cosine work? I had to know…" />
+<link rel="canonical" href="http://localhost:4000/2017/09/05/roll-your-own-math-sine-cosine.html" />
+<meta property="og:url" content="http://localhost:4000/2017/09/05/roll-your-own-math-sine-cosine.html" />
+<meta property="og:site_name" content="F1LT3R" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-09-05T17:48:55-04:00" />
+<script type="application/ld+json">
+{"description":"For years I have been using JavaScript’s Math.sin() and Math.cos() to create games, animations and interactive graphs on the &lt;canvas&gt; element. But how do Sine and Cosine work? I had to know…","author":{"@type":"Person","name":"Alistair MacDonald"},"@type":"BlogPosting","url":"http://localhost:4000/2017/09/05/roll-your-own-math-sine-cosine.html","headline":"Roll Your Own Math - Sine &amp; Cosine","dateModified":"2017-09-05T17:48:55-04:00","datePublished":"2017-09-05T17:48:55-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/09/05/roll-your-own-math-sine-cosine.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="F1LT3R" /><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
+</head>
+<body class="">
+    <!-- <video autoplay muted loop id="myVideo">
+        <source src="https://i.imgur.com/lBSSjpo.mp4" type="video/mp4">
+     </video> --><header class="site-header wide" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">F1LT3R</a>
+    <!-- <div class="ident">
+      <img class="logo" src="/img/site/f1lt3r-logo.svg"/>
+    </div>
+     -->
+
+    <!-- <div id="search-container">
+        <input type="text" id="search-input" placeholder="search...">
+        <ul id="results-container"></ul>
+    </div>
+    <script src="/js/search-script.js" type="text/javascript"></script>
+    <script>
+    SimpleJekyllSearch({
+      searchInput: document.getElementById('search-input'),
+      resultsContainer: document.getElementById('results-container'),
+      json: '/search.json'
+    })
+    </script> --><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/bio/">Bio</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="feature-image"> 
+    <div class="img" style="background-image: url('https://media1.giphy.com/media/3Omg3IWyAVqZq/giphy.gif?cid=790b76115d0cf9c4647862436b9be218&rid=giphy.gif'); width:100%;"></div>
+  </div> 
+
+  <header class="post-header">
+    <!-- <img class="feature-image" src="https://media1.giphy.com/media/3Omg3IWyAVqZq/giphy.gif?cid=790b76115d0cf9c4647862436b9be218&rid=giphy.gif"/> -->
+    <h1 class="post-title p-name" itemprop="name headline">Roll Your Own Math - Sine &amp; Cosine</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-09-05T17:48:55-04:00" itemprop="datePublished">Sep 5, 2017
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>For years I have been using JavaScript’s <code class="highlighter-rouge">Math.sin()</code> and <code class="highlighter-rouge">Math.cos()</code>  to create games, animations and interactive graphs on the <code class="highlighter-rouge">&lt;canvas&gt;</code> element. But how do Sine and Cosine work? I had to know…</p>
+
+<h2 id="tldr">TLDR;</h2>
+
+<p>Don’t like reading? Click the image below to see the code running on Github pages:</p>
+
+<p><a href="https://f1lt3r.github.io/roll-your-own-math-sine-cosine/"><img src="/content/images/2017/09/sine-cosine-play-demo.png" alt="Drawing a Circle with Custom Sine Cosine Functions" /></a></p>
+
+<h2 id="bad-weekend">Bad Weekend</h2>
+
+<p>I was having a bad weekend. I was frustrated with whatever I was working on during the week, and I had got it into my head that I was possibly the worst programmer I had ever met.</p>
+
+<p>(I don’t know about you, but find it pretty easy to beat myself up if I can’t figure out “the next best thing” without trying.)</p>
+
+<p>So the second stupid thing I got into my head, was that the only solution to overcoming my woes was to understand how Sine and Cosine worked, as quickly as possible.</p>
+
+<h2 id="the-rules">The Rules</h2>
+
+<p>I felt like if I could re-create the Sine and Cosine functions using only simple math operators, then I would “know” where the magic was, thank God.</p>
+
+<ul>
+  <li>Add <code class="highlighter-rouge">+</code></li>
+  <li>Subtract <code class="highlighter-rouge">-</code></li>
+  <li>Multiply <code class="highlighter-rouge">*</code></li>
+  <li>Divide <code class="highlighter-rouge">/</code></li>
+</ul>
+
+<h2 id="the-research">The Research</h2>
+
+<p>I hit up all the usual suspects: Wikipedia, <a href="https://mathoverflow.net/">MathOverflow</a>, and <a href="https://www.reddit.com/r/mathematics/">Reddit Mathematics</a>; and as usual, I got assaulted with more indecipherable squirrely symbols.</p>
+
+<p>Surprisingly, <a href="https://www.quora.com/How-do-I-calculate-cos-sine-etc-without-a-calculator">Quora</a> seemed to have a good start on things. Math Samurai <a href="https://www.quora.com/profile/David-Joyce-11">“David Joyce”</a> went to the effort of explaining the Math quite clearly.</p>
+
+<p><img src="/content/images/2017/09/sine-cosine-math-explained-by-david-joyce.png" alt="sine-cosine-math-explained-by-david-joyce" /></p>
+
+<p>But I still didn’t <em>get it</em>.</p>
+
+<p>Eventually, I stumbled upon a treasure-trove of intuitive math information from Kalid Azad at <a href="https://betterexplained.com/">BetterExplained.com</a>. (You have to <a href="https://betterexplained.com/">read this guy’s website</a>, it’s AMAZING!). His article on the <a href="https://betterexplained.com/articles/intuitive-understanding-of-sine-waves/">Intuitive Understand of Sine Waves</a> was the exact information I needed. I had to re-read it, a lot, but it finally clicked!</p>
+
+<p><img src="/content/images/2017/09/sine-better-models-better-explained.png" alt="sine-better-models-better-explained" /></p>
+
+<h2 id="learning-a-few-things">Learning a Few Things</h2>
+
+<p>It became apparent that rolling-my-own Sine and Cosine functions with basic math operators would require “rolling-a-few-more-of-my-own” math functions than I had expected. <a href="http://lmgtfy.com/?q=meadow+muffins">Meadow muffins</a>!</p>
+
+<p>Taking account of the damage:</p>
+
+<ul>
+  <li>Powers</li>
+  <li>Factorials</li>
+  <li>Infinite Series</li>
+  <li>Restoring Forces</li>
+</ul>
+
+<p>To truly understand how Sine and Cosine work, it will help to first understand what these math functions do. Let us take a quik look.</p>
+
+<h2 id="understanding-powers">Understanding Powers</h2>
+
+<p>Probably the easiest to understand is the power. A Power is a number, multiplied by itself. The number that we want to multiply is called the “base”. And the value that we want to multiply it by, is called the “exponent” or the “power”.</p>
+
+<p>Powers are often represented in code with a circumflex character, for example, <code class="highlighter-rouge">base ^ power</code> or <code class="highlighter-rouge">2 ^ 3</code>, which is the same as saying <em>“two-to-the-third”</em> or <em>“2 to the 3rd power”</em>.</p>
+
+<p>Lets run through some examples: <code class="highlighter-rouge">2^1</code> (two-to-the-power-of-one), is “two”; which is the same as saying: two times one equals two.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">2</span>
+</code></pre></div></div>
+
+<p>And <code class="highlighter-rouge">2^2</code> (two-to-the-power-of-two), is the same as saying: two times two.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mi">4</span>
+</code></pre></div></div>
+
+<p>And <code class="highlighter-rouge">2^3</code> (two-to-the-power-of-three), is the same as saying: two times two, times two.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">=</span> <span class="mi">8</span>
+</code></pre></div></div>
+
+<p>You may know that the values of binary digits, (the 1’s and 0’s that make up base language of computers), are all powers of two:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2</span><span class="o">^</span><span class="mi">1</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="mi">2</span><span class="o">^</span><span class="mi">2</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="mi">2</span><span class="o">^</span><span class="mi">3</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="mi">2</span><span class="o">^</span><span class="mi">4</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="mi">2</span><span class="o">^</span><span class="mi">5</span> <span class="o">=</span> <span class="mi">32</span>
+<span class="mi">2</span><span class="o">^</span><span class="mi">6</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="mi">2</span><span class="o">^</span><span class="mi">7</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="mi">2</span><span class="o">^</span><span class="mi">8</span> <span class="o">=</span> <span class="mi">256</span>
+</code></pre></div></div>
+
+<p>Putting this together in JavaScript might look something like this:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Example: let base = 2 and exponent = 3</span>
+<span class="kd">const</span> <span class="nx">power</span> <span class="o">=</span> <span class="p">(</span><span class="nx">base</span><span class="p">,</span> <span class="nx">exponent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+
+	<span class="c1">// Initialize return value with 2</span>
+	<span class="c1">// Eg: let val = 2</span>
+	<span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">base</span>
+
+	<span class="c1">// Initialize counter</span>
+	<span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+	<span class="c1">// While counter is lower than exponent</span>
+	<span class="c1">// Eg: while (0 &lt; 2)...</span>
+	<span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">exponent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+		<span class="c1">// Multiple the return value by the base</span>
+		<span class="c1">// Eg: 2 * 2 = 4 (val is now 4)</span>
+		<span class="nx">val</span> <span class="o">*=</span> <span class="nx">base</span>
+		<span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+	<span class="c1">// Repeat until we have multiplied the base</span>
+	<span class="c1">// by "n"-times (where "n" is the exponent)</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">val</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The next time we iterate the while loop, multiplying the base by the exponent, our values will have changed like so:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// While counter is lower than exponent</span>
+<span class="c1">// Eg: while (1 &lt; 2)...</span>
+<span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">exponent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+
+	<span class="c1">// Multiple the return value by the base</span>
+	<span class="c1">// Eg: 2 * 2 * 2 = 8 (val is now 8)</span>
+	<span class="nx">val</span> <span class="o">*=</span> <span class="nx">base</span>
+    <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+<span class="c1">// Exit the loop because `i = exponent - 1`)</span>
+<span class="c1">// Eg: 2 = 3 - 1</span>
+</code></pre></div></div>
+
+<p>Sometimes it is hard to visualize what the loop is doing. One way to make things clearer is to read out the values of the loop; that code might look something like this:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">power</span> <span class="o">=</span> <span class="p">(</span><span class="nx">base</span><span class="p">,</span> <span class="nx">exponent</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">base</span>
+	<span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span>
+
+	<span class="c1">// LOG OUTPUT</span>
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span>
+
+	<span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">exponent</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">val</span> <span class="o">*=</span> <span class="nx">base</span>
+		<span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+		<span class="c1">// LOG OUTPUT</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">power</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The code above would log something like the following output:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">i</span><span class="p">,</span> <span class="nx">val</span>
+<span class="mi">0</span><span class="p">,</span> <span class="mi">2</span>
+<span class="mi">1</span><span class="p">,</span> <span class="mi">4</span>
+<span class="mi">2</span><span class="p">,</span> <span class="mi">8</span>
+<span class="mi">3</span><span class="p">,</span> <span class="mi">16</span>
+<span class="mi">4</span><span class="p">,</span> <span class="mi">32</span>
+<span class="mi">5</span><span class="p">,</span> <span class="mi">64</span>
+<span class="mi">6</span><span class="p">,</span> <span class="mi">128</span>
+<span class="mi">7</span><span class="p">,</span> <span class="mi">256</span>
+</code></pre></div></div>
+
+<h2 id="understanding-factorials">Understanding Factorials</h2>
+
+<p>With “Power” out of the way, let us take a peek at Factorial. A <em>“Factorial”</em> is usually represented with a <em>explamation</em>, for example, <code class="highlighter-rouge">5!</code>, which is the same as saying <em>“five-factorial”</em>.</p>
+
+<p>The factorial is an integer number (a whole number), multiplied by all of the integer numbers lower than it. For example, the calculation for <code class="highlighter-rouge">3!</code> (three-factorial) would look like this:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">3</span><span class="o">!</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">6</span>
+</code></pre></div></div>
+
+<p>In turn, the calculation for <code class="highlighter-rouge">5!</code> (five-factorial) would look like this:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">5</span><span class="o">!</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">=</span> <span class="mi">120</span>
+</code></pre></div></div>
+
+<p>Here is one way to calculate the factorial in JavaScript. I have added console logs to the code, so we can get a better idea of what is going on:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">factoral</span> <span class="o">=</span> <span class="nx">n</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">n</span>
+
+	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span>
+
+	<span class="k">while</span> <span class="p">(</span><span class="nx">n</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">val</span> <span class="o">*=</span> <span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span>
+		<span class="nx">n</span> <span class="o">-=</span> <span class="mi">1</span>
+
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span> <span class="nx">val</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">val</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">f5</span> <span class="o">=</span> <span class="nx">factoral</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`5! = </span><span class="p">${</span><span class="nx">f5</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The output looks something like this:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">i</span><span class="p">,</span> <span class="nx">val</span>
+<span class="mi">5</span><span class="p">,</span> <span class="mi">5</span>
+<span class="mi">4</span><span class="p">,</span> <span class="mi">20</span>
+<span class="mi">3</span><span class="p">,</span> <span class="mi">60</span>
+<span class="mi">2</span><span class="p">,</span> <span class="mi">120</span>
+<span class="mi">5</span><span class="o">!</span> <span class="o">=</span> <span class="mi">120</span>
+</code></pre></div></div>
+
+<p>Breaking this down, we can see that this function iterates backwards. As with the Power function, we initialize our value outside of the loop, so the <code class="highlighter-rouge">while</code> statement does not count down to 1.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">factoral</span> <span class="o">=</span> <span class="nx">n</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">n</span>
+	<span class="c1">// Eg: val = 5</span>
+
+	<span class="c1">// The factorial for 1 is "1", so we</span>
+	<span class="c1">// gain nothing from solving for "1"</span>
+	<span class="k">while</span> <span class="p">(</span><span class="nx">n</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">val</span> <span class="o">*=</span> <span class="nx">n</span> <span class="o">-</span> <span class="mi">1</span>
+		<span class="cm">/* Eg:
+			n-1 = 4
+			val = val * 4
+			val = 5 * 4
+			val = 20
+		*/</span>
+
+		<span class="c1">// Count backwards from 5 to 2.</span>
+		<span class="nx">n</span> <span class="o">-=</span> <span class="mi">1</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nx">val</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">f5</span> <span class="o">=</span> <span class="nx">factoral</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="infinite-series">Infinite Series</h2>
+
+<p>Understanding the Infinite Series was where things got exciting for me. The concept is pretty simple: a series is “the operation of adding infinitely many quantities, one after the other, to a given starting quantity.” - <a href="https://en.wikipedia.org/wiki/Series_(mathematics)">Wikipedia</a></p>
+
+<p>In a simple sense, could express this like so:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">sum</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">+</span> <span class="p">...</span> <span class="p">(</span><span class="nx">to</span><span class="o">-</span><span class="nx">infinity</span><span class="o">!</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>But we could also express a series of more complicated functions, for example, a series of Power functions:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">sum</span> <span class="o">=</span> <span class="mi">1</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">4</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="p">...</span> <span class="p">(</span><span class="nx">to</span><span class="o">-</span><span class="nx">infinity</span><span class="o">!</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>But the series does not have to use power functions; we could use anything we like.</p>
+
+<h3 id="why-infinite">Why Infinite?</h3>
+
+<p>You might also be wondering what the “infinite” in “infinite series” means. Infinite in this sense is not to say we will try to calculate an infinite value! (That would be impossible). But the term <em>“infinite-series”</em> expresses the idea: that if we continued to determine the value for next step in our series, we would continue to find more values. We could keep running the function forever and get new results each time.</p>
+
+<p>In this way, we might be able to think our Power-function is an infinite series and our Integer Factorial function as a finite series. The power keeps getting bigger each step we add, and the integer-factorial gets smaller until we run out of steps.</p>
+
+<p>The infinite series that we will use to generate our Sine and Cosine waves will require us to stop and read out the value at some point. The point at which we will stop is called the <em>“precision.”</em></p>
+
+<p>Note: that if we let the series run, we will be forced to stop at a certain percision anyway, because we will run out of decimal places to divide into.</p>
+
+<h2 id="restoring-forces">Restoring Forces</h2>
+
+<p>A restoring force is a force that pushes back on an impulse, eventually regaining equilibrium. For example: if you are driving a car west, against a steadily increasing easterly wind, you will have to put your foot down harder and harder on the pedal to maintain your speed. In this way, the wind is a restoring force.</p>
+
+<p>Perhaps a better example is gravity. The equilibrium of a ball sitting on the ground gets broken by the “impulse” of throwing a ball into the air, and then “restored” by the force of gravity pulling it back to the earth.</p>
+
+<p>We need a restoring force to generate a Sine wave.</p>
+
+<h2 id="generating-a-sine-wave">Generating a Sine Wave</h2>
+
+<p>Khalid’s post on the <a href="https://betterexplained.com/articles/intuitive-understanding-of-sine-waves/">Inuitive Understanding of Sine Waves</a> is particularly helpful in understanding how to put the calculations together to generate a Sine Wave. We could express the restoring-force calculation in pseudo code like this:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">y</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">-</span> <span class="p">(</span><span class="nx">x</span><span class="o">^</span><span class="mi">3</span> <span class="o">/</span> <span class="mi">3</span><span class="o">!</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">x</span><span class="o">^</span><span class="mi">5</span> <span class="o">/</span> <span class="mi">5</span><span class="o">!</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nx">x</span><span class="o">^</span><span class="mi">7</span> <span class="o">/</span> <span class="mi">7</span><span class="o">!</span><span class="p">)</span> <span class="p">...</span> <span class="p">(</span><span class="nx">to</span> <span class="nx">infinity</span><span class="o">!</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In the pseudo code example, you can see that we calculate a function in an infinite series, but pay attention to the plus <code class="highlighter-rouge">+</code> and minus <code class="highlighter-rouge">-</code>. The first time we run the function we subtract the result, and the second time we run the function we add the resulting value, and we keep going like this, back and forth, over and over; creating our restorative force.</p>
+
+<p>We know that each time we raise a number to the power, it gets larger, and so our function returns an increasingly greater number as the series continues. And we also know that the factorial produces a larger number, as its initial value gets raised too. Does this mean the number gets larger?</p>
+
+<p>No: because the series flips between addition and subtraction of the result, so the number is continually refined (until we reach precision). As we increase the precision (the number of steps in the series), we change how the restorative force effects the value.</p>
+
+<p>If we run the psuedo code above in the NodeJS console, we can watch the impulse and the restorative force in action as we add each step in the series.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">-</span> <span class="p">(</span><span class="nx">x</span><span class="o">^</span><span class="mi">3</span> <span class="o">/</span> <span class="mi">3</span><span class="o">!</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">x</span><span class="o">^</span><span class="mi">5</span> <span class="o">/</span> <span class="mi">5</span><span class="o">!</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nx">x</span><span class="o">^</span><span class="mi">7</span> <span class="o">/</span> <span class="mi">7</span><span class="o">!</span><span class="p">)</span>
+
+<span class="o">&gt;</span> <span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="nx">fact</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="mf">0.6666666666666667</span>
+<span class="o">&gt;</span> <span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="nx">fact</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">/</span> <span class="nx">fact</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="mf">0.9333333333333333</span>
+<span class="o">&gt;</span> <span class="mi">2</span> <span class="o">-</span> <span class="p">(</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="nx">fact</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">/</span> <span class="nx">fact</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="o">/</span> <span class="nx">fact</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
+<span class="mf">0.9079365079365079</span>
+</code></pre></div></div>
+
+<p>We can look at the values of the calculations we did above in this following table. You can see that as the series increases, and the powers and factorials increase, the sum value decreases! So as we raise the precision, the impulses and restorative forces decrease; refining the value by smaller and smaller amounts.</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-05-at-11.06.47-AM.png" alt="Sine Wave table" /></p>
+
+<p>So this <em>back-and-forth</em> is what generates the sine wave. And the more back-and-forth we have, (the more steps of precision we have), the longer our Sine wave extends.</p>
+
+<p>This following CodePen plots the precision from 0 to 10. As the precision increases, and the steps in our series increase, we have more and more restorative forces acting upon the value, and so the wave “gets wavier” the more preceision we add.</p>
+
+<p data-height="300" data-theme-id="dark" data-slug-hash="yowgwE" data-default-tab="result" data-user="F1LT3R" data-embed-version="2" data-pen-title="Roll Your Own Math - Sine" class="codepen">See the Pen <a href="https://codepen.io/F1LT3R/pen/yowgwE/">Roll Your Own Math - Sine</a> by f1lt3r (<a href="https://codepen.io/F1LT3R">@F1LT3R</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async="" src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>The important thing to consider here is that the longer the sine wave is that we want to plot, the higher the precision (steps in our series) will need to be in order for the wave to be pulled back across the center line. At some point, our wave will eventually escape gravity and shoot off the chart.</p>
+
+<p>This concept might be a little clearer if we plot the precision of Sine and Cosine together as if we are trying to draw a circle. This following image plots precision 1 - 10. As the precision increases, the line progresses further around the circle before escaping. This plot also makes it easier to see the effect of ending the series calculation on a plus <code class="highlighter-rouge">+</code> versus a minus <code class="highlighter-rouge">-</code>, as you can see the line shoot off towards the top or bottom of the image respectively.</p>
+
+<p><img src="/content/images/2017/09/sine-precision.png" alt="Plot increasing precision of Sine and Cosine" /></p>
+
+<p>We can see that it takes about 8 steps in our series to complete the circle. With need for increased precision in mind we might ask the question:</p>
+
+<blockquote>
+  <p>“How many steps in my series do I need to calculate a Sine wave of n-length?”</p>
+</blockquote>
+
+<p>Fortunately we do not have to answer this question. We can use a little trick. We know that the 360 degrees of a circle are made up of approximately <code class="highlighter-rouge">~6.283</code> radians. So the value of <code class="highlighter-rouge">x</code> at <code class="highlighter-rouge">2π</code>, is the same as the value of <code class="highlighter-rouge">x</code> at <code class="highlighter-rouge">0</code>. So rather than increasing the precision of our series, we can confine the value of <code class="highlighter-rouge">x</code> to <code class="highlighter-rouge">2π</code>.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">series</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">offset</span><span class="p">,</span> <span class="nx">precision</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="c1">// Constrain x to PI * 2 so that we don't need</span>
+	<span class="c1">// to add more precision as x increases</span>
+	<span class="nx">x</span> <span class="o">%=</span> <span class="nx">PI2</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="making-circles">Making Circles</h2>
+
+<p>Putting things together we can create a function that executes our series to a given precision.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">series</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">offset</span><span class="p">,</span> <span class="nx">precision</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="c1">// Constrain x to PI * 2 so that we don't need</span>
+	<span class="c1">// to add more precision as x increases</span>
+	<span class="nx">x</span> <span class="o">%=</span> <span class="nx">PI2</span>
+
+	<span class="c1">// Count the steps with `n`</span>
+	<span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="mi">0</span>
+
+	<span class="c1">// Set the impulse force</span>
+	<span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">x</span>
+
+	<span class="c1">// Until we reach our precision...</span>
+	<span class="k">while</span> <span class="p">(</span><span class="nx">n</span> <span class="o">&lt;</span> <span class="nx">precision</span><span class="p">)</span> <span class="p">{</span>
+		<span class="c1">// Calculate the step: [3, 5, 7, ...], [2, 4, 8, ...]</span>
+		<span class="kd">const</span> <span class="nx">step</span> <span class="o">=</span> <span class="nx">offset</span> <span class="o">+</span> <span class="p">(</span><span class="nx">n</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+
+		<span class="c1">// Calculate the sum for the current step in the series</span>
+		<span class="kd">const</span> <span class="nx">pow</span> <span class="o">=</span> <span class="nx">power</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">step</span><span class="p">)</span>
+		<span class="kd">const</span> <span class="nx">fact</span> <span class="o">=</span> <span class="nx">factorial</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span>
+		<span class="kd">const</span> <span class="nx">sum</span> <span class="o">=</span> <span class="nx">pow</span> <span class="o">/</span> <span class="nx">fact</span>
+
+		<span class="c1">// Apply the sum to the value as either an</span>
+		<span class="c1">// Impulse Force or Restorative Force</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+			<span class="nx">val</span> <span class="o">+=</span> <span class="nx">sum</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="nx">val</span> <span class="o">-=</span> <span class="nx">sum</span>
+		<span class="p">}</span>
+
+		<span class="nx">n</span> <span class="o">+=</span> <span class="mi">1</span>
+	<span class="p">}</span>
+
+	<span class="c1">// Return the value after reaching our desired precision</span>
+	<span class="k">return</span> <span class="nx">val</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This <code class="highlighter-rouge">series()</code> function gives us everything we need to create our <code class="highlighter-rouge">sin()</code> function. Oue sine function just calls <code class="highlighter-rouge">series()</code> with the relevant values. To generate a sine wave, we set the offset to 3 and pass the value of x.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">sin</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="kd">const</span> <span class="nx">sineOffset</span> <span class="o">=</span> <span class="mi">3</span>
+	<span class="kd">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">series</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">sineOffset</span><span class="p">,</span> <span class="nx">precision</span><span class="p">)</span>
+	<span class="k">return</span> <span class="nx">value</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="what-about-cosine">What about Cosine?</h3>
+
+<p>Cosine is slightly different. To calculate Cosine we need to make 2 changes to our series. Firstly, the step value is phase-shifted. To provide thie shift in phase, our step values for Sine are <code class="highlighter-rouge">[3, 5, 7, ...]</code> and the step values for Cosine are <code class="highlighter-rouge">[2, 4, 6, ...]</code> and so-on.</p>
+
+<p>Secondly, we do need need an impulse force. Our Sine wave starts with an <code class="highlighter-rouge">x</code> of <code class="highlighter-rouge">0</code> but our Cosine is phase-shifted to 1. This means we need to add the following code to our <code class="highlighter-rouge">series()</code> function.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">series</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">offset</span><span class="p">,</span> <span class="nx">precision</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="c1">// When calculating Cosine, contrain the value</span>
+	<span class="c1">// to `1` (no initial impulse)</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">offset</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">val</span> <span class="o">=</span> <span class="mi">1</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now we can interact with our <code class="highlighter-rouge">series()</code> function to create our Cosine function.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">cos</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="kd">const</span> <span class="nx">cosineOffset</span> <span class="o">=</span> <span class="mi">2</span>
+	<span class="k">return</span> <span class="nx">series</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">cosineOffset</span><span class="p">,</span> <span class="nx">precision</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now we have everything we need to make circles!</p>
+
+<ol>
+  <li>A Power function</li>
+  <li>A Factorial function</li>
+  <li>A Series method that can execute to a given precision</li>
+  <li>Sine and Cosine functions that can run a series</li>
+</ol>
+
+<p>We can not plot a circle with our custom <code class="highlighter-rouge">sin()</code> and <code class="highlighter-rouge">cos()</code> functions.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>const mag = 50
+const rate = 0.3
+let t = 0
+
+const draw = () =&gt; {
+	t += rate
+
+	const x = centerX + (sin(t) * mag)
+	const y = centerY + (cos(t) * mag)
+
+	plot(x, y)
+}
+
+setInterval(draw, 40)
+</code></pre></div></div>
+
+<p>Here is a CodePen example of all these functions together in action:</p>
+
+<p data-height="360" data-theme-id="dark" data-slug-hash="ZJZvOM" data-default-tab="js,result" data-user="F1LT3R" data-embed-version="2" data-pen-title="Roll Your Own Math - Sine &amp; Cosine (Circle)" class="codepen">See the Pen <a href="https://codepen.io/F1LT3R/pen/ZJZvOM/">Roll Your Own Math - Sine &amp; Cosine (Circle)</a> by f1lt3r (<a href="https://codepen.io/F1LT3R">@F1LT3R</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async="" src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>So that is how to Roll Your Own Sine and Cosine.</p>
+
+<p>I must say a big “Thank you!” to Khalid from <a href="https://betterexplained.com/articles/intuitive-understanding-of-sine-waves/">BetterExplained.com</a> who’s blog post helped me understand how the math works.</p>
+
+<p>Thoughts, comments, ideas? Let me know what you think.</p>
+
+
+<div class="sign"><pre>       ___ _ _  ____________
+ ___  | __/ | ||_   ___   _ \
+/___/ | _|| | |__| | |_ \   /
+      |_| |_|____|_||___/_|_\</pre></div><a class="u-url" href="/2017/09/05/roll-your-own-math-sine-cosine.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+  
+  <div class="wrapper">
+    
+    
+    <div class="footer-col-wrapper">
+      
+      <div class="footer-col">
+        <div class="avatar">
+          <img src="/img/site/f1lt3r-avatar.jpg" />
+        </div>
+      </div>
+       
+      <div class="footer-col">
+          <h2 class="footer-heading">F1LT3R</h2>
+          <ul class="contact-list">
+            <li class="p-name">Alistair MacDonald</li><li><a class="u-email" href="mailto:al@pwn.io">al@pwn.io</a></li></ul>
+      </div>
+
+      <div class="footer-col"><ul class="social-media-list"><li><a href="https://github.com/f1lt3r"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">f1lt3r</span></a></li><li><a href="https://instagram.com/f1lt3r"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">f1lt3r</span></a></li><li><a href="https://www.linkedin.com/in/f1lt3r"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">f1lt3r</span></a></li><li><a href="https://www.twitter.com/F1LT3R_"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">F1LT3R_</span></a></li></ul>
+</div>
+
+      <div class="footer-col">
+          <p>An engineering blog</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

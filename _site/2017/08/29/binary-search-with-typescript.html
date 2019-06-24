@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Binary Search with Typescript | F1LT3R</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Binary Search with Typescript" />
+<meta name="author" content="Alistair MacDonald" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="“What is a Binary Search?”, I was asked this week. “I have no idea!”, I replied. I was interested to see if I could understand what a Binary Search was and whether I could write a Binary Search with Typescript." />
+<meta property="og:description" content="“What is a Binary Search?”, I was asked this week. “I have no idea!”, I replied. I was interested to see if I could understand what a Binary Search was and whether I could write a Binary Search with Typescript." />
+<link rel="canonical" href="http://localhost:4000/2017/08/29/binary-search-with-typescript.html" />
+<meta property="og:url" content="http://localhost:4000/2017/08/29/binary-search-with-typescript.html" />
+<meta property="og:site_name" content="F1LT3R" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-08-29T01:38:10-04:00" />
+<script type="application/ld+json">
+{"description":"“What is a Binary Search?”, I was asked this week. “I have no idea!”, I replied. I was interested to see if I could understand what a Binary Search was and whether I could write a Binary Search with Typescript.","author":{"@type":"Person","name":"Alistair MacDonald"},"@type":"BlogPosting","url":"http://localhost:4000/2017/08/29/binary-search-with-typescript.html","headline":"Binary Search with Typescript","dateModified":"2017-08-29T01:38:10-04:00","datePublished":"2017-08-29T01:38:10-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/08/29/binary-search-with-typescript.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="F1LT3R" /><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
+</head>
+<body class="">
+    <!-- <video autoplay muted loop id="myVideo">
+        <source src="https://i.imgur.com/lBSSjpo.mp4" type="video/mp4">
+     </video> --><header class="site-header wide" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">F1LT3R</a>
+    <!-- <div class="ident">
+      <img class="logo" src="/img/site/f1lt3r-logo.svg"/>
+    </div>
+     -->
+
+    <!-- <div id="search-container">
+        <input type="text" id="search-input" placeholder="search...">
+        <ul id="results-container"></ul>
+    </div>
+    <script src="/js/search-script.js" type="text/javascript"></script>
+    <script>
+    SimpleJekyllSearch({
+      searchInput: document.getElementById('search-input'),
+      resultsContainer: document.getElementById('results-container'),
+      json: '/search.json'
+    })
+    </script> --><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/bio/">Bio</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="feature-image"> 
+    <div class="img" style="background-image: url('https://media2.giphy.com/media/deD6sPhPdGbRojquw4/giphy.gif?cid=790b76115d0cf91a30653259679665c5&rid=giphy.gif'); width:100%;"></div>
+  </div> 
+
+  <header class="post-header">
+    <!-- <img class="feature-image" src="https://media2.giphy.com/media/deD6sPhPdGbRojquw4/giphy.gif?cid=790b76115d0cf91a30653259679665c5&rid=giphy.gif"/> -->
+    <h1 class="post-title p-name" itemprop="name headline">Binary Search with Typescript</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-08-29T01:38:10-04:00" itemprop="datePublished">Aug 29, 2017
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>“What is a Binary Search?”, I was asked this week. “I have no idea!”, I replied. I was interested to see if I could understand what a Binary Search was and whether I could write a Binary Search with Typescript.</p>
+
+<h2 id="tldr">TLDR;</h2>
+
+<p>You can try the <a href="https://f1lt3r.github.io/binary-search-in-typescript/">Binary Search Demo</a> demo on Github pages:</p>
+
+<p><a href="https://f1lt3r.github.io/binary-search-in-typescript/"><img src="/img/posts/binary-search-typescript-play.png" alt="Typescript Binary Search Screenshot" /></a></p>
+
+<h3 id="why-typescript">Why Typescript?</h3>
+
+<p>Recently I have been taking the course <a href="https://www.udemy.com/understanding-typescript/">Understanding Typescript</a> on Udemy with
+<a href="https://www.linkedin.com/in/maximilian-schwarzm%C3%BCller-66b152a5/">Maximilian Schwarzmüller</a>. I am finding this course to be a wonderful introduction to Typescript. The course is extremely clear and well thought out. Putting the Binary Search together in Typescript was be a good way to practice what I was learning.</p>
+
+<h2 id="what-is-a-binarysearch">What is a Binary Search?</h2>
+
+<p>The first Step was figuring out what a Binary Search was. A little Wikipedia reading and Youtube watching did the trick. <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm">The Binary Search entry on Wikipedia</a> helped me to understand the basic concept.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ary</span><span class="p">:</span> <span class="nx">number</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">...</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>The concept is this: if you take an array of numbers, say from <em>1–100</em>, and you want to search for the number <em>27</em>, you do not need to pass through all 100 indexes of the array. That would not be the most efficient method.</p>
+
+<p>Wouldn’t it be great if there was a way to chop out parts of the array that you knew you did not need to search?</p>
+
+<p>Ah but there is…</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Binary_search_algorithm"><img src="/img/posts/440px-Binary_Search_Depiction.svg.png" alt="Source: Wikipedia" /></a></p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">valueAtMiddle</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nx">ary</span><span class="p">[</span><span class="mi">50</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">valueAtMiddle</span> <span class="o">&gt;</span> <span class="mi">27</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">reducedSearch</span><span class="p">:</span> <span class="nx">number</span><span class="p">[]</span> <span class="o">=</span> <span class="nx">arg</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">middle</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If I chop my array of 100 numbers in half at index <em>50</em>, and the value at the half-way point is greater than my target-number <em>27</em>, then I know that I don’t have to search the 2nd-half of the array.</p>
+
+<p>Wonderful!</p>
+
+<p>We can keep iterating through the array this way, chopping left, or chopping right, until we either find the value we want, or we run out of array to chop.</p>
+
+<p>So I suppose <em>“Binary Search”</em> might get it’s name because it either searches <em>this-half</em> of the array or <em>that-half</em> of the array. But perhaps there is another good reason to call it a “Binary Search”, namely… it’s logarithm.</p>
+
+<h2 id="worst-case-performance">Worst Case Performance</h2>
+
+<p>Before we get to the naming… lets look at another interesting feature of Binary Search. It follows something called “O(Log N)”, which describes the <a href="https://en.wikipedia.org/wiki/Best,_worst_and_average_case">Worst Case Performance</a> of the search algorithm.</p>
+
+<blockquote>
+  <p>In computer science, best, worst, and average cases of a given algorithm express what the resource usage is at least, at most and on average, respectively. Usually the resource being considered is running time, i.e. time complexity, but it could also be memory or other resource.  
+<a href="https://en.wikipedia.org/wiki/Best,_worst_and_average_case">Wikipedia</a></p>
+</blockquote>
+
+<p>But what on earth does <em>O(Log N)</em> actually mean?</p>
+
+<p>Reading the Wikipedia page for <a href="https://en.wikipedia.org/wiki/Big_O_notation">Big O Notation</a> was not a huge help to me (too many scary math symbols); but I found the following Youtube video by Matt Garland helped me understand <em>just-enough</em>, that I calculate the Worst Case Performance in JavaScript.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kjDR1NBB9MU" frameborder="0" allowfullscreen=""></iframe>
+
+<p>What we are trying to get at when we talk about <em>“performance”</em> here? We are asking the question:</p>
+
+<blockquote>
+  <p>“How many times do we need to iterate the search function before we can know whether the target value exists in the array?”</p>
+</blockquote>
+
+<p>That’s a super-cool question!</p>
+
+<p>If you watched the video above, or you are a computer science/math grad, you probably already have a good idea of the answer.</p>
+
+<p>In short: the number of times you need to search the array, will be a logarithm of the length of the array. In JavaScript you can use <code class="highlighter-rouge">Math.log2(ary.length)</code> to know how many iterations you will need before you can safely stop searching the array.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ary</span><span class="p">:</span> <span class="nx">number</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">...,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+<span class="kd">const</span> <span class="nx">worstCasePerformance</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">log2</span><span class="p">(</span><span class="nx">ary</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+<span class="c1">// 6.643856189774724</span>
+
+<span class="kd">const</span> <span class="nx">maxIterations</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">worstCasePerformance</span><span class="p">)</span>
+<span class="c1">// 7</span>
+</code></pre></div></div>
+
+<h3 id="whats-in-a-name">What’s In a Name?</h3>
+
+<p>And so back to the naming… this is why I think naming Binary Search for it’s logarithmic qualities is cute… because binary notation also follows O(Log N).</p>
+
+<p>For example:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Binary [32, 16, 8, 4, 2, 1] (value of each binary digit)</span>
+<span class="c1">// Index  [ 5,  4, 3, 2, 1, 0] (inverse index)</span>
+<span class="c1">// Digits [ 1,  1, 1, 1, 1, 1] (binary number for "63")</span>
+
+<span class="kd">const</span> <span class="nx">value</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="mb">0b111111</span>  <span class="c1">// Binary Number notation (ES6)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>  <span class="c1">// Logs "63"</span>
+</code></pre></div></div>
+
+<p>Looking at this code example, you can see that the value of each binary digit doubles, from <em>right-to-left</em>. So the binary number <code class="highlighter-rouge">0b100000</code> has a <em>Base-10</em> value of <em>32</em> and the binary number <code class="highlighter-rouge">0b111111</code> has a Base-10 value of <em>63</em>. </p>
+
+<p>This means that the index position of each digit, from right-to-left, is the O(Log N) of it’s Base-10 value. :)</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">binaryValues</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">Map</span> <span class="nx">each</span> <span class="nx">number</span> <span class="nx">to</span> <span class="nx">Log2</span>
+<span class="kd">const</span> <span class="nx">ahha</span> <span class="o">=</span> <span class="nx">binaryValues</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">log2</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ahha</span><span class="p">)</span>
+<span class="c1">// Logs [5, 4, 3, 2, 1, 0]</span>
+</code></pre></div></div>
+
+<h2 id="show-me-thecode">Show Me The Code</h2>
+
+<p>With the understanding of the basic operations of a Binary Search, and enough knowledge of O(Log N) to get the job done, I started working on an approach to solving the problem in Typescript.</p>
+
+<p><a href="https://f1lt3r.github.io/binary-search-in-typescript/">Click here to try the Binary Search Demo</a></p>
+
+<p><a href="https://f1lt3r.github.io/binary-search-in-typescript/"><img src="/content/images/2017/09/binary-search-typescript-play.png" alt="Typescript Binary Search Screenshot" /></a></p>
+
+<h3 id="exit-strategies">Exit Strategies</h3>
+
+<p>There are <em>3</em> kinds of exits available in my solution:</p>
+
+<ol>
+  <li><strong>Success:</strong> Target found, returns index</li>
+  <li><strong>Failure #1:</strong> Target not found - exits where no array is left to search</li>
+  <li><strong>Failure #2:</strong> Target not found - exit when iterated past O(Log N)</li>
+</ol>
+
+<p>I used a Typescript <code class="highlighter-rouge">ENUM</code> to specify which type of failure we would like to test when the script is run, this way we can switch between the exit strategies in <a href="https://f1lt3r.github.io/binary-search-in-typescript/">the Github pages demo</a>.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">enum</span> <span class="nx">FailExits</span> <span class="p">{</span>
+    <span class="nx">ologn</span><span class="p">,</span>
+    <span class="nx">nochop</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">exit</span> <span class="o">=</span> <span class="nx">FailExits</span><span class="p">.</span><span class="nx">ologn</span>
+<span class="kd">let</span> <span class="nx">iterCount</span><span class="p">:</span><span class="nx">number</span>
+<span class="kd">let</span> <span class="nx">maxIterations</span><span class="p">:</span> <span class="nx">number</span>
+</code></pre></div></div>
+
+<p>Now we have a counter, a max iteration variable and an exit strategy, we can create the recursive compare function that will do the more interesting work of stepping through the array. Here is the basic handling of the variables:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">compare</span> <span class="o">=</span> <span class="p">(</span><span class="nx">target</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">ary</span><span class="p">:</span> <span class="nx">number</span><span class="p">[],</span> <span class="nx">start</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">end</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> 
+<span class="nx">number</span><span class="p">[]</span> <span class="o">|</span> <span class="nx">number</span> <span class="o">|</span> <span class="nx">boolean</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Find the range between the start and the end</span>
+    <span class="c1">// (we want to chop this in half to reduce the search)</span>
+    <span class="kd">const</span> <span class="na">range</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nx">end</span> <span class="o">-</span> <span class="nx">start</span>
+    
+    <span class="c1">// Our midPoint is the value of the half-way point...</span>
+    <span class="c1">// Note: this could be a decimal!</span>
+    <span class="kd">const</span> <span class="na">midPoint</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nx">start</span> <span class="o">+</span> <span class="p">(</span><span class="nx">range</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    
+    <span class="c1">// Our midIndex must be an Integer to access the array index</span>
+    <span class="kd">const</span> <span class="na">midIndex</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">midPoint</span><span class="p">)</span>
+    
+    <span class="c1">// Finally get the value of the number half way through the array</span>
+    <span class="c1">// This is what we will compare to our target value</span>
+    <span class="kd">const</span> <span class="na">midValue</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nx">ary</span><span class="p">[</span><span class="nx">midIndex</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Once we have the search positions and the compare values, we can add the logic to we need to evaluate the next action. The rest of the function here handles the logic deciding whether we should exit or continue searching.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">compare</span> <span class="o">=</span> <span class="p">(</span><span class="nx">target</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">ary</span><span class="p">:</span> <span class="nx">number</span><span class="p">[],</span> <span class="nx">start</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">end</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> 
+<span class="nx">number</span><span class="p">[]</span> <span class="o">|</span> <span class="nx">number</span> <span class="o">|</span> <span class="nx">boolean</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    
+    <span class="p">...</span>
+    
+    <span class="c1">// Fail: Exit Strategy 1 - If we iterated past O(Log N)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">iterCount</span> <span class="o">&gt;</span> <span class="nx">maxIterations</span> <span class="o">&amp;&amp;</span> <span class="nx">exit</span> <span class="o">===</span> <span class="nx">FailExits</span><span class="p">.</span><span class="nx">ologn</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span>
+    <span class="p">}</span>
+    <span class="nx">iterCount</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1">// Sucess: We found the value we were looking for!</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">midValue</span> <span class="o">===</span> <span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">midIndex</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Fail: Exit Strategy 2 - No more array to look in</span>
+    <span class="c1">// If the start and the middle of the range have the same</span>
+    <span class="c1">// array-index, then we know it's time to exit</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">start</span> <span class="o">===</span> <span class="nx">midIndex</span> <span class="o">&amp;&amp;</span> <span class="nx">exit</span> <span class="o">===</span> <span class="nx">FailExits</span><span class="p">.</span><span class="nx">nochop</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Continue: Chop Left</span>
+    <span class="c1">// We know the index of the target value has to be in </span>
+    <span class="c1">// the lower half of the array (if it exists)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">target</span> <span class="o">&lt;</span> <span class="nx">midValue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">start</span> <span class="o">=</span> <span class="nx">start</span>
+        <span class="nx">end</span> <span class="o">=</span> <span class="nx">midIndex</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Continue: Chop Right</span>
+    <span class="c1">// We know the index of the target value has to be in </span>
+    <span class="c1">// the upper half of the array (if it exists)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">target</span> <span class="o">&gt;</span> <span class="nx">midValue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">start</span> <span class="o">=</span> <span class="nx">midIndex</span>
+    <span class="p">}</span>
+
+    <span class="c1">// This compare function calls itself again with the</span>
+    <span class="c1">// new start and end values until it exits</span>
+    <span class="k">return</span> <span class="nx">compare</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">ary</span><span class="p">,</span> <span class="nx">start</span><span class="p">,</span> <span class="nx">end</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And that’s it!</p>
+
+<p>Check out <a href="https://f1lt3r.github.io/binary-search-in-typescript/">The Live Demo</a> here and try tweaking the values to see what happens.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<h3 id="using-typescript">Using Typescript</h3>
+
+<p>Creating the Binary Search was a fun puzzle. Adding Typescript in the mix gave me the opportunity to learn some interesting things about how Typescript interacts with browser elements.</p>
+
+<p>For example: there is such a thing as an <code class="highlighter-rouge">HTMLElement</code> type.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">elem</span><span class="p">:</span> <span class="nx">HTMLElement</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">foo</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>And I also did not know that some types have un-documented functions, that prohibit the use of dot-notation.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">elem</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">:</span> <span class="nx">Event</span><span class="p">):</span> <span class="k">void</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="na">checked</span><span class="p">:</span> <span class="nx">boolean</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">checked</span>
+    <span class="c1">// ERROR: Property 'checked' does not exist on type EventTarget</span>
+    
+    <span class="kd">const</span> <span class="na">checked</span><span class="p">:</span> <span class="nx">boolean</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">[</span><span class="dl">'</span><span class="s1">checked</span><span class="dl">'</span><span class="p">]</span>
+    <span class="c1">// PASS!</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This seems odd, so I am assuming there is something I have not yet learned about Typescript here.</p>
+
+<h3 id="alogithmic-efficiency">Alogithmic Efficiency</h3>
+
+<p>I also believe I could get a lot more performance out of the alogithm if my <em>start-index</em>, <em>end-index</em> and <em>target-value</em> existed outside of the <code class="highlighter-rouge">compare()</code> function.</p>
+
+<p>And so this:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">compare</span> <span class="o">=</span> <span class="p">(</span><span class="nx">target</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">ary</span><span class="p">:</span> <span class="nx">number</span><span class="p">[],</span> <span class="nx">start</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">end</span><span class="p">:</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">compare</span><span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">ary</span><span class="p">,</span> <span class="nx">start</span><span class="p">,</span> <span class="nx">end</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Might be better written like this:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">target</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="kd">let</span> <span class="nx">ary</span><span class="p">:</span> <span class="nx">number</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">...</span> <span class="mi">71</span><span class="p">]</span>
+<span class="kd">let</span> <span class="nx">start</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">let</span> <span class="nx">end</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="nx">ary</span><span class="p">.</span><span class="nx">length</span>
+
+<span class="c1">// No variables passed into the function = less memory overhead</span>
+<span class="kd">const</span> <span class="nx">compare</span> <span class="o">=</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">compare</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I think passing the array + values to the next <code class="highlighter-rouge">compare()</code> call will incur extra memory overhead. Not enough to worry about in a simple web page, but this could be a real concern if you were iterating large quanities of data server-side.</p>
+
+<p>Thoughts, comments, ideas? Let me know what you think.</p>
+
+
+<div class="sign"><pre>       ___ _ _  ____________
+ ___  | __/ | ||_   ___   _ \
+/___/ | _|| | |__| | |_ \   /
+      |_| |_|____|_||___/_|_\</pre></div><a class="u-url" href="/2017/08/29/binary-search-with-typescript.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+  
+  <div class="wrapper">
+    
+    
+    <div class="footer-col-wrapper">
+      
+      <div class="footer-col">
+        <div class="avatar">
+          <img src="/img/site/f1lt3r-avatar.jpg" />
+        </div>
+      </div>
+       
+      <div class="footer-col">
+          <h2 class="footer-heading">F1LT3R</h2>
+          <ul class="contact-list">
+            <li class="p-name">Alistair MacDonald</li><li><a class="u-email" href="mailto:al@pwn.io">al@pwn.io</a></li></ul>
+      </div>
+
+      <div class="footer-col"><ul class="social-media-list"><li><a href="https://github.com/f1lt3r"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">f1lt3r</span></a></li><li><a href="https://instagram.com/f1lt3r"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">f1lt3r</span></a></li><li><a href="https://www.linkedin.com/in/f1lt3r"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">f1lt3r</span></a></li><li><a href="https://www.twitter.com/F1LT3R_"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">F1LT3R_</span></a></li></ul>
+</div>
+
+      <div class="footer-col">
+          <p>An engineering blog</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

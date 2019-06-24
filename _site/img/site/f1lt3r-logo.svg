@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="506px" viewBox="0 0 512 506" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>f1lt3r-logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="512" height="512" rx="137"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-4" transform="translate(0.000000, -6.000000)">
+            <g id="Rectangle-+-Rectangle-Copy-2-+-Rectangle-Copy-3-+-Rectangle-Copy-4-+-Rectangle-Copy-7-+-Rectangle-Copy-9-+-Rectangle-Copy-8-+-Rectangle-Copy-12-+-Rectangle-Copy-17-+-Rectangle-Copy-18-+-Rectangle-Copy-23-+-Rectangle-Copy-27-+-Rectangle-Copy-25-+-Rectangle-Copy-15-Mask">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Mask" fill-rule="nonzero"></g>
+                <rect id="Rectangle" fill="#FF004D" fill-rule="nonzero" mask="url(#mask-2)" x="134" y="6" width="115" height="115" rx="14.4"></rect>
+                <rect id="Rectangle-Copy-2" fill="#FF004D" fill-rule="nonzero" mask="url(#mask-2)" x="262" y="6" width="115" height="115" rx="14.4"></rect>
+                <rect id="Rectangle-Copy-3" fill="#FF004D" fill-rule="nonzero" mask="url(#mask-2)" x="390" y="6" width="115" height="115" rx="14.4"></rect>
+                <rect id="Rectangle-Copy-4" fill="#FF004D" fill-rule="nonzero" mask="url(#mask-2)" x="134" y="134" width="115" height="115" rx="28.8"></rect>
+                <rect id="Rectangle-Copy-7" fill="#FF004D" fill-rule="nonzero" mask="url(#mask-2)" x="134" y="262" width="115" height="115" rx="43.2"></rect>
+                <rect id="Rectangle-Copy-9" fill="#FF004D" fill-rule="nonzero" mask="url(#mask-2)" x="134" y="390" width="115" height="115" rx="57.5"></rect>
+                <rect id="Rectangle-Copy-8" fill="#FF004D" fill-rule="nonzero" mask="url(#mask-2)" x="262" y="262" width="115" height="115" rx="43.2"></rect>
+                <rect id="Rectangle-Copy-12" fill="#00FFD4" fill-rule="nonzero" mask="url(#mask-2)" x="6" y="134" width="115" height="115" rx="28.8"></rect>
+                <rect id="Rectangle-Copy-17" fill="#00FFD4" fill-rule="nonzero" mask="url(#mask-2)" x="6" y="6" width="115" height="115" rx="14.4"></rect>
+                <rect id="Rectangle-Copy-18" fill="#EFFF00" fill-rule="nonzero" mask="url(#mask-2)" x="262" y="134" width="115" height="115" rx="28.8"></rect>
+                <rect id="Rectangle-Copy-23" fill="#EFFF00" fill-rule="nonzero" mask="url(#mask-2)" x="262" y="390" width="115" height="115" rx="57.5"></rect>
+                <rect id="Rectangle-Copy-27" fill="#EFFF00" fill-rule="nonzero" mask="url(#mask-2)" x="390" y="262" width="115" height="115" rx="43.2"></rect>
+                <rect id="Rectangle-Copy-25" fill="#EFFF00" fill-rule="nonzero" mask="url(#mask-2)" x="390" y="390" width="115" height="115" rx="57.5"></rect>
+                <rect id="Rectangle-Copy-15" fill="#FFFFFF" fill-rule="nonzero" mask="url(#mask-2)" x="6" y="390" width="115" height="115" rx="57.5"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

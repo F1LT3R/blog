@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Node BDD Cookie Cutter | F1LT3R</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Node BDD Cookie Cutter" />
+<meta name="author" content="Alistair MacDonald" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Learn how to setup a Behavioral Driven Development pattern in a Node.js project. Using Mocha and NYC, we will setup a watcher that will run unit tests on the fly and produce coverage results when you pre-commit code using Husky." />
+<meta property="og:description" content="Learn how to setup a Behavioral Driven Development pattern in a Node.js project. Using Mocha and NYC, we will setup a watcher that will run unit tests on the fly and produce coverage results when you pre-commit code using Husky." />
+<link rel="canonical" href="http://localhost:4000/2017/09/18/node-bdd-cookie-cutter.html" />
+<meta property="og:url" content="http://localhost:4000/2017/09/18/node-bdd-cookie-cutter.html" />
+<meta property="og:site_name" content="F1LT3R" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2017-09-18T05:30:32-04:00" />
+<script type="application/ld+json">
+{"description":"Learn how to setup a Behavioral Driven Development pattern in a Node.js project. Using Mocha and NYC, we will setup a watcher that will run unit tests on the fly and produce coverage results when you pre-commit code using Husky.","author":{"@type":"Person","name":"Alistair MacDonald"},"@type":"BlogPosting","url":"http://localhost:4000/2017/09/18/node-bdd-cookie-cutter.html","headline":"Node BDD Cookie Cutter","dateModified":"2017-09-18T05:30:32-04:00","datePublished":"2017-09-18T05:30:32-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2017/09/18/node-bdd-cookie-cutter.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="F1LT3R" /><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
+</head>
+<body class="">
+    <!-- <video autoplay muted loop id="myVideo">
+        <source src="https://i.imgur.com/lBSSjpo.mp4" type="video/mp4">
+     </video> --><header class="site-header wide" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">F1LT3R</a>
+    <!-- <div class="ident">
+      <img class="logo" src="/img/site/f1lt3r-logo.svg"/>
+    </div>
+     -->
+
+    <!-- <div id="search-container">
+        <input type="text" id="search-input" placeholder="search...">
+        <ul id="results-container"></ul>
+    </div>
+    <script src="/js/search-script.js" type="text/javascript"></script>
+    <script>
+    SimpleJekyllSearch({
+      searchInput: document.getElementById('search-input'),
+      resultsContainer: document.getElementById('results-container'),
+      json: '/search.json'
+    })
+    </script> --><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/bio/">Bio</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="feature-image"> 
+    <div class="img" style="background-image: url('https://images.unsplash.com/photo-1452860606245-08befc0ff44b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80'); width:100%;"></div>
+  </div> 
+
+  <header class="post-header">
+    <!-- <img class="feature-image" src="https://images.unsplash.com/photo-1452860606245-08befc0ff44b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"/> -->
+    <h1 class="post-title p-name" itemprop="name headline">Node BDD Cookie Cutter</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2017-09-18T05:30:32-04:00" itemprop="datePublished">Sep 18, 2017
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Learn how to setup a Behavioral Driven Development pattern in a <a href="https://nodejs.org/en/">Node.js</a> project. Using <a href="https://github.com/mochajs/mocha">Mocha</a> and <a href="https://github.com/istanbuljs/nyc">NYC</a>, we will setup a watcher that will run unit tests on the fly and produce coverage results when you <code class="highlighter-rouge">pre-commit</code> code using <a href="https://github.com/typicode/husky">Husky</a>.</p>
+
+<h2 id="tldr">TLDR;</h2>
+
+<p>You can see the Github, Travis and Coveralls.io output of this cookie cutter in the links below.</p>
+
+<ul>
+  <li><a href="https://github.com/F1LT3R/node-bdd-cookie-cutter">Github - Repository</a></li>
+  <li><a href="https://github.com/F1LT3R/node-bdd-cookie-cutter/pull/1">Github - Pull Request #1</a></li>
+  <li><a href="https://coveralls.io/builds/13311245/source?filename=lib%2Fmy-lib.js">Coveralls.io - Coverage Report (Build #11)</a></li>
+  <li><a href="https://travis-ci.org/F1LT3R/node-bdd-cookie-cutter/builds/276706214">Travis CI - Build Information (Build #11)</a></li>
+</ul>
+
+<h2 id="inspired-to-test">Inspired to Test</h2>
+
+<p>Recently I have been having fun watching videos by an experienced software developer who goes by the name of Uncle Bob (Steve Martin). I have also been reading Steve’s book <a href="https://www.amazon.com/Clean-Coder-Conduct-Professional-Programmers/dp/0137081073">“The Clean Coder.”</a> Steve’s writing <a href="https://www.youtube.com/watch?v=ecIWPzGEbFc">and talks</a> on Youtube have an entertaining mix of humor and information that I find to be engaging, and enlightening.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ecIWPzGEbFc?rel=0" frameborder="0" allowfullscreen=""></iframe>
+
+<p>I can imagine Steve will rub a lot of people the wrong way; on one hand Steve sounds like a fundamentalist know-it-all preaching about the way things should be done. But I love that about Steve. He’s got the experience and the conviction to make a solid point.</p>
+
+<p>Steve Martin’s video on the <a href="https://www.youtube.com/watch?v=qkblc5WRn-U">“The Three Laws of TDD”</a> is great fun! In this video, you get to watch a man who fanatically practices Test Driven Development, preach his way through the three laws with zeal.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/qkblc5WRn-U?rel=0" frameborder="0" allowfullscreen=""></iframe>
+
+<p>Steve makes many points worthy of reflection, but one of the most interesting was the idea that in practicing Test Driven Development:</p>
+
+<blockquote>
+  <p>~ “The developer will produce algorithms that they would not have thought of making if they had not coded the software line-by-line.”</p>
+</blockquote>
+
+<p>That is a loaded premise that deserves testing.</p>
+
+<p>My hunch, is that developers think and code in paragraphs, and story-arcs. Perhaps this is because the big-picture <em>has to</em> come ahead of the line-of-code. Our development work is driving towards some predefined feature. We sit down and start creatively writing towards our end goal. After we think we have enough functionality to test, we run the code. As a result, our functionality may work well – for the ways we expect the code to be used. But coding with 100% coverage may cause us to discover solutions we could not have perceived.</p>
+
+<p>And so it goes, that coding your thoughts out in real-time could not only set you back in terms of efficiency, but may also lead you to an entirely different architecture.</p>
+
+<h2 id="the-three-laws-of-test-driven-development">The Three Laws of Test Driven Development</h2>
+
+<p>What are the three laws of TDD?</p>
+
+<ol>
+  <li><strong>First Law:</strong> You may not write production code until you have written a <em>failing</em> unit test.</li>
+  <li><strong>Second Law:</strong> You may not write more of a unit test than is sufficient to fail, and not compiling is failing.</li>
+  <li><strong>Third Law:</strong> You may not write more production code than is sufficient to pass the currently failing test.</li>
+</ol>
+
+<p>At first pass, this technique sounds insane. To only ever write the tests first seems like you would paint yourself into a box pretty quickly. But I have been practicing this dogmatically on a test project of moderate complexity: a language parsing engine; and I have not found the method to be nearly as painful as I had expected.</p>
+
+<p>What I found was that development was incredibly slow and boring at first. Though I did notice that the code I had written became structured in a much simpler way than I would usually have attempted. My source was naturally falling into smaller functions with fewer concerns.</p>
+
+<p>When the code-complexity increased a little, the boredom disappeared. I found myself darting back through some of the first tests I had written, to update behaviors as I rounded out the behavior of the parsing engine.</p>
+
+<p>This was all par for the course. I expected these things from my experiences writing tests for other projects. But in being 100% dogmatic about the 3 Laws of TDD, I had two very big and very unexpected “Aha!” moments.</p>
+
+<h3 id="number--nature">Number &amp; Nature</h3>
+
+<p>The first was the number and nature of the bugs I was exposing. I was managing to catch bugs with TDD, that I know I could not have typically found until much later in the project if I had not followed the 3 Laws of TDD. I also found the bugs were smaller and more limited in their scope. The reduced complexity of the bugs made them much quicker to trace and squash.</p>
+
+<p>After getting deeper into the project, I realized I was flying.</p>
+
+<p>The second “Aha!” moment came after a few iterations when I installed the code-coverage tool. To my surprise, I found I had thousands of lines of code, with only two if-else branches statements not covered.</p>
+
+<p>My code was 99% green, out of the box!</p>
+
+<p>Suddenly the effort of coding tests after writing the code looked like a big fat waste of time. And it was all about the complexity.</p>
+
+<h2 id="code-is-like-rope">Code is Like Rope</h2>
+
+<p>Imagine you were looping pieces of knotted rope around your arms into a manageable bundle. If you work out the kinks and the knots each time you reach one, you will have a tight bunch, which maintains its shape without much effort.</p>
+
+<p>But imagine if your boss was yelling at you to “get that God damned rope bundled as quickly as possible”, and you just wound that sucker up as fast as you could into an enormous rope-spaghetti. Next time you come to use that rope, you are going to have a few problems.</p>
+
+<p>The rope will not unwind. You will have to untangle one thing here so that you can un-knot another thing there. And then you will have back track on yourself because you didn’t realize that if you untangle one part, you make a knot in another. It then becomes more cost effective to buy a new rope than to spend the time untangling the old one.</p>
+
+<p>In my experience, source-code is like that.</p>
+
+<p>Exactly like that.</p>
+
+<h2 id="tdd-vs-bdd">TDD vs BDD</h2>
+
+<p>The point of this post was to share how I am setting up Node.js projects for Test/Behavior Driven Development. I will explain how I do this in a moment.</p>
+
+<p>But what is BDD?</p>
+
+<p>https://en.wikipedia.org/wiki/Behavior-driven_development</p>
+
+<p>While TDD stands for Test Driven Development, BDD stands for Behavior Driven Development. These two practices are essentially the same practice, but with different nuances. BDD targets domain logic, and uses chained domain specific language, making the tests read more like spoken English.</p>
+
+<p>For example:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span><span class="na">bar</span><span class="p">:</span> <span class="mi">123</span><span class="p">}</span>
+<span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">have</span><span class="p">.</span><span class="nx">property</span><span class="p">(</span><span class="dl">'</span><span class="s1">bar</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">bar</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">(</span><span class="dl">'</span><span class="s1">number</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">expect</span><span class="p">(</span><span class="nx">foo</span><span class="p">.</span><span class="nx">bar</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>I love this expressiveness in the language that Chai allows.</p>
+
+<p>But why test <em>“behaviors”</em> instead of <em>“units”</em>? That’s a great question. What we really want to test in software is something like: “Can my software generate Output X when running Function Y?” The small details of how Function Y produces Output X do not necessarily matter to us, we simply care that we get Output X. The advantage of thinking about tests this way is that when we change the internals of Function Y without having to re-write most of our tests.</p>
+
+<p>This video <a href="https://www.youtube.com/watch?v=4QFYTQy47yA">Test Driven Development vs Behaviour Driven Development</a> may be helpful:</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4QFYTQy47yA?rel=0" frameborder="0" allowfullscreen=""></iframe>
+
+<h2 id="the-nodejs-bdd-toolchain">The Node.js BDD Toolchain</h2>
+
+<p>The Toolchain I am using for my Node.js projects contain the following tools:</p>
+
+<ul>
+  <li><strong>Mocha</strong> - The testing framework.</li>
+  <li><strong>Chai</strong> - to write tests in BDD syntax.</li>
+  <li><strong>Chai as Promised</strong> - for testing asynchronous Promises.</li>
+  <li><strong>Istanbul</strong> - to instrument and test for code coverage.</li>
+  <li><strong>Mocha LCov Reporter</strong> - to report code coverage for Mocha tests.</li>
+  <li><strong>Git-Pre-Commit</strong> - to run tests before commits.</li>
+  <li><strong>Coveralls</strong> - to share code-coverage on Github.</li>
+  <li><strong>TravisCI</strong> - for testing on Github pull requests.</li>
+</ul>
+
+<p>I am going to take you through the steps to setting most of these up and writing your first couple of asynchronous tests with ES6/ESNext.</p>
+
+<h3 id="pre-requisites">Pre-requisites</h3>
+
+<ul>
+  <li><strong>Node.js</strong> - <code class="highlighter-rouge">v8.4.0</code></li>
+  <li><strong>Yarn</strong> - <code class="highlighter-rouge">0.27.5</code></li>
+</ul>
+
+<p>First lets create the directoy structure for our project:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Make the project directory</span>
+<span class="nb">mkdir </span>node-bdd-cookie-cutter
+<span class="nb">cd </span>node-bdd-cookie-cutter
+
+<span class="c"># Create a lib folder for our source code</span>
+<span class="nb">mkdir </span>lib
+
+<span class="c"># Create a folder for mock resources</span>
+<span class="nb">mkdir </span>mock
+
+<span class="c"># DO NOT create a test dir</span>
+<span class="c"># (We will be keeping out specs next to our tests)</span>
+</code></pre></div></div>
+
+<p>Your tree should now look like this:</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-11-at-10.54.53-AM.png" alt="Directory Structure" /></p>
+
+<p>Now lets start adding our testing packages:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add mocha chai chai-as-promised istanbul mocha-lcov-reporter git-pre-commit coveralls
+</code></pre></div></div>
+
+<p>After our packages are installed, lets initialize our <code class="highlighter-rouge">package.json</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm init
+
+<span class="c"># This utility will walk you through...</span>
+
+<span class="c"># Here are the values I am using:</span>
+
+package name:  <span class="c"># bdd-cookie-cutter</span>
+version:  <span class="c"># 1.0.0</span>
+description:  <span class="c"># Behavior Driven Testing template for Node.js</span>
+entry point:  <span class="c"># lib/index.js</span>
+<span class="nb">test command</span>:  <span class="c"># mocha</span>
+git repository:  <span class="c"># git@github.com/f1lt3r/node-bdd-cookie-cutter.git</span>
+keywords:  <span class="c"># bdd, tdd, coverage, promises, chai, istanbul, coveralls, travis, git-pre-commit, lcov</span>
+author:  <span class="c"># f1lt3r</span>
+license:  <span class="c"># MIT</span>
+</code></pre></div></div>
+
+<p>Great! Now that we have things set up, we can start writing some tests.</p>
+
+<h3 id="creating-the-first-tests">Creating The First Tests</h3>
+
+<p>We are following BBD principles here, so before we start working on our production code, we need to create a failing test. Open your editor or IDE and start working on the file: <code class="highlighter-rouge">lib/my-lib.spec.js</code>.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Import Chai so we can write nice syntax</span>
+<span class="kd">const</span> <span class="nx">chai</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">chai</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="c1">// Import the lib to test</span>
+<span class="kd">const</span> <span class="nx">myLib</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./myLib</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="c1">// Alias expect from Chai (we will use it a lot!)</span>
+<span class="kd">const</span> <span class="nx">expect</span> <span class="o">=</span> <span class="nx">chai</span><span class="p">.</span><span class="nx">expect</span>
+
+<span class="c1">// Setup Chai for work with Promises</span>
+<span class="nx">chai</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">chai-as-promised</span><span class="dl">'</span><span class="p">))</span>
+
+<span class="c1">// Allow implicit testing of failed promises</span>
+<span class="nx">chai</span><span class="p">.</span><span class="nx">should</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>The first thing that our lib needs is a file loader. So lets add a failing test. In the code below, we add a group of tests for <em>file loader</em> in <code class="highlighter-rouge">my-lib</code>. Then we add a test to check that our file loader will reject a promise to load a file that does not exist.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">my-lib</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should fail to load a test file</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+		<span class="kd">const</span> <span class="nx">filename</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">../mock/no-file.txt</span><span class="dl">'</span>
+
+		<span class="k">return</span> <span class="nx">myLib</span><span class="p">.</span><span class="nx">loadfile</span><span class="p">(</span><span class="nx">filename</span><span class="p">)</span>
+            <span class="c1">// Implicit testing of failed promises</span>
+			<span class="p">.</span><span class="nx">should</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">rejected</span>
+	<span class="p">})</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>Now we have our first test, lets run it and see what happens. We can do this by running <code class="highlighter-rouge">./mocha</code> from our current directory.</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-11-at-11.36.44-AM.png" alt="Failure for: Failed to load a non-existent test file" /></p>
+
+<p>We can see that our lib does not have a function called <code class="highlighter-rouge">loadfile</code> yet, so let us add one. Open the file <code class="highlighter-rouge">lib/my-lib.js</code> and place the following code inside.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Include File System library (to load files)</span>
+<span class="kd">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">fs</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="c1">// Create an object for export</span>
+<span class="kd">const</span> <span class="nx">myLib</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1">// Create a public function on the exported object</span>
+<span class="nx">myLib</span><span class="p">.</span><span class="nx">loadfile</span> <span class="o">=</span> <span class="nx">filename</span> <span class="o">=&gt;</span>
+	<span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+		<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="nx">filename</span><span class="p">,</span> <span class="dl">'</span><span class="s1">utf8</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">content</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+				<span class="c1">// Reject promise if file can not load</span>
+				<span class="k">return</span> <span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+			<span class="p">}</span>
+
+			<span class="nx">resolve</span><span class="p">(</span><span class="nx">content</span><span class="p">)</span>
+		<span class="p">})</span>
+	<span class="p">})</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">myLib</span>
+</code></pre></div></div>
+
+<p>Now we have something to test, lets run mocha again.</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-11-at-11.37.44-AM.png" alt="Pass: Failed to load a non-existent test file" /></p>
+
+<p>Great, it works! We have followed the TDD principles, creating a test that fails, and then added the minimum nessecary code to make the test pass. Lets keep going and write another failing test. This time we will write one that <em>should</em> pass. Add the following code:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Begin the tests!</span>
+<span class="nx">describe</span><span class="p">(</span><span class="dl">'</span><span class="s1">my-lib</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="p">...</span>
+
+	<span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should load a test file "Hello World!"</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+		<span class="kd">const</span> <span class="nx">filename</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">../mock/yes-file.txt</span><span class="dl">'</span>
+
+		<span class="k">return</span> <span class="nx">myLib</span><span class="p">.</span><span class="nx">loadfile</span><span class="p">(</span><span class="nx">filename</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">contents</span> <span class="o">=&gt;</span> <span class="p">{</span>
+			<span class="nx">expect</span><span class="p">(</span><span class="nx">contents</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">(</span><span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">)</span>
+			<span class="nx">expect</span><span class="p">(</span><span class="nx">contents</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello World!</span><span class="se">\n</span><span class="dl">'</span><span class="p">)</span>
+		<span class="p">})</span>
+	<span class="p">})</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>Running mocha again we get the following:</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-11-at-11.53.43-AM.png" alt="Failing: load file containing &quot;Hello World&quot;" /></p>
+
+<p>All we should have to do to make this test pass, is add the correct file and re-run the tests.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo </span>Hello World! <span class="o">&gt;</span> ../mock/yes-file.txt
+mocha ./
+</code></pre></div></div>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-11-at-11.55.39-AM.png" alt="Screen-Shot-2017-09-11-at-11.55.39-AM" /></p>
+
+<p>Tada!</p>
+
+<p>Now just keep going. Create a failing test, write the code to pass the test, and so on. At the point your code begins to get useful, I hope you experience the same wins that I have.</p>
+
+<h3 id="npm-testing-setup">Npm Testing Setup</h3>
+
+<p>So far we have been running our tests using the command <code class="highlighter-rouge">mocha ./</code>, but our project would be better served if we could run our tests from an NPM script in our <code class="highlighter-rouge">package.json</code> file.</p>
+
+<p>Looking at our package.json file, we can see that our current test command is just <code class="highlighter-rouge">mocha</code>.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mocha"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>So if we use the command <code class="highlighter-rouge">npm test</code> or <code class="highlighter-rouge">yarn test</code> from the CLI, we can see Mocha get kicked off by Node.js.</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-15-at-3.35.09-PM.png" alt="Mocha does not know where to look" /></p>
+
+<p>Because we have set up our test alongside our code Mocha does not know where to look. It is looking for the directory called “test”.</p>
+
+<blockquote>
+  <p>Warning: Could not find any test files matching pattern: test</p>
+</blockquote>
+
+<p>Let’s update the <code class="highlighter-rouge">package.json</code> file so that Mocha has something to work with.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mocha ./lib/**/*.spec.js"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This should make Mocha look inside all sub directories of <code class="highlighter-rouge">./lib</code> to see if there are an <code class="highlighter-rouge">*spec.js</code> files. If you save the JSON file and re-run <code class="highlighter-rouge">npm test</code>, you should get the following output:</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-15-at-3.40.14-PM.png" alt="We found the tests!" /></p>
+
+<p>Great, mocha found the tests! But…</p>
+
+<p>Unfortunately our second test is failing. This is because we were running Mocha from the <code class="highlighter-rouge">./lib</code> directory previously. The mock file <code class="highlighter-rouge">../mock/yes-file.txt</code> was being opened relative to where the <code class="highlighter-rouge">mocha</code> command was run.</p>
+
+<p>(Note: The first test does not fail because we are testing that a file can not be loaded.)</p>
+
+<p>Lets update our code in to handle the path; at the top of <code class="highlighter-rouge">./lib/my-lib.js</code>:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">path</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>And in your last test:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">it</span><span class="p">(</span><span class="dl">'</span><span class="s1">should load a test file "Hello World!"</span><span class="dl">'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+	<span class="kd">const</span> <span class="nx">filename</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="dl">'</span><span class="s1">../mock/yes-file.txt</span><span class="dl">'</span><span class="p">)</span>
+
+	<span class="k">return</span> <span class="nx">myLib</span><span class="p">.</span><span class="nx">loadfile</span><span class="p">(</span><span class="nx">filename</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">contents</span> <span class="o">=&gt;</span> <span class="p">{</span>
+		<span class="nx">expect</span><span class="p">(</span><span class="nx">contents</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">be</span><span class="p">.</span><span class="nx">a</span><span class="p">(</span><span class="dl">'</span><span class="s1">string</span><span class="dl">'</span><span class="p">)</span>
+		<span class="nx">expect</span><span class="p">(</span><span class="nx">contents</span><span class="p">).</span><span class="nx">to</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello World!</span><span class="se">\n</span><span class="dl">'</span><span class="p">)</span>
+	<span class="p">})</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<p>Lets run tests again with <code class="highlighter-rouge">yarn test</code> or <code class="highlighter-rouge">npm test</code>:</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-15-at-3.51.58-PM.png" alt="Relative directory is now handled" /></p>
+
+<p>Success!</p>
+
+<p>Our relative directory is now handled in relation to the <code class="highlighter-rouge">__dirname</code>. This value <code class="highlighter-rouge">__dirname</code> is the directory that the current JavaScript file lives in.</p>
+
+<p>Now we can run the same tests from the package level with <code class="highlighter-rouge">yarn test</code>, as well as from the directory level with <code class="highlighter-rouge">./mocha &lt;file&gt;</code>. This turns out to be very useful.</p>
+
+<h2 id="symlinking-our-app">Symlinking Our App</h2>
+
+<p>While we are talking about directories we should talk about symlinking. I find that the practice of symlinking the package directory into the <code class="highlighter-rouge">./node_modules</code> directory allows us to simplify our imports.</p>
+
+<p>Instead of requiring scripts relative to our current JavaScript file we can require scripts relative to the directory that <code class="highlighter-rouge">package.json</code> lives in. So instead of:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myModule</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">../../../../lib/myModule</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We can do this:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myModule</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">app/lib/myModule</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Much cleaner!</p>
+
+<p>We should add our symlink creation to our <code class="highlighter-rouge">package.json</code> scripts, so that any user checking out our module, will have things set up the right way. Add the following two lines to your <code class="highlighter-rouge">package.json</code> file:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mocha ./lib/**/*.spec.js"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"preinstall"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rm -rf node_modules/app || true"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"postinstall"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ln -s ../ node_modules/app"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>When you run <code class="highlighter-rouge">npm install</code> or <code class="highlighter-rouge">yarn install</code> now, a symbolic link will be created inside of your <code class="highlighter-rouge">./node_modules</code> directory. This allows you to link to files using Node’s recursive require architecture.</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-15-at-3.59.24-PM.png" alt="We have symlinked our app root inside of the node_modules directory" /></p>
+
+<p>If we <code class="highlighter-rouge">ls</code> the <code class="highlighter-rouge">./node_modules/app</code> directory, we can see that it links back to the directory containing our <code class="highlighter-rouge">package.json</code> file and our <code class="highlighter-rouge">./lib</code> and <code class="highlighter-rouge">./mock</code> directories.</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-15-at-4.01.57-PM.png" alt="Screen-Shot-2017-09-15-at-4.01.57-PM" /></p>
+
+<p>Please note: you may have to handle this differently for Windows. In which case an extenal script in the <code class="highlighter-rouge">./bin</code> directory may be more appropriate. For the purpose of this tutorial, we are going to assume this code will never be run on Windows.</p>
+
+<p>Now lets update our code to use the symbolically linked directory. At the top of our file <code class="highlighter-rouge">./lib/my-lib.spec.js</code> make these changes:</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code> // Import the lib to test
+<span class="gd">- const myLib = require('./my-lib')
+</span><span class="gi">+ const myLib = require('app/lib/my-lib')
+</span></code></pre></div></div>
+
+<p>That’s it for sym-linking. We can now require files relative to the <code class="highlighter-rouge">package.json</code> file rather than the file in which we are using the <code class="highlighter-rouge">require()</code> statement.</p>
+
+<h2 id="setting-up-code-coverage">Setting Up Code Coverage</h2>
+
+<p>Another important part of Test Driven Development is Code Coverage. We want to know that 100% of our code is covered by our tests. This does not mean that there are no bugs in our code, but it does mean that it is much harder to break the code, or introduce new bugs without noticing.</p>
+
+<p>We installed the Node.js packages required for Code Coverage back in a previous step, so here we just have to implement them in our <code class="highlighter-rouge">package.json</code> file.</p>
+
+<p>Add the following long <code class="highlighter-rouge">cover</code> line to your <code class="highlighter-rouge">package.json</code> file:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mocha ./lib/**/*.spec.js"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"preinstall"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rm -rf node_modules/app || true"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"postinstall"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ln -s ../ node_modules/app"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"cover"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha ./lib/*.js ./lib/**/*.js &amp;&amp; echo </span><span class="se">\"</span><span class="s2">View report: coverage/lcov-report/index.html</span><span class="se">\"</span><span class="s2">"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>That new line is comfusing! So what does the line do exactly?</p>
+
+<p>Here’s a quick breakdown:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Istanbul "Cover" &lt;mocha-path&gt; &lt;production-code-path&gt; &amp;&amp; echo $HTMLReportPath"
+</code></pre></div></div>
+
+<p>Stepwise:</p>
+
+<ol>
+  <li>Run the Instabul <code class="highlighter-rouge">Cover</code> command</li>
+  <li>Pass the path to Mocha</li>
+  <li>Provide paths to spec files</li>
+  <li>Echo the report HTML output when done</li>
+</ol>
+
+<p>But before we run the coverage command, we are want to add the <code class="highlighter-rouge">.istanbul.yml</code> file to our package root. This will help us define <em>what not to test</em>, and how the reporting should be done:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">verbose</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">instrumentation</span><span class="pi">:</span>
+    <span class="c1"># Production Code Root</span>
+    <span class="na">root</span><span class="pi">:</span> <span class="s">./lib</span>
+    
+    <span class="c1"># Files to test</span>
+    <span class="na">extensions</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">.js</span>
+
+    <span class="c1"># Files NOT to test</span>
+    <span class="c1"># (We do not want our spec files showing up in the coverage report!)</span>
+    <span class="na">default-excludes</span><span class="pi">:</span> <span class="no">true</span>
+    <span class="na">excludes</span><span class="pi">:</span> <span class="pi">[</span><span class="s2">"</span><span class="s">*.spec.js"</span><span class="pi">,</span> <span class="s2">"</span><span class="s">**/*.spec.js"</span><span class="pi">]</span>
+    <span class="na">include-all-sources</span><span class="pi">:</span> <span class="no">true</span>
+    
+<span class="na">reporting</span><span class="pi">:</span>
+    <span class="na">print</span><span class="pi">:</span> <span class="s">both</span>
+    <span class="na">reports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="s">lcov</span>
+</code></pre></div></div>
+
+<p>Your directory structure should now look something like this, (notice the <code class="highlighter-rouge">.istanbul.yml</code> file at the top:</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-15-at-4.38.49-PM.png" alt="Our directory structure now we have added our `.istanbul.yml` file" /></p>
+
+<p>Ok good!</p>
+
+<p>Lets run <code class="highlighter-rouge">yarn cover</code> or <code class="highlighter-rouge">npm cover</code> and see what happens.</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-15-at-4.42.07-PM.png" alt="Screen-Shot-2017-09-15-at-4.42.07-PM" /></p>
+
+<p>Fantastic!</p>
+
+<p>We can see from the coverage output that our coverage is at 100%. And if we click on the HTML link, we can inspect the cover in the Web Browser. The table of contents looks like this:</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-15-at-4.44.10-PM.png" alt="Coverage Report table of contents in the web browser" /></p>
+
+<p>And we can drill down further by clicking on the dirctories and files:</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-15-at-4.45.41-PM.png" alt="Viewing the coverage report for my-lib.js" /></p>
+
+<p>Note: all your coverage files are kept in the <code class="highlighter-rouge">./coverage</code> directory.</p>
+
+<h2 id="pre-commit-testing">Pre-Commit Testing</h2>
+
+<p>Practicing Test Driven Development is a great way to squash bugs early. But did you know that you can keep the majority of bugs from every getting your code base in the first place? It’s true. You can use Git’s “Pre-Commit” hook to run tests every time you try to commit.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-m</span> <span class="s2">"I fixed all the things!"</span>
+<span class="c"># Tests kick off here</span>
+</code></pre></div></div>
+
+<p>If your tests fail, the offending code never makes it into the history of your repository. It’s worth thing about that for a minute.</p>
+
+<p>If your tests pass, your working code is immortalized in the code-base. In the life-cycle of a project, good reasons arise to checkout code from a previous commit: perhaps you will need to diverge the code-base from a previous point in history, or to copy over some pre-existing features that were discarded.</p>
+
+<p>Wouldn’t it be great if you knew that at any point you checked out that code-base, that you could be sure you were checking out “working code”? And wouldn’t it be great to know that the code had 100% coverage so that if you could tweak the feature to sit alongside current changes without side-effects? I think so.</p>
+
+<p>So let’s install the Node.js package <code class="highlighter-rouge">git-pre-commit</code> to handle this for us:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add git-pre-commit
+</code></pre></div></div>
+
+<p>We can now see two things added to our <code class="highlighter-rouge">.git/hooks</code> directory:</p>
+
+<ol>
+  <li><code class="highlighter-rouge">pre-commit-utils</code> directory</li>
+  <li><code class="highlighter-rouge">pre-commit.js</code> file</li>
+</ol>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-17-at-11.29.30-PM.png" alt="The Git Hooks directory has new files" /></p>
+
+<p>Fortunately, we can interact with our Git Pre-Commit Hook by adding commands to <code class="highlighter-rouge">scripts</code> in our <code class="highlighter-rouge">package.json</code> file. Update the <code class="highlighter-rouge">test</code> and <code class="highlighter-rouge">precommit</code> scripts like so:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+</span><span class="s2">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"test"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mocha ./lib/**/*.spec.js &amp;&amp; yarn run cover"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"precommit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yarn test"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>We have added <code class="highlighter-rouge">&amp;&amp; yarn run cover</code> to the <code class="highlighter-rouge">test</code> script so that code-coverage is automatically run after testing. Then we also added <code class="highlighter-rouge">yarn test</code> to the <code class="highlighter-rouge">precommit</code> script, which will kick off both tests and coverage every time you try to commit.</p>
+
+<p>Ok, lets make a bug to test this out!</p>
+
+<p>In your <code class="highlighter-rouge">./lib/my-lib.js</code> file, add some bogus data to the return content.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Create a public function on the exported object</span>
+<span class="nx">myLib</span><span class="p">.</span><span class="nx">loadfile</span> <span class="o">=</span> <span class="nx">filename</span> <span class="o">=&gt;</span>
+    <span class="p">...</span>
+			<span class="nx">resolve</span><span class="p">(</span><span class="nx">content</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">foobar</span><span class="dl">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>When adding and trying to commit changes:</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-17-at-11.44.22-PM.png" alt="Git Pre-Commit Hook stopped an error getting into the codebase" /></p>
+
+<p>Super! The commit failed. Our nasty bug got Git-blocked before it could spread across the web. Let’s double check by looking at the <code class="highlighter-rouge">git log</code>.</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-17-at-11.46.59-PM.png" alt="No bugs committed to this codebase" /></p>
+
+<p>Phew.</p>
+
+<h2 id="testing-in-the-cloud">Testing in the Cloud</h2>
+
+<p>With the code so far, we can engage in test-driven development from our local machine. But inevitably we will be sharing our code, and people will create Pull Requests, asking you to merge their fixes and updates. But you can not be certain that the developer creating the Pull Requests has setup their environment correctly and run the tests.</p>
+
+<p>No worries.</p>
+
+<p>We can force each new pull request to have tests run automatically in the cloud by using Travis-CI and Github. Assuming you already have a Travis-CI and Github account, you can follow these steps.</p>
+
+<p><strong>1) Enable Your Repo in Travis</strong></p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-18-at-12.01.46-AM.png" alt="Flip the switch on your Repo in Travis-Ci" /></p>
+
+<p><strong>2) Select Travis-CI Integration in Github Settings</strong></p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-18-at-12.04.12-AM.png" alt="Adding the Travis-CI integration in repo settings on Github" /></p>
+
+<p><strong>3) Add a Travis YML File to your Repo</strong></p>
+
+<p>In the root of you repository, (alongside <code class="highlighter-rouge">package.json</code>), add a file called <code class="highlighter-rouge">.travis.yml</code> and insert the following contents:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">sudo</span><span class="pi">:</span> <span class="no">false</span>
+<span class="na">language</span><span class="pi">:</span> <span class="s">node_js</span>
+<span class="na">node_js</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">7"</span>
+<span class="na">install</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">yarn</span><span class="nv"> </span><span class="s">install"</span>
+<span class="na">test</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">yarn</span><span class="nv"> </span><span class="s">test"</span>
+</code></pre></div></div>
+
+<p>Commit this file to your repository and push to Github. Travis-CI should now have what it needs to run your tests and coverage in the cloud. Tests will be run and coverage will be generated every time that someone creates a pull-request to merge into your code-base.</p>
+
+<p>To test this, I ran the following code:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Checked our a new branch</span>
+git checkout <span class="nt">-b</span> changes
+
+<span class="c"># (I added an abitrary change, linebreak, whitespace, etc.)</span>
+
+<span class="c"># Add and Push files to Github</span>
+git add <span class="nt">-A</span>
+git push <span class="nt">--set-upstream</span> origin changes
+</code></pre></div></div>
+
+<p>Now when I create a Pull Request in Github, I can see that my tests have run and passed in Travis-CI:</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-18-at-12.20.35-AM.png" alt="Travis-CI tests are passing" /></p>
+
+<p>So all incoming code will now run the gauntlet of tests you created, as well as any tests that the collaborator adds. Passing this test bar raises confidence that the new code being committed will integrate well. And hopefully the act of having any “bar” there at all will help weed out the wrong kind of commits and the wrong kind of collaborators.</p>
+
+<p>Lets take a quick look at what happened on Travis:</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-18-at-12.27.04-AM.png" alt="Mocha tests and Coverage running on Travis-CI" /></p>
+
+<p>In this picture we can see that Mocha tests and Istanbul coverage ran in Travis CI, just like they did on our local machine.</p>
+
+<h2 id="coverage-reports-in-the-cloud">Coverage Reports in The Cloud</h2>
+
+<p>Great, things are adding up. We have a system locked down that can be used to practice Behavior Driven Development, we have a way of checking our coverage, we can make sure any incoming production code pass tests before being accepted; but we do not have any way of sharing the status of our coverage with outside developers, yet.</p>
+
+<p>Sharing coverage results with outside developers is important. Your code-coverage stats allow a developer to know several things:</p>
+
+<ol>
+  <li>This is not spit-ball spaghetti code. The code that the collaborator checks out has been cared for.</li>
+  <li>If the outside developer commits changes to the new code, they will have a higher confidence that they will not introduce new bugs and in turn, a higher confidence that their changes will be well received, which should be an encouragement to the developer that their submissions are not a waste of their time.</li>
+</ol>
+
+<p>To set up coverage reports, we will use <a href="https://coveralls.io/">Coveralls.io</a>. Assuming you have already signed up for a Coveralls.io account, use the following steps:</p>
+
+<p><strong>1) Flip the switch on your repo</strong></p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-18-at-12.30.08-AM.png" alt="Turning on your Coverage Reports for your Repo with Coveralls.io" /></p>
+
+<p><strong>2) Copy your repo token</strong></p>
+
+<p>Click on the “Details” button. This should bring you to a screen containing your Coveralls <code class="highlighter-rouge">Repo Token</code>. Copy this token and create the following <code class="highlighter-rouge">.coveralls.yml</code> file next to your <code class="highlighter-rouge">package.json</code> file:</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-18-at-12.41.41-AM-1.png" alt="Copy your Coveralls Reop Token" /></p>
+
+<p>In your <code class="highlighter-rouge">.coveralls.yml</code> file, add your token:</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">repo_token</span><span class="pi">:</span> <span class="s">&lt;your-token-here&gt;</span>
+</code></pre></div></div>
+
+<p>This will allow you to run coverage from your <strong>local machine only</strong>. This repo token should not be shared publicly, so make sure you update your <code class="highlighter-rouge">.gitignore</code> file so your token does not get committed:</p>
+
+<p>3) Update Git Ignore File</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Coveralls</span>
+.coveralls.yml
+</code></pre></div></div>
+
+<p>4) Add a Coveralls Script to Package.json</p>
+
+<p>Now lets add a <code class="highlighter-rouge">coveralls</code> script to our <code class="highlighter-rouge">package.json</code> file:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+</span><span class="s2">"scripts"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"coveralls"</span><span class="p">:</span><span class="w"> </span><span class="s2">"yarn run cover &amp;&amp; cat ./coverage/lcov.info | ./node_modules/.bin/coveralls -v"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This script will run your coverage, and pass the response to the Coveralls package in your <code class="highlighter-rouge">./node_modules</code> directory, which will push the updated coverage reports to the coveralls server where they can be seen publicly.</p>
+
+<p>5) Add Coveralls Script to Travis</p>
+
+<p>Finally, add the following line to your <code class="highlighter-rouge">.travis.yml</code> file.</p>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">after_success</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">npm run coveralls</span>
+</code></pre></div></div>
+
+<p>This will trigger the npm coveralls script.</p>
+
+<p>If we commit these changes and create a pull request, we can see what that Coveralls is now reporting your Coverage at 100%!</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-18-at-1.09.17-AM.png" alt="Coveralls.io showing code-coverage is 100% after running in Travis-Ci" /></p>
+
+<p>6) Add Coveralls Badge to Readme.md File</p>
+
+<p>Select the Markdown embed code from the page:</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-18-at-1.11.07-AM.png" alt="Select the Markdown Embed code" /></p>
+
+<p>And copy it to your repo’s <code class="highlighter-rouge">README.md</code> file.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># node-bdd-cookie-cutter</span>
+Cookie Cutter Repo for Behavior Driven Testing in Node.js with Promises
+
+<span class="p">[</span><span class="nv">![Coverage Status</span><span class="p">](</span><span class="sx">https://coveralls.io/repos/github/F1LT3R/node-bdd-cookie-cutter/badge.svg?branch=changes</span><span class="p">)</span>](https://coveralls.io/github/F1LT3R/node-bdd-cookie-cutter?branch=changes)
+</code></pre></div></div>
+
+<p>Now when we commit and push changes, the Code Coverage Badge is automatically updated to represent the most recent results, displaying them in your <code class="highlighter-rouge">README.md</code> file on Github.</p>
+
+<p><img src="/content/images/2017/09/Screen-Shot-2017-09-18-at-1.18.41-AM.png" alt="100% Coverage Badge on Github Readme" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Congratulations! You can now use Behavior Driven Development in Node.js to create production code, and reap the many benefits of TDD along the way. You can check that any incoming code passes tests before you merge it, and attract new contributors to your project with your coverage badge.</p>
+
+<p>I would like to say a big thank you to David Ernst for <a href="http://dsernst.com/2015/09/02/node-mocha-travis-istanbul-coveralls-unit-tests-coverage-for-your-open-source-project/">the blog post</a> he wrote on this subject, which was a big help getting some of this proceedure figured out at the start of the year.</p>
+
+<p>If you would like to look at the code from this blog post, I have added everything here on GitHub: <a href="https://github.com/F1LT3R/node-bdd-cookie-cutter">node-bdd-cookie-cutter</a>.</p>
+
+<p>Thoughts, comments, ideas? Let me know!</p>
+
+
+<div class="sign"><pre>       ___ _ _  ____________
+ ___  | __/ | ||_   ___   _ \
+/___/ | _|| | |__| | |_ \   /
+      |_| |_|____|_||___/_|_\</pre></div><a class="u-url" href="/2017/09/18/node-bdd-cookie-cutter.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+  
+  <div class="wrapper">
+    
+    
+    <div class="footer-col-wrapper">
+      
+      <div class="footer-col">
+        <div class="avatar">
+          <img src="/img/site/f1lt3r-avatar.jpg" />
+        </div>
+      </div>
+       
+      <div class="footer-col">
+          <h2 class="footer-heading">F1LT3R</h2>
+          <ul class="contact-list">
+            <li class="p-name">Alistair MacDonald</li><li><a class="u-email" href="mailto:al@pwn.io">al@pwn.io</a></li></ul>
+      </div>
+
+      <div class="footer-col"><ul class="social-media-list"><li><a href="https://github.com/f1lt3r"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">f1lt3r</span></a></li><li><a href="https://instagram.com/f1lt3r"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg> <span class="username">f1lt3r</span></a></li><li><a href="https://www.linkedin.com/in/f1lt3r"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg> <span class="username">f1lt3r</span></a></li><li><a href="https://www.twitter.com/F1LT3R_"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">F1LT3R_</span></a></li></ul>
+</div>
+
+      <div class="footer-col">
+          <p>An engineering blog</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

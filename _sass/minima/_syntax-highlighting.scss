@@ -1,0 +1,90 @@
+$code-a: $col-a;
+$code-b: darken($col-b, 15%);
+$code-c: #0086f7;
+$code-d: $col-c;
+
+$code-0: #444;
+
+.highlight * {
+    font-weight: 100!important;
+    // font-smooth: never;
+    // -webkit-font-smoothing : none;
+}
+
+
+.highlight .c { font-style: italic; background-color: $col-c;  }
+.highlight .err { color: $code-0; }
+.highlight .esc { color: $code-0; }
+.highlight .g { color: $code-0; }
+.highlight .k { color: $code-b; font-weight: bold; }
+.highlight .l { color: $code-0; }
+.highlight .n { color: $code-0; }
+.highlight .o { color: $code-0; }
+.highlight .x { color: $code-0; }
+.highlight .p { color: $code-0; }
+.highlight .gd { color: $code-0; }
+.highlight .ge { color: $code-0; }
+.highlight .gr { color: $code-0; }
+.highlight .gh { color: $code-0; font-weight: bold; }
+.highlight .gi { color: $code-0; }
+.highlight .gp { color: $code-0; }
+.highlight .gs { color: $code-0; }
+.highlight .gu { color: $code-0; font-weight: bold; }
+.highlight .gt { color: $code-0; }
+.highlight .nb { color: $code-0; }
+.highlight .nc { color: $code-0; }
+.highlight .no { color: $code-c; }
+.highlight .nd { color: $code-0; }
+.highlight .ni { color: $code-0; }
+.highlight .ne { color: $code-0; }
+.highlight .nf { color: $code-a; font-weight: bold; }
+.highlight .nl { color: $code-0; }
+.highlight .nn { color: $code-0; }
+.highlight .nx { color: $code-0; }
+.highlight .py { color: $code-0; }
+.highlight .ow { color: $code-0; }
+.highlight .ld { color: $code-0; }
+.highlight .cs { font-style: italic; background-color: $col-c; }
+.highlight .ch { font-style: italic; background-color: $col-c;  }
+.highlight .cm { font-style: italic; background-color: $col-c; }
+.highlight .cp { color: #ff0007; font-weight: bold; font-style: italic; background-color: #0f140f; }
+.highlight .cpf { font-style: italic; background-color: $col-c;}
+.highlight .c1 { font-style: italic; color: rgba($code-0, 100%); background-color: rgba($col-c, 80%)}
+.highlight .go { background-color: #222222; color: #898989; }
+.highlight .kc { color: $code-b; font-weight: bold; }
+.highlight .kd { color: $code-b; font-weight: bold; }
+.highlight .kn { color: $code-b; font-weight: bold; }
+.highlight .kp { color: $code-b; }
+.highlight .kr { color: $code-b; font-weight: bold; }
+.highlight .kt { color: #cdcaa9; font-weight: bold; }
+.highlight .m { color: $code-c; font-weight: bold; }
+.highlight .s { color: $code-c; }
+.highlight .na { color: $code-a; font-weight: bold; }
+.highlight .nt { color: $code-b; font-weight: bold; }
+.highlight .nv { color: $code-b; }
+.highlight .w { color: #888888; }
+.highlight .mb { color: $code-c; font-weight: bold; }
+.highlight .mf { color: $code-c; font-weight: bold; }
+.highlight .mh { color: $code-c; font-weight: bold; }
+.highlight .mi { color: $code-c; font-weight: bold; }
+.highlight .mo { color: $code-c; font-weight: bold; }
+.highlight .sa { color: $code-c; }
+.highlight .sb { color: $code-c; }
+.highlight .sc { color: $code-c; }
+.highlight .dl { color: $code-c; }
+.highlight .sd { color: $code-c; }
+.highlight .s2 { color: $code-c; }
+.highlight .se { color: $code-c; }
+.highlight .sh { color: $code-c; }
+.highlight .si { color: $code-c; }
+.highlight .sx { color: $code-c; }
+.highlight .sr { color: $code-c; }
+.highlight .s1 { color: $code-c; }
+.highlight .ss { color: $code-c; }
+.highlight .bp { color: $code-0; }
+.highlight .fm { color: $code-a; font-weight: bold; }
+.highlight .vc { color: $code-b; }
+.highlight .vg { color: $code-b; }
+.highlight .vi { color: $code-b; }
+.highlight .vm { color: $code-b; }
+.highlight .il { color: $code-c; font-weight: bold; }
