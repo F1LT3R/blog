@@ -792,12 +792,12 @@ You should now see the React App launch in a browser with your `CompButton` comp
 
 I think this is as far as I would like to take this in a single article. I hope someone else finds this setup useful. If people express interest, I will follow up with a Part 2 on how to setup CI to ship multiple React Apps from this Monorepo setup.
 
-
 Comments, feedback, suggestions always welcome!
 
 Always ready to learn.
 
 # Interesting Articles on This Topic:
+
 - [Building Large Scale React Applications in a Monorepo](https://medium.com/@luisvieira_gmr/building-large-scale-react-applications-in-a-monorepo-91cd4637c131)
 - [Why Google Stores Billions of Lines of Code in a Single Repository](https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext)
 - [GitHub: Support Lerna and/or Yarn Workspaces](https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext)
