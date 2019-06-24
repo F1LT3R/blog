@@ -797,15 +797,12 @@ Comments, feedback, suggestions always welcome!
 
 Always ready to learn.
 
-&mdash; Alistair MacDonald
-
 # Interesting Articles on This Topic:
-- https://medium.com/@luisvieira_gmr/building-large-scale-react-applications-in-a-monorepo-91cd4637c131
-- https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext
-- https://github.com/facebook/create-react-app/issues/1333
-- https://github.com/facebook/create-react-app/pull/3741
-- https://github.com/jamiebuilds/react-loadable
-- https://daveceddia.com/customize-create-react-app-webpack-without-ejecting/
+- [Building Large Scale React Applications in a Monorepo](https://medium.com/@luisvieira_gmr/building-large-scale-react-applications-in-a-monorepo-91cd4637c131)
+- [Why Google Stores Billions of Lines of Code in a Single Repository](https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext)
+- [GitHub: Support Lerna and/or Yarn Workspaces](https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext)
+- [GitHub: Add support for yarn and lerna monorepos.](https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext)
+- [Customize Create React App without Ejecting](https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext)
 
 
 [Lerna]: https://lernajs.io/ "Lerna"
