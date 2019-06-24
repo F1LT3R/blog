@@ -19,7 +19,7 @@ For years I have been using JavaScript's `Math.sin()` and `Math.cos()`  to creat
 
 Don't like reading? Click the image below to see the code running on Github pages:
 
-[![Drawing a Circle with Custom Sine Cosine Functions](/content/images/2017/09/sine-cosine-play-demo.png)](https://f1lt3r.github.io/roll-your-own-math-sine-cosine/)
+[![Drawing a Circle with Custom Sine Cosine Functions](/img/posts/sine-cosine-play-demo.png)](https://f1lt3r.github.io/roll-your-own-math-sine-cosine/)
 
 ## Bad Weekend
 
@@ -44,13 +44,13 @@ I hit up all the usual suspects: Wikipedia, [MathOverflow](https://mathoverflow.
 
 Surprisingly, [Quora](https://www.quora.com/How-do-I-calculate-cos-sine-etc-without-a-calculator) seemed to have a good start on things. Math Samurai ["David Joyce"](https://www.quora.com/profile/David-Joyce-11) went to the effort of explaining the Math quite clearly.
 
-![sine-cosine-math-explained-by-david-joyce](/content/images/2017/09/sine-cosine-math-explained-by-david-joyce.png)
+![sine-cosine-math-explained-by-david-joyce](/img/posts/sine-cosine-math-explained-by-david-joyce.png)
 
 But I still didn't *get it*.
 
 Eventually, I stumbled upon a treasure-trove of intuitive math information from Kalid Azad at [BetterExplained.com](https://betterexplained.com/). (You have to [read this guy's website](https://betterexplained.com/), it's AMAZING!). His article on the [Intuitive Understand of Sine Waves](https://betterexplained.com/articles/intuitive-understanding-of-sine-waves/) was the exact information I needed. I had to re-read it, a lot, but it finally clicked!
 
-![sine-better-models-better-explained](/content/images/2017/09/sine-better-models-better-explained.png)
+![sine-better-models-better-explained](/img/posts/sine-better-models-better-explained.png)
 
 ## Learning a Few Things
 
@@ -331,7 +331,7 @@ let y = x - (x^3 / 3!) + (x^5 / 5!) - (x^7 / 7!)
 
 We can look at the values of the calculations we did above in this following table. You can see that as the series increases, and the powers and factorials increase, the sum value decreases! So as we raise the precision, the impulses and restorative forces decrease; refining the value by smaller and smaller amounts.
 
-![Sine Wave table](/content/images/2017/09/Screen-Shot-2017-09-05-at-11.06.47-AM.png)
+![Sine Wave table](/img/posts/Screen-Shot-2017-09-05-at-11.06.47-AM.png)
 
 So this *back-and-forth* is what generates the sine wave. And the more back-and-forth we have, (the more steps of precision we have), the longer our Sine wave extends.
 
@@ -344,7 +344,7 @@ The important thing to consider here is that the longer the sine wave is that we
 
 This concept might be a little clearer if we plot the precision of Sine and Cosine together as if we are trying to draw a circle. This following image plots precision 1 - 10. As the precision increases, the line progresses further around the circle before escaping. This plot also makes it easier to see the effect of ending the series calculation on a plus `+` versus a minus `-`, as you can see the line shoot off towards the top or bottom of the image respectively.
 
-![Plot increasing precision of Sine and Cosine](/content/images/2017/09/sine-precision.png)
+![Plot increasing precision of Sine and Cosine](/img/posts/sine-precision.png)
 
 We can see that it takes about 8 steps in our series to complete the circle. With need for increased precision in mind we might ask the question:
 
