@@ -130,7 +130,7 @@ With the understanding of the basic operations of a Binary Search, and enough kn
 
 [Click here to try the Binary Search Demo](https://f1lt3r.github.io/binary-search-in-typescript/)
 
-[![Typescript Binary Search Screenshot](/content/images/2017/09/binary-search-typescript-play.png)](https://f1lt3r.github.io/binary-search-in-typescript/)
+[![Typescript Binary Search Screenshot](/img/posts/binary-search-typescript-play.png)](https://f1lt3r.github.io/binary-search-in-typescript/)
 
 ### Exit Strategies
 
