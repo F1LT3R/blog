@@ -414,9 +414,9 @@ const sin = x => {
 
 ### What about Cosine?
 
-Cosine is slightly different. To calculate Cosine we need to make 2 changes to our series. Firstly, the step value is phase-shifted. To provide thie shift in phase, our step values for Sine are `[3, 5, 7, ...]` and the step values for Cosine are `[2, 4, 6, ...]` and so-on.
+Cosine is slightly different. To calculate Cosine we need to make 2 changes to our series. Firstly, the step value is phase-shifted. To provide the shift in phase, our step values for Sine are `[3, 5, 7, ...]` and the step values for Cosine are `[2, 4, 6, ...]` and so-on.
 
-Secondly, we do need need an impulse force. Our Sine wave starts with an `x` of `0` but our Cosine is phase-shifted to 1. This means we need to add the following code to our `series()` function.
+Secondly, we do need an impulse force. Our Sine wave starts with an `x` of `0` but our Cosine is phase-shifted to 1. This means we need to add the following code to our `series()` function.
 
 ```javascript
 const series = (x, offset, precision) => {
