@@ -444,7 +444,7 @@ Now we have everything we need to make circles!
 3. A Series method that can execute to a given precision
 4. Sine and Cosine functions that can run a series
 
-We can not plot a circle with our custom `sin()` and `cos()` functions.
+w plot a circle with our custom `sin()` and `cos()` functions.
 
 ```
 const mag = 50
