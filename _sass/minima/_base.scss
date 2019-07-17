@@ -203,7 +203,7 @@ blockquote {
     }
   }
 
-  p > code {
+  p > code, li > code {
     // background: none;
     // color: $col-c;
     // border: 0.5px solid $col-c;
@@ -239,7 +239,7 @@ code {
   padding: $su / 16 $su / 8;
 }
 
-p > code {
+p > code, li > code {
   // position: relative;
   // top: -2px;
   // @include relative-font-size(0.7);

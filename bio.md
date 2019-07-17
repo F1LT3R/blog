@@ -24,7 +24,9 @@ const tools = [
 
 <p>In my early career, I focused on pushing the bleeding-edge of web technology. I was a Technical Lead for Mozilla, chaired the Audio Working Group at The W3C, worked on data visualization for Newsweek, developed a Node.js platform for Redbull Studios and wrote an article for the .NET magazine about JavaScript animation. In recent years I have focused on using technology to help solve social problems. I was a Software Architect and Scrum Master for a Web Accessibility company and a Lead Developer for two mobile healthcare apps.</p>
 
-<p>I have been programming since the early 1980's, and started designing and building websites for working the early 2000's. I have co-founded a company and been the first employee at a start-up three times.</p>
+<p>I have been programming since the early 1980's, and started designing and building websites for work during the early 2000's. I have co-founded a company and been the first employee at a tech start-up three times.</p>
 
-<p>I studied Music Technology, Production & Performance at Langley College in England, where my teachers nicknamed me: *"Doctor Filter"*, because I would apply [Frequency Cutoff Filters](https://en.wikipedia.org/wiki/Cutoff_frequency) to all of the music I produced; over time this nickname shifted to [L337](https://en.wikipedia.org/wiki/Leet) *"F1LT3R"* form.</p>
+<p>I studied Music Technology, Production & Performance at Langley College in England, where my teacher jokingly nicknamed me <b>"Doctor Filter"</b>, because a) every musician was pre-pending their name with "Dr." back then, (E.g., Dr. Dre), and b), because I would apply <a href="https://en.wikipedia.org/wiki/Cutoff_frequency">Frequency Cutoff Filters</a> to every channel of the electronic music I produced.
+
+<p>My peers thought this nickname was hilarious, and so it stuck. With an ungodly number of hours playing <a href="http://www.teamfortress.com/">Team Fortress 2</a> under my belt, my nickname naturally shifted to its present, <a href="https://en.wikipedia.org/wiki/Leet">1337</a> form, <b>"F1LT3R"</b>.</p>
 <div class="cols-3">
