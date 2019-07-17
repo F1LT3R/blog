@@ -71,7 +71,7 @@ Before we get to the naming... lets look at another interesting feature of Binar
 
 But what on earth does *O(Log N)* actually mean?
 
-Reading the Wikipedia page for [Big O Notation](https://en.wikipedia.org/wiki/Big_O_notation) was not a huge help to me (too many scary math symbols); but I found the following Youtube video by Matt Garland helped me understand *just-enough*, that I calculate the Worst Case Performance in JavaScript.
+Reading the Wikipedia page for [Big O Notation](https://en.wikipedia.org/wiki/Big_O_notation) was not a huge help to me (too many scary math symbols); but I found the following YouTube video by Matt Garland helped me understand *just-enough*, that I could calculate the Worst Case Performance in JavaScript.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kjDR1NBB9MU" frameborder="0" allowfullscreen></iframe>
 
