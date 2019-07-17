@@ -19,7 +19,7 @@ tags:
 ---
 
 > ### UPDATE: 2019/07/17
-> Please use [React Workspaces Playground](https://github.com/react-workspaces/react-workspaces-playground) instead of this guide. React Workspaces Playground is a supported codebase where you can test drive everything in this guide with the latest version of React and Storybook. Unfortunately, this guide demonstrates how to achieve the similar effects via monkey-patching - a bad practice that is difficult to maintain. Please review my [React Workspaces slides](https://slides.com/alistairmacdonald-f1lt3r/react-workspaces/#/) for more information.
+> Please use [React Workspaces Playground](https://github.com/react-workspaces/react-workspaces-playground) instead of this guide. React Workspaces Playground is a supported codebase where you can test drive everything in this guide with the latest version of React and Storybook. Unfortunately, this guide demonstrates how to achieve similar effects via monkey-patching - a bad practice that is difficult to maintain. Please review my [React Workspaces slides](https://slides.com/alistairmacdonald-f1lt3r/react-workspaces/#/) for more information.
 
 Learn how to scaffold a Monorepo to manage multiple [Create React App]()'s that share a common component library using [Lerna](https://github.com/lerna/lerna) and [Yarn Workspaces](https://yarnpkg.com/lang/en/docs/workspaces/). We will setup [Storybook](https://storybook.js.org) and [Jest](https://jestjs.io/) to work well in the Monorepo environment.
 
