@@ -89,7 +89,7 @@ And `2^3` (two-to-the-power-of-three), is the same as saying: two times two, tim
 2 * 2 * 2 = 8
 ```
 
-You may know that the values of binary digits, (the 1's and 0's that make up base language of computers), are all powers of two:
+You may know that the values of binary digits, (the 1's and 0's that make up the base language of computers), are all powers of two:
 
 ```javascript
 2^1 = 2
@@ -187,7 +187,7 @@ i, val
 
 ## Understanding Factorials
 
-With "Power" out of the way, let us take a peek at Factorial. A *"Factorial"* is usually represented with a *explamation*, for example, `5!`, which is the same as saying *"five-factorial"*.
+With "Power" out of the way, let us take a peek at Factorial. A *"Factorial"* is usually represented with a *exclamation*, for example, `5!`, which is the same as saying *"five-factorial"*.
 
 The factorial is an integer number (a whole number), multiplied by all of the integer numbers lower than it. For example, the calculation for `3!` (three-factorial) would look like this:
 
@@ -444,9 +444,9 @@ Now we have everything we need to make circles!
 3. A Series method that can execute to a given precision
 4. Sine and Cosine functions that can run a series
 
-w plot a circle with our custom `sin()` and `cos()` functions.
+So let's plot a circle with our custom `sin()` and `cos()` functions.
 
-```
+```javascript
 const mag = 50
 const rate = 0.3
 let t = 0
