@@ -117,7 +117,7 @@ This means that the index position of each digit, from right-to-left, is the O(L
 ```typescript
 const binaryValues = [32, 16, 8, 4, 2, 1]
 
-Map each number to Log2
+// Map each number to Log2
 const ahha = binaryValues.map(Math.log2)
 
 console.log(ahha)
