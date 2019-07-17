@@ -54,7 +54,7 @@ Eventually, I stumbled upon a treasure-trove of intuitive math information from 
 
 ## Learning a Few Things
 
-It became apparent that rolling-my-own Sine and Cosine functions with basic math operators would require "rolling-a-few-more-of-my-own" math functions than I had expected. [Meadow muffins](http://lmgtfy.com/?q=meadow+muffins)!
+It became apparent that rolling-my-own Sine and Cosine functions with basic math operators would require "rolling-a-few-more-of-my-own" math functions than I had expected.
 
 Taking account of the damage:
 
