@@ -289,18 +289,23 @@ body, html {
 }
 
 .site-nav {
-  // background: $col-b;
-  background: #000;
   color: $col-b !important;
   font-family: 'IBM Plex Sans', sans-serif;
   padding: 0 $spacing-unit;
-
+  background: #000;
+  
   .page-link {
+    display: inline-block;
+    background: #000;
     color: $col-a;
     &:hover {
       color: $col-b; 
     }
   }
+}
+
+.site-nav .page-link:not(:last-child) {
+  // margin-right: 1px;
 }
 
 body:not(.wide) .site-header {
@@ -463,3 +468,6 @@ body:not(.wide) .page-content {
   }
 }
 
+.supporters {
+   
+}

@@ -13,16 +13,16 @@ href="https://angel.co/f1lt3r">AngelList</a> | <a       href="https://www.linked
 ```javascript
 const tools = [
     'ESNext (JavaScript)', 'Node.js', 'React', 'Angular', 'Ionic', 'Vue.js'
-    'XO', 'AVA', 'Bluebird (Promises)', 'Mocha/Chai', 'Travis', 'NYC',
-    'AWS Cognito', 'GitHub', 'Cordova', 'Babel', 'HTML5',
-    'Less', 'SASS', 'Gulp', 'Typescript', 'Webpack', 'Sketch'
+    'XO', 'AVA', `Jest` 'Bluebird (Promises)', 'Mocha/Chai', 'Travis', 'NYC',
+    'AWS', 'GitHub', 'Cordova', 'Babel', 'HTML5', 'Less', 'SASS',
+    'WebPack', 'Gulp', 'Grunt', 'Typescript', 'Sketch'
 ]
 ```
 
 <div class="cols-3">
-<p>I eat, sleep and dream in code. During the 19 years that I have worked as a software developer, I have experienced bumbling failures and spectacular successes. I make Web & Mobile apps when the sun is shining and tinker with Parallelism, Quantum Computing, and Open Source software when everyone has gone to sleep. I am a passionate advocate for Behavior Driven Development, DevOps, and ZTDD (Zero Technical Debt Development).</p>
+<p>I have been using JavaScript to develop web sites & mobile applications for 20 years. I eat, sleep and dream in code. I experiment with low-power computing, build keyboards and contribute to Open Source software. I am a passionate advocate for Behavior Driven Development, Devops and Agile without drama.</p>
 
-<p>In my early career, I focused on pushing the bleeding-edge of web technology. I was a Technical Lead for Mozilla, chaired the Audio Working Group at The W3C, worked on data visualization for Newsweek, developed a Node.js platform for Redbull Studios and wrote an article for the .NET magazine about JavaScript animation. In recent years I have focused on using technology to help solve social problems. I was a Software Architect and Scrum Master for a Web Accessibility company and a Lead Developer for two mobile healthcare apps.</p>
+<p>In my early career, I focused on pushing the bleeding-edge of web technology. I was a Technical Lead for Mozilla, chaired the Audio Working Group at The W3C, worked on data visualization for Newsweek, developed a Node.js platform for Redbull Studios and wrote an article for the .NET magazine about JavaScript animation. In recent years I have focused on using technology to help solve social problems. I was a Software Architect and Scrum Master for a Web Accessibility company and a Lead Developer for two mobile healthcare apps. </p>
 
 <p>I have been programming since the early 1980's, and started designing and building websites for work during the early 2000's. I have co-founded a company and been the first employee at a tech start-up three times.</p>
 
