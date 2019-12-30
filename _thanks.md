@@ -3,6 +3,7 @@ layout: page
 title: Thanks
 permalink: /thanks/
 date: '2019-12-29 12:12:00'
+
 ---
 
 <p><center><a href="https://github.com/sponsors/F1LT3R">❤️ Sponsor me on Github</a></center></p>
