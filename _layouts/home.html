@@ -12,6 +12,11 @@ layout: default
   {%- if site.posts.size > 0 -%}
     <h2 class="post-list-heading">{{ page.list_title | default: "Posts" }}</h2>
 
+    <form action="/search.html" method="get" id="search-form">
+      <label hidden for="search-box">Search</label>
+      <input type="text" id="search-box" name="term" placeholder="Search">
+    </form>
+
     <ul class="post-list">
       {%- for post in site.posts -%}
       <li>

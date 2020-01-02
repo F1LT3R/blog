@@ -138,34 +138,70 @@ body > * {
   margin-left: 0;
 }
 
+// #search-form {
+//   background: black;
+//   height: 67px;
+//   padding: 0 20px 0 0;
+//   float: right;
+// }
+
+// #search-box {
+//   position: relative;
+//   top: 16px;
+//   background: none;
+//   border: 0.5px solid $col-a;
+//   border-radius: 5px;
+//   padding: 4px 8px;
+//   color: $col-a!important;
+//   &:focus {
+//     color: $col-b!important;
+//       &::placeholder {
+//         color: $col-b!important;
+//       }
+//   }
+//   font-size: 20px;
+//   font-family: 'IBM Plex Sans', sans-serif;
+//   width: 132px;
+//   &::placeholder {
+//     color: $col-a;
+//   }
+// }
+
 #search-form {
-  background: black;
-  height: 67px;
-  padding: 0 20px 0 0;
-  float: right;
+  // background: black;
+  // height: 67px;
+  margin-bottom: 32px;
+  margin-top: -32px;
+  // margin-top: 8px;
+  display: block;
+  // position: absolute;
 }
 
 #search-box {
-  position: relative;
-  top: 16px;
+  // position: absolute;
+  // top: 16px;
   background: none;
   border: 0.5px solid $col-a;
   border-radius: 5px;
   padding: 4px 8px;
-  color: $col-a!important;
-  &:focus {
-    color: $col-b!important;
-      &::placeholder {
-        color: $col-b!important;
-      }
-  }
+  // margin-bottom: 16px;
+  // margin-top: -32px;
+  // color: $col-a!important;
+  // &:focus {
+  //   color: $col-b!important;
+  //     &::placeholder {
+  //       color: $col-b!important;
+  //     }
+  // }
+  color: black;
   font-size: 20px;
   font-family: 'IBM Plex Sans', sans-serif;
-  width: 132px;
+  // width: 132px;
   &::placeholder {
-    color: $col-a;
+    // color: black;
   }
 }
+
 
 .excerpt {
   margin-top: 12px;
