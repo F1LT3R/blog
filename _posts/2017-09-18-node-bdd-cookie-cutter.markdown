@@ -121,7 +121,6 @@ This video [Test Driven Development vs Behaviour Driven Development](https://www
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/4QFYTQy47yA?rel=0" frameborder="0" allowfullscreen></iframe>
 
-
 ## The Node.js BDD Toolchain
 
 The Toolchain I am using for my Node.js projects contain the following tools:
@@ -142,41 +141,47 @@ I am going to take you through the steps to setting most of these up and writing
 - **Node.js** - `v8.4.0`
 - **Yarn** - `0.27.5`
 
-First lets create the directoy structure for our project:
+First lets create the directory structure for our project:
 
-```shell
-# Make the project directory
-mkdir node-bdd-cookie-cutter
-cd node-bdd-cookie-cutter
+1. Make the project directory
 
-# Create a lib folder for our source code
-mkdir lib
+    ```cli
+    mkdir node-bdd-cookie-cutter
+    ```
+2. Create a lib folder for our source code
 
-# Create a folder for mock resources
-mkdir mock
+    ```cli
+    mkdir lib
+    ```
 
-# DO NOT create a test dir
-# (We will be keeping out specs next to our tests)
-```
+3. Create a folder for mock resources
+
+    ```cli
+    mkdir mock
+    ```
+
+> ## 🙅 DO NOT!
+>
+> **DO NOT** create a "test/" directory. We will be keeping out specs ("tests") next to our code.
 
 Your tree should now look like this:
 
-![Directory Structure](/img/posts/Screen-Shot-2017-09-11-at-10.54.53-AM.png)
-
+[![Directory Structure](/img/posts/Screen-Shot-2017-09-11-at-10.54.53-AM.png)](/img/posts/Screen-Shot-2017-09-11-at-10.54.53-AM.png "Directory Structure")
 
 Now lets start adding our testing packages:
 
-```shell
+```cli
 yarn add mocha chai chai-as-promised istanbul mocha-lcov-reporter git-pre-commit coveralls
 ```
 
 After our packages are installed, lets initialize our `package.json`:
 
-```bash
+```cli
 npm init
+```
 
+```bash
 # This utility will walk you through...
-
 # Here are the values I am using:
 
 package name:  # bdd-cookie-cutter
@@ -191,7 +196,6 @@ license:  # MIT
 ```
 
 Great! Now that we have things set up, we can start writing some tests.
-
 
 ### Creating The First Tests
 
@@ -230,7 +234,7 @@ describe('my-lib', () => {
 
 Now we have our first test, lets run it and see what happens. We can do this by running `./mocha` from our current directory.
 
-![Failure for: Failed to load a non-existent test file](/img/posts/Screen-Shot-2017-09-11-at-11.36.44-AM.png)
+[![Failure for: Failed to load a non-existent test file](/img/posts/Screen-Shot-2017-09-11-at-11.36.44-AM.png)](/img/posts/Screen-Shot-2017-09-11-at-11.36.44-AM.png "Failure for: Failed to load a non-existent test file "Failure for: Failed to load a non-existent test file")
 
 We can see that our lib does not have a function called `loadfile` yet, so let us add one. Open the file `lib/my-lib.js` and place the following code inside.
 
@@ -259,9 +263,9 @@ module.exports = myLib
 
 Now we have something to test, lets run mocha again.
 
-![Pass: Failed to load a non-existent test file](/img/posts/Screen-Shot-2017-09-11-at-11.37.44-AM.png)
+[![Pass: Failed to load a non-existent test file](/img/posts/Screen-Shot-2017-09-11-at-11.37.44-AM.png)](/img/posts/Screen-Shot-2017-09-11-at-11.37.44-AM.png "Pass: Failed to load a non-existent test file")
 
-Great, it works! We have followed the TDD principles, creating a test that fails, and then added the minimum nessecary code to make the test pass. Lets keep going and write another failing test. This time we will write one that *should* pass. Add the following code:
+Great, it works! We have followed the TDD principles, creating a test that fails, and then added the minimum necessary code to make the test pass. Lets keep going and write another failing test. This time we will write one that *should* pass. Add the following code:
 
 ```javascript
 // Begin the tests!
@@ -281,21 +285,20 @@ describe('my-lib', () => {
 
 Running mocha again we get the following:
 
-![Failing: load file containing "Hello World"](/img/post/Screen-Shot-2017-09-11-at-11.53.43-AM.png)
+[![Failing: load file containing "Hello World"](/img/posts/Screen-Shot-2017-09-11-at-11.53.43-AM.png)](/img/posts/Screen-Shot-2017-09-11-at-11.53.43-AM.png "Failing: load file containing "Hello World"")
 
 All we should have to do to make this test pass, is add the correct file and re-run the tests.
 
-```shell
+```cli
 echo Hello World! > ../mock/yes-file.txt
 mocha ./
 ```
 
-![Screen-Shot-2017-09-11-at-11.55.39-AM](/img/posts/Screen-Shot-2017-09-11-at-11.55.39-AM.png)
+[![Screenshot of the test passing](/img/posts/Screen-Shot-2017-09-11-at-11.55.39-AM.png)](/img/posts/Screen-Shot-2017-09-11-at-11.55.39-AM.png "Screenshot of the test passing")
 
-Tada!
+Ta-da!
 
 Now just keep going. Create a failing test, write the code to pass the test, and so on. At the point your code begins to get useful, I hope you experience the same wins that I have.
-
 
 ### Npm Testing Setup
 
@@ -317,7 +320,9 @@ So if we use the command `npm test` or `yarn test` from the CLI, we can see Moch
 
 Because we have set up our test alongside our code Mocha does not know where to look. It is looking for the directory called "test".
 
-> Warning: Could not find any test files matching pattern: test
+We should see an error like this:
+
+> **Warning:** "Could not find any test files matching pattern: test"
 
 Let's update the `package.json` file so that Mocha has something to work with.
 
@@ -331,13 +336,13 @@ Let's update the `package.json` file so that Mocha has something to work with.
 
 This should make Mocha look inside all sub directories of `./lib` to see if there are an `*spec.js` files. If you save the JSON file and re-run `npm test`, you should get the following output:
 
-![We found the tests!](/img/posts/Screen-Shot-2017-09-15-at-3.40.14-PM.png)
+[![We found the tests!](/img/posts/Screen-Shot-2017-09-15-at-3.40.14-PM.png)](/img/posts/Screen-Shot-2017-09-15-at-3.40.14-PM.png "We found the tests!")
 
 Great, mocha found the tests! But...
 
 Unfortunately our second test is failing. This is because we were running Mocha from the `./lib` directory previously. The mock file `../mock/yes-file.txt` was being opened relative to where the `mocha` command was run. 
 
-(Note: The first test does not fail because we are testing that a file can not be loaded.)
+> **Note:** The first test does not fail because we are testing that a file can not be loaded.
 
 Lets update our code in to handle the path; at the top of `./lib/my-lib.js`:
 
@@ -358,9 +363,13 @@ it('should load a test file "Hello World!"', () => {
 })
 ```
 
-Lets run tests again with `yarn test` or `npm test`:
+Lets run tests again:
 
-![Relative directory is now handled](/img/posts/Screen-Shot-2017-09-15-at-3.51.58-PM.png)
+```cli
+npm test
+```
+
+[![Relative directory is now handled](/img/posts/Screen-Shot-2017-09-15-at-3.51.58-PM.png)](/img/posts/Screen-Shot-2017-09-15-at-3.51.58-PM.png "Relative directory is now handled")
 
 Success!
 
@@ -401,24 +410,23 @@ We should add our symlink creation to our `package.json` scripts, so that any us
 
 When you run `npm install` or `yarn install` now, a symbolic link will be created inside of your `./node_modules` directory. This allows you to link to files using Node's recursive require architecture.
 
-![We have symlinked our app root inside of the node_modules directory](/img/posts/Screen-Shot-2017-09-15-at-3.59.24-PM.png)
+[![We have sym-linked our app root inside of the node_modules directory](/img/posts/Screen-Shot-2017-09-15-at-3.59.24-PM.png)](/img/posts/Screen-Shot-2017-09-15-at-3.59.24-PM.png "We have sym-linked our app root inside of the node_modules directory")
 
 If we `ls` the `./node_modules/app` directory, we can see that it links back to the directory containing our `package.json` file and our `./lib` and `./mock` directories.
 
-![Screen-Shot-2017-09-15-at-4.01.57-PM](/img/posts/Screen-Shot-2017-09-15-at-4.01.57-PM.png)
+[![Screenshot testing the sym-link with ls](/img/posts/Screen-Shot-2017-09-15-at-4.01.57-PM.png)](/img/posts/Screen-Shot-2017-09-15-at-4.01.57-PM.png "Screenshot testing the symlink with ls")
 
 Please note: you may have to handle this differently for Windows. In which case an extenal script in the `./bin` directory may be more appropriate. For the purpose of this tutorial, we are going to assume this code will never be run on Windows.
 
 Now lets update our code to use the symbolically linked directory. At the top of our file `./lib/my-lib.spec.js` make these changes:
 
 ```diff
- // Import the lib to test
+// Import the lib to test
 - const myLib = require('./my-lib')
 + const myLib = require('app/lib/my-lib')
 ```
 
 That's it for sym-linking. We can now require files relative to the `package.json` file rather than the file in which we are using the `require()` statement.
-
 
 ## Setting Up Code Coverage
 
@@ -461,7 +469,7 @@ verbose: true
 instrumentation:
     # Production Code Root
     root: ./lib
-    
+
     # Files to test
     extensions:
         - .js
@@ -471,7 +479,7 @@ instrumentation:
     default-excludes: true
     excludes: ["*.spec.js", "**/*.spec.js"]
     include-all-sources: true
-    
+
 reporting:
     print: both
     reports:
@@ -480,34 +488,37 @@ reporting:
 
 Your directory structure should now look something like this, (notice the `.istanbul.yml` file at the top:
 
-![Our directory structure now we have added our `.istanbul.yml` file](/img/posts/Screen-Shot-2017-09-15-at-4.38.49-PM.png)
+[![Our directory structure now we have added our `.istanbul.yml` file](/img/posts/Screen-Shot-2017-09-15-at-4.38.49-PM.png)](/img/posts/Screen-Shot-2017-09-15-at-4.38.49-PM.png "Our directory structure now we have added our `.istanbul.yml` file")
 
 Ok good!
 
-Lets run `yarn cover` or `npm cover` and see what happens.
+Lets run coverage and see what happens...
 
-![Screen-Shot-2017-09-15-at-4.42.07-PM](/img/posts/Screen-Shot-2017-09-15-at-4.42.07-PM.png)
+```cli
+npm run cover
+```
+
+[![ScreenShot of coverage passing](/img/posts/Screen-Shot-2017-09-15-at-4.42.07-PM.png)](/img/posts/Screen-Shot-2017-09-15-at-4.42.07-PM.png "ScreenShot of coverage passing")
 
 Fantastic!
 
 We can see from the coverage output that our coverage is at 100%. And if we click on the HTML link, we can inspect the cover in the Web Browser. The table of contents looks like this:
 
-![Coverage Report table of contents in the web browser](/img/posts/Screen-Shot-2017-09-15-at-4.44.10-PM.png)
+[![Coverage Report table of contents in the web browser](/img/posts/Screen-Shot-2017-09-15-at-4.44.10-PM.png)](/img/posts/Screen-Shot-2017-09-15-at-4.44.10-PM.png "Coverage Report table of contents in the web browser")
 
 And we can drill down further by clicking on the dirctories and files:
 
-![Viewing the coverage report for my-lib.js](/img/posts/Screen-Shot-2017-09-15-at-4.45.41-PM.png)
+[![Viewing the coverage report for my-lib.js](/img/posts/Screen-Shot-2017-09-15-at-4.45.41-PM.png)](/img/posts/Screen-Shot-2017-09-15-at-4.45.41-PM.png "Viewing the coverage report for my-lib.js")
 
 Note: all your coverage files are kept in the `./coverage` directory.
-
 
 ## Pre-Commit Testing
 
 Practicing Test Driven Development is a great way to squash bugs early. But did you know that you can keep the majority of bugs from every getting your code base in the first place? It's true. You can use Git's "Pre-Commit" hook to run tests every time you try to commit.
 
-```bash
+```cli
 git commit -m "I fixed all the things!"
-# Tests kick off here
+# ...tests kick off here
 ```
 
 If your tests fail, the offending code never makes it into the history of your repository. It's worth thing about that for a minute.
@@ -518,7 +529,7 @@ Wouldn't it be great if you knew that at any point you checked out that code-bas
 
 So let's install the Node.js package `git-pre-commit` to handle this for us:
 
-```bash
+```cli
 yarn add git-pre-commit
 ```
 
@@ -527,7 +538,7 @@ We can now see two things added to our `.git/hooks` directory:
 1. `pre-commit-utils` directory
 2. `pre-commit.js` file
 
-![The Git Hooks directory has new files](/img/posts/Screen-Shot-2017-09-17-at-11.29.30-PM.png)
+[![The Git Hooks directory has new files](/img/posts/Screen-Shot-2017-09-17-at-11.29.30-PM.png)](/img/posts/Screen-Shot-2017-09-17-at-11.29.30-PM.png "The Git Hooks directory has new files")
 
 Fortunately, we can interact with our Git Pre-Commit Hook by adding commands to `scripts` in our `package.json` file. Update the `test` and `precommit` scripts like so:
 
@@ -555,16 +566,17 @@ myLib.loadfile = filename =>
 
 When adding and trying to commit changes:
 
-![Git Pre-Commit Hook stopped an error getting into the codebase](/img/posts/Screen-Shot-2017-09-17-at-11.44.22-PM.png)
+[![Git Pre-Commit Hook stopped an error getting into the codebase](/img/posts/Screen-Shot-2017-09-17-at-11.44.22-PM.png)](/img/posts/Screen-Shot-2017-09-17-at-11.44.22-PM.png "Git Pre-Commit Hook stopped an error getting into the codebase")
 
 Super! The commit failed. Our nasty bug got Git-blocked before it could spread across the web. Let's double check by looking at the `git log`.
 
-![No bugs committed to this codebase](/img/posts/Screen-Shot-2017-09-17-at-11.46.59-PM.png)
+[![No bugs committed to this codebase](/img/posts/Screen-Shot-2017-09-17-at-11.46.59-PM.png)](/img/posts/Screen-Shot-2017-09-17-at-11.46.59-PM.png "No bugs committed to this codebase")
 
-Phew.
+Phew!
 
+Nothing bad was added to our commit history.
 
-## Testing in the Cloud
+## Running Tests in CI
 
 With the code so far, we can engage in test-driven development from our local machine. But inevitably we will be sharing our code, and people will create Pull Requests, asking you to merge their fixes and updates. But you can not be certain that the developer creating the Pull Requests has setup their environment correctly and run the tests.
 
@@ -572,60 +584,73 @@ No worries.
 
 We can force each new pull request to have tests run automatically in the cloud by using Travis-CI and Github. Assuming you already have a Travis-CI and Github account, you can follow these steps.
 
-**1) Enable Your Repo in Travis**
+1. **Enable Your Repo in Travis**
 
-![Flip the switch on your Repo in Travis-Ci](/img/posts/Screen-Shot-2017-09-18-at-12.01.46-AM.png)
+    [![Flip the switch on your Repo in Travis-Ci](/img/posts/Screen-Shot-2017-09-18-at-12.01.46-AM.png)](/img/posts/Screen-Shot-2017-09-18-at-12.01.46-AM.png "Flip the switch on your Repo in Travis-Ci")
 
-**2) Select Travis-CI Integration in Github Settings**
+1. **Select Travis-CI Integration in Github Settings**
 
-![Adding the Travis-CI integration in repo settings on Github](/img/posts/Screen-Shot-2017-09-18-at-12.04.12-AM.png)
+    [![Adding the Travis-CI integration in repo settings on Github](/img/posts/Screen-Shot-2017-09-18-at-12.04.12-AM.png)](/img/posts/Screen-Shot-2017-09-18-at-12.04.12-AM.png "Adding the Travis-CI integration in repo settings on Github")
 
-**3) Add a Travis YML File to your Repo**
+3. **Add a Travis YML File to your Repo**
 
-In the root of you repository, (alongside `package.json`), add a file called `.travis.yml` and insert the following contents:
+    In the root of you repository, (alongside `package.json`), add a file called `.travis.yml` and insert the following contents:
 
-```yml
-sudo: false
-language: node_js
-node_js:
-  - "7"
-install:
-  - "yarn install"
-test:
-  - "yarn test"
-```
+    ```yml
+    sudo: false
+    language: node_js
+    node_js:
+      - "7"
+    install:
+      - "yarn install"
+    test:
+      - "yarn test"
+    ```
 
-Commit this file to your repository and push to Github. Travis-CI should now have what it needs to run your tests and coverage in the cloud. Tests will be run and coverage will be generated every time that someone creates a pull-request to merge into your code-base.
+    Commit this file to your repository and push to Github. Travis-CI should now have what it needs to run your tests and coverage in the cloud. Tests will be run and coverage will be generated every time that someone creates a pull-request to merge into your code-base.
 
-To test this, I ran the following code:
+To test this, I did the following in the CLI:
 
-```bash
-# Checked our a new branch
-git checkout -b changes
+1. Checked our a new branch
 
-# (I added an abitrary change, linebreak, whitespace, etc.)
+    ```cli
+    git checkout -b changes
+    ```
 
-# Add and Push files to Github
-git add -A
-git push --set-upstream origin changes
-```
+2. I added an arbitrary change to a file (a line-break)
+
+    ```cli
+    echo "\n" >> README.md
+    ```
+
+3. I pushed files to Github
+
+    ```cli
+    git add -A
+    git push --set-upstream origin changes
+    ```
 
 Now when I create a Pull Request in Github, I can see that my tests have run and passed in Travis-CI:
 
 ![Travis-CI tests are passing](/img/posts/Screen-Shot-2017-09-18-at-12.20.35-AM.png)
 
-So all incoming code will now run the gauntlet of tests you created, as well as any tests that the collaborator adds. Passing this test bar raises confidence that the new code being committed will integrate well. And hopefully the act of having any "bar" there at all will help weed out the wrong kind of commits and the wrong kind of collaborators.
+### Building Public Confidence in Your Code
+
+So all incoming Pull Requests will now run the gauntlet of tests you created, as well as any tests that the collaborator adds. Passing this test bar raises confidence that the new code being committed will integrate well. And hopefully the act of having any "bar" there at all will help weed out the wrong kind of commits and the wrong kind of collaborators.
 
 Lets take a quick look at what happened on Travis:
 
-![Mocha tests and Coverage running on Travis-CI](/img/posts/Screen-Shot-2017-09-18-at-12.27.04-AM.png)
+[![Mocha tests and Coverage running on Travis-CI](/img/posts/Screen-Shot-2017-09-18-at-12.27.04-AM.png)](/img/posts/Screen-Shot-2017-09-18-at-12.27.04-AM.png "Mocha tests and Coverage running on Travis-CI")
 
-In this picture we can see that Mocha tests and Istanbul coverage ran in Travis CI, just like they did on our local machine.
+> ## ☝🧐&nbsp; In this picture
+>    
+> ...we can see that Mocha tests and Istanbul coverage ran in Travis CI, just like they did on our local machine.
 
+Great! Things are adding up.
 
-## Coverage Reports in The Cloud
+We have a system locked down that can be used to practice Behavior Driven Development, we have a way of checking our coverage, we can make sure any incoming production code pass tests before being accepted; but we do not have any way of sharing the status of our coverage with outside developers, yet.
 
-Great, things are adding up. We have a system locked down that can be used to practice Behavior Driven Development, we have a way of checking our coverage, we can make sure any incoming production code pass tests before being accepted; but we do not have any way of sharing the status of our coverage with outside developers, yet.
+## Coverage Reports in CI
 
 Sharing coverage results with outside developers is important. Your code-coverage stats allow a developer to know several things:
 
@@ -634,85 +659,84 @@ Sharing coverage results with outside developers is important. Your code-coverag
 
 To set up coverage reports, we will use [Coveralls.io](https://coveralls.io/). Assuming you have already signed up for a Coveralls.io account, use the following steps:
 
-**1) Flip the switch on your repo**
+1. **Flip the switch on your repo**
 
-![Turning on your Coverage Reports for your Repo with Coveralls.io](/img/posts/Screen-Shot-2017-09-18-at-12.30.08-AM.png)
+    [![Turning on your Coverage Reports for your Repo with Coveralls.io](/img/posts/Screen-Shot-2017-09-18-at-12.30.08-AM.png)](/img/posts/Screen-Shot-2017-09-18-at-12.30.08-AM.png "Turning on your Coverage Reports for your Repo with Coveralls.io")
 
-**2) Copy your repo token**
+2. **Copy your repo token**
 
-Click on the "Details" button. This should bring you to a screen containing your Coveralls `Repo Token`. Copy this token and create the following `.coveralls.yml` file next to your `package.json` file:
+    Click on the "Details" button. This should bring you to a screen containing your Coveralls `Repo Token`. Copy this token and create the following `.coveralls.yml` file next to your `package.json` file:
 
-![Copy your Coveralls Reop Token](/img/posts/Screen-Shot-2017-09-18-at-12.41.41-AM-1.png)
+    [![Copy your Coveralls Repo Token](/img/posts/Screen-Shot-2017-09-18-at-12.41.41-AM-1.png)](/img/posts/Screen-Shot-2017-09-18-at-12.41.41-AM-1.png "Copy your Coveralls Repo Token")
 
-In your `.coveralls.yml` file, add your token:
+    In your `.coveralls.yml` file, add your token:
+    
+    ```yml
+    repo_token: <your-token-here>
+    ```
 
-```yml
-repo_token: <your-token-here>
-```
+    This will allow you to run coverage from your **local machine only**. This repo token should not be shared publicly, so make sure you update your `.gitignore` file so your token does not get committed:
 
-This will allow you to run coverage from your **local machine only**. This repo token should not be shared publicly, so make sure you update your `.gitignore` file so your token does not get committed:
+3. **Update Git Ignore File**
 
-3) Update Git Ignore File
+    ```bash
+    # Coveralls
+    .coveralls.yml
+    ```
 
-```bash
-# Coveralls
-.coveralls.yml
-```
+4. **Add a Coveralls Script to Package.json**
+    
+    Now lets add a `coveralls` script to our `package.json` file:
 
-4) Add a Coveralls Script to Package.json
+    ```json
+    {
+      "scripts": {
+        "coveralls": "yarn run cover && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls -v"
+      }
+    }
+    ```
 
-Now lets add a `coveralls` script to our `package.json` file:
+    This script will run your coverage, and pass the response to the Coveralls package in your `./node_modules` directory, which will push the updated coverage reports to the coveralls server where they can be seen publicly.
 
-```json
-{
-"scripts": {
-    "coveralls": "yarn run cover && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls -v"
-  }
-}
-```
+5. **Add Coveralls Script to Travis**
 
-This script will run your coverage, and pass the response to the Coveralls package in your `./node_modules` directory, which will push the updated coverage reports to the coveralls server where they can be seen publicly.
+    Finally, add the following line to your `.travis.yml` file. 
 
-5) Add Coveralls Script to Travis
+    ```yml
+    after_success:
+      - npm run coveralls
+    ```
 
-Finally, add the following line to your `.travis.yml` file. 
+    This will trigger the npm coveralls script.
+    
+    If we commit these changes and create a pull request, we can see what that Coveralls is now reporting your Coverage at 100%!
 
-```yml
-after_success:
-  - npm run coveralls
-```
+    [![Coveralls.io showing code-coverage is 100% after running in Travis-CI](/img/posts/Screen-Shot-2017-09-18-at-1.09.17-AM.png)](/img/posts/Screen-Shot-2017-09-18-at-1.09.17-AM.png "Coveralls.io showing code-coverage is 100% after running in Travis-CI")
 
-This will trigger the npm coveralls script.
+6. **Add Coveralls Badge to Readme.md File**
 
-If we commit these changes and create a pull request, we can see what that Coveralls is now reporting your Coverage at 100%!
+    Select the Markdown embed code from the page:
 
-![Coveralls.io showing code-coverage is 100% after running in Travis-Ci](/img/posts/Screen-Shot-2017-09-18-at-1.09.17-AM.png)
+    [![Select the Markdown Embed code](/img/posts/Screen-Shot-2017-09-18-at-1.11.07-AM.png)](/img/posts/Screen-Shot-2017-09-18-at-1.11.07-AM.png "Select the Markdown Embed code")
+    
+    And copy it to your repo's `README.md` file.
 
-
-6) Add Coveralls Badge to Readme.md File
-
-Select the Markdown embed code from the page:
-
-![Select the Markdown Embed code](/img/posts/Screen-Shot-2017-09-18-at-1.11.07-AM.png)
-
-And copy it to your repo's `README.md` file.
-
-```markdown
-# node-bdd-cookie-cutter
-Cookie Cutter Repo for Behavior Driven Testing in Node.js with Promises
-
-[![Coverage Status](https://coveralls.io/repos/github/F1LT3R/node-bdd-cookie-cutter/badge.svg?branch=changes)](https://coveralls.io/github/F1LT3R/node-bdd-cookie-cutter?branch=changes)
-```
+    ```markdown
+    # node-bdd-cookie-cutter
+    Cookie Cutter Repo for Behavior Driven Testing in Node.js with Promises
+  
+    [![Coverage Status](https://coveralls.io/repos/github/F1LT3R/node-bdd-cookie-cutter/badge.svg?branch=changes)](https://coveralls.io/github/F1LT3R/node-bdd-cookie-cutter?branch=changes)
+    ```
 
 Now when we commit and push changes, the Code Coverage Badge is automatically updated to represent the most recent results, displaying them in your `README.md` file on Github.
 
-![100% Coverage Badge on Github Readme](/img/posts/Screen-Shot-2017-09-18-at-1.18.41-AM.png)
-
-
+[![100% Coverage Badge on Github Readme](/img/posts/Screen-Shot-2017-09-18-at-1.18.41-AM.png)](/img/posts/Screen-Shot-2017-09-18-at-1.18.41-AM.png "100% Coverage Badge on Github Readme")
 
 ## Conclusion
 
-Congratulations! You can now use Behavior Driven Development in Node.js to create production code, and reap the many benefits of TDD along the way. You can check that any incoming code passes tests before you merge it, and attract new contributors to your project with your coverage badge.
+Congratulations!
+
+You can now use Behavior Driven Development in Node.js to create production code, and reap the many benefits of TDD along the way. You can check that any incoming code passes tests before you merge it, and attract new contributors to your project with your coverage badge.
 
 I would like to say a big thank you to David Ernst for [the blog post](http://dsernst.com/2015/09/02/node-mocha-travis-istanbul-coveralls-unit-tests-coverage-for-your-open-source-project/) he wrote on this subject, which was a big help getting some of this proceedure figured out at the start of the year.
 

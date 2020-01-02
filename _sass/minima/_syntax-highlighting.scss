@@ -88,3 +88,36 @@ $code-0: #444;
 .highlight .vi { color: $code-b; }
 .highlight .vm { color: $code-b; }
 .highlight .il { color: $code-c; font-weight: bold; }
+
+@mixin cli {
+    &::before {
+        content: "$";
+        margin-left: -1.9em;
+        position: absolute;
+        color: #313232;
+        font-weight: bold;
+    }
+    font-family: 'Fira Code';
+    display: block;
+    border-left: $su solid $col-b;
+    padding: $spacing-unit / 2;
+    margin-bottom: $su*2;
+    font-weight: 100;
+    box-shadow: $su/2 $su/2 $su/16 rgba(0, 0, 0, 0.2);
+    background:rgba(0, 0, 0, 0.8);
+    font-size: $spacing-unit / 1.6;
+    color: $col-b;
+    > :last-child {
+      margin-bottom: 0;
+    }
+}
+
+code.language-cli {
+    @include cli;
+}
+
+code.language-cli-wrap {
+    @include cli;
+    white-space: pre-wrap; 
+}
+

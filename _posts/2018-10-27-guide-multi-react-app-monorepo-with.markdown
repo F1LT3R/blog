@@ -20,32 +20,35 @@ tags:
 
 Learn how to scaffold a Monorepo to manage multiple [Create React App]()'s that share a common component library using [Lerna](https://github.com/lerna/lerna) and [Yarn Workspaces](https://yarnpkg.com/lang/en/docs/workspaces/). We will setup [Storybook](https://storybook.js.org) and [Jest](https://jestjs.io/) to work well in the Monorepo environment.
 
-> ### UPDATE: 2019/07/17
-> Please use [React Workspaces Playground](https://github.com/react-workspaces/react-workspaces-playground) instead of this guide. React Workspaces Playground is a supported codebase where you can test drive everything in this guide with the latest version of React and Storybook. Unfortunately, this guide demonstrates how to achieve similar effects via monkey-patching - a bad practice that is difficult to maintain. Please review my [React Workspaces slides](https://slides.com/alistairmacdonald-f1lt3r/react-workspaces/#/) for more information.
-
+> ## 🚨 Update &mdash; 2019/07/17
+>   
+> Please use [React Workspaces Playground](https://github.com/react-workspaces/react-workspaces-playground) instead of this guide. React Workspaces Playground is a supported project that allows you to test-drive everything in this guide with the latest version of React and Storybook.
+>   
+> This guide demonstrates how to achieve similar effects via monkey-patching - a bad practice that is difficult to maintain. Please review my [React Workspaces slides](https://slides.com/alistairmacdonald-f1lt3r/react-workspaces/#/) for more information.
 
 Featuring:
 
-- [Babel-Loader-Lerna-CRA] - Auto-transpile sibling Lerna modules w/ hot-reloading
-- [Lerna] - The Monorepo manager
-- [Create-React-App-2] - React 16 App Scaffolding (unejected)
-- [Storybook-4-React] - Component Storybook
-- [Jest] - Unit/Snapshot Testing
+- 🎸 [Babel-Loader-Lerna-CRA] - Auto-transpile sibling Lerna modules w/ hot-reloading
+- 🐉 [Lerna] - The Monorepo manager
+- ⚛️️ [Create-React-App-2] - React 16 App Scaffolding (unejected)
+- 📖 [Storybook-4-React] - Component Storybook
+- 🃏 [Jest] - Unit/Snapshot Testing
 
 > Note: Download the code for this guide from GitHub [f1lt3r/monorepo-react](https://github.com/F1LT3R/monorepo-react).  
 
-> ### ⚠️ IMPORTANT STEPS
-> If you are checking out this code to test without using this guide, please remember to follow these important steps in order:
-> 
+> ### ⚠️ &nbsp;Important Steps  
+>   
+> If you are checking out this code to test without using this guide, please remember to follow these important steps in order.
+>   
 > 1. `npm install` in Lerna root directory
 > 2. `npm install` in the `packages/my-react-app` directory
 > 3. `npx babel-loader-lerna-cra` in the Lerna root directory
 
-# The Case For Monorepos
+## The Case For Monorepos
 
 Imagine a scenario where you are building a suite of three React apps that share the same architecture, design patterns, components and styles. Now imaging making an update to a low-level component like a Button that is used in all three apps, as well as one sub-component.
 
-![Multi React App Monorepo dependency graph](https://i.imgur.com/rPs8Vmf.png)
+[![Multi React App Monorepo dependency graph](/img/posts/0_9YpTKzsnkyYaVcl4.png)](/img/posts/0_9YpTKzsnkyYaVcl4.png "Multi React App Monorepo dependency graph")
 
 In this scenario, you would be forced into a process like this:
 
@@ -60,7 +63,7 @@ In this scenario, you would be forced into a process like this:
     2. Republish the package on npm service.
     3. Submit a new PR.
     4. Deploy
-4. Go into `React App #2`
+4. Go into act App #2
     1. Update the dependencies.
     2. Republish the package on npm service.
     3. Submit a new PR.
@@ -91,37 +94,38 @@ This is why large organizations like Facebook and Google make good use of Monore
 
 The following guide will show you how to set up a such Monorepo for a React project.
 
-# Prerequisites 
+## Prerequisites
 
-```shell
-$ npm i -g lerna
+```cli
+npm i -g lerna
 ```
 
-```shell
-$ npm i -g create-react-app
+```cli
+npm i -g create-react-app
 ```
 
 Create a directory for your Monorepo project.
 
-```shell
-$ cd ~/repos
-$ mkdir monorepo-react
-$ cd monorepo-react
+```cli
+cd ~/repos
+mkdir monorepo-react
+cd monorepo-react
 ```
 
-# Setup Lerna 
+## Setup Lerna 
 
-> Note: In order restart these this guide at any time, you remove the following files and directories:
-> ```shell
-> $ sudo rm -r node_modules packages stories .storybook coverage stories
-> $ rm package.json package-lock.json setupTests.js lerna.json
-> ```
+> **Note:** In order restart these this guide at any time, you remove the following files and directories:
+> ## 👇
 
+```cli
+sudo rm -r node_modules packages stories .storybook coverage stories
+rm package.json package-lock.json setupTests.js lerna.json
+```
 
 Create and initialize your [Lerna] monorepo:
 
-```shell
-$ lerna init
+```cli
+lerna init
 ```
 
 Your `package.json` should now look like this:
@@ -136,7 +140,7 @@ Your `package.json` should now look like this:
 }
 ```
 
-# Install Common Depenencies
+## Install Common Dependencies
 
 Installing these common dependencies will allow you to:
 
@@ -144,8 +148,8 @@ Installing these common dependencies will allow you to:
 - To have Storybook auto-install the right modules for your React project.
 - Have Babel transpile correctly for code, testing and Storybook.
 
-```shell
-$ npm i -D react react-dom @babel/core@^7.0.0-0 @babel/cli babel-plugin-transform-es2015-modules-commonjs babel-jest enzyme enzyme-adapter-react-16 jest react-test-renderer babel-core@7.0.0-bridge.0 @babel/preset-env @babel/preset-react 
+```cli-wrap
+npm i -D react react-dom @babel/core@^7.0.0-0 @babel/cli babel-plugin-transform-es2015-modules-commonjs babel-jest enzyme enzyme-adapter-react-16 jest react-test-renderer babel-core@7.0.0-bridge.0 @babel/preset-env @babel/preset-react 
 ```
 
 Your `package.json` should now look like this:
@@ -173,17 +177,17 @@ Your `package.json` should now look like this:
 }
 ```
 
-# Install Storybook React
+## Install Storybook React
 
 Now we will install and initialize Storybook version 4.
 
-```shell
-$ npx -p @storybook/cli@alpha sb init
+```cli
+npx -p @storybook/cli@alpha sb init
 ```
 
 Note: Installing the `@alpha` version (currently  `@4.0.0-rc.6`), will allow us to set our Babel configuration inside of our `package.json` files which will make configuration easier for sub-packages.
 
-![Screenshot of Storybook React 4 installing](https://imgur.com/Tquu6YT.png)
+[![Screenshot of Storybook React 4 installing](/img/posts/Tquu6YT.png)](/img/posts/Tquu6YT.png "Screenshot of Storybook React 4 installing")
 
 Your root `package.json` file should now look like this:
 
@@ -222,71 +226,71 @@ Your root `package.json` file should now look like this:
 
 Now you can test that Storybook runs on your machine.
 
-```shell
-$ npm run storybook
+```cli
+npm run storybook
 ```
 
-![Screenshot of Storybook React 4 launching from the command line](https://imgur.com/gFzGOfJ.png)
+[![Screenshot of Storybook React 4 launching from the command line](/img/posts/gFzGOfJ.png)](/img/posts/gFzGOfJ.png "Screenshot of Storybook React 4 launching from the command line")
 
 Storybook should now launch in your web browser automatically.
 
-![Screenshot of Storybook running in the web browser](https://i.imgur.com/SaYF4x6.png)
+[![Screenshot of Storybook running in the web browser](/img/posts/SaYF4x6.png)](/img/posts/SaYF4x6.png "Screenshot of Storybook running in the web browser")
 
 List the storybook files:
 
-```shell
-$ tree -C .storybook stories
+```cli
+tree -C .storybook stories
 ```
 
 - Your `.storybook/` directory contains your Storybook configuration.
 - Your `stories/` directory is where your global Storybook stories live.
 
-![Screenshot of .storybook and stories directories](https://imgur.com/m5xzkiZ.png)
+[![Screenshot of .storybook and stories directories](/img/posts/m5xzkiZ.png)](/img/posts/m5xzkiZ.png "Screenshot of .storybook and stories directories")
 
-> Note: To install tree: [`brew`/`apt-get`/`yum`/`pkg`] `install tree`
+> Note: To install tree: `brew install tree`
 
-# Create Your React App
+## Create Your React App
 
 Create a home in `packages/my-react-app` for your React App.
 
-```shell
-$ cd ~/repos/monorepo-react/packages/
-$ create-react-app my-react-app
+```cli
+cd ~/repos/monorepo-react/packages/
+create-react-app my-react-app
 ```
 
 Run your React app to test things worked.
 
-```shell
-$ cd my-react-app
-$ npm run start
+```cli
+cd my-react-app
+npm run start
 ```
 
 You should now see an error message about Webpack like this one:
 
-![Screenshot of React error message about Webpack version number](https://imgur.com/5XOdevS.png)
+[![Screenshot of React error message about Webpack version number](/img/posts/5XOdevS.png)](/img/posts/5XOdevS.png "Screenshot of React error message about Webpack version number")
 
 We will work around this by setting the `SKIP_PREFLIGHT_CHECK=true` in the `.env` file as suggested.
 
-```shell
+```cli
 echo "SKIP_PREFLIGHT_CHECK=true" > .env
 ```
 
 You should now be able to run your React app, and your browser should launch automatically.
 
-```shell
-$ npm run start
+```cli
+npm run start
 ```
 
-![Screenshot of Your React App running in the web browser](https://i.imgur.com/yovfAHZ.png)
+[![Screenshot of Your React App running in the web browser](/img/posts/yovfAHZ.png)](/img/posts/yovfAHZ.png "Screenshot of Your React App running in the web browser")
 
 ## Create an External React Component
 
 Lets create our first external React component. We will do this inside our `./packages` directory provided by Lerna.
 
-```shell
-$ cd ~/repos/monorepo-react/packages/
-$ mkdir comp-button
-$ cd comp-button
+```cli
+cd ~/repos/monorepo-react/packages/
+mkdir comp-button
+cd comp-button
 ```
 
 Create a `packages/comp-button/package.json` file like this:
@@ -330,9 +334,9 @@ What is going on in the `package.json` file:
 
 Make a source directory for your React component.
 
-```shell
-$ mkdir src
-$ cd src
+```cli
+mkdir src
+cd src
 ```
 
 Create your React component in `packages/comp-button/index.js`:
@@ -355,21 +359,21 @@ export default Button
 
 Now lets try to transpile your React code to ECMAScript 2015 (JavaScript with support for older browsers).
 
-```shell
-$ lerna run transpile
+```cli
+lerna run transpile
 ```
 
 You should see the following output:
 
-![Screenshot of babel transpiling button component](https://imgur.com/YDkWQ3T.png)
+[![Screenshot of babel transpiling button component](/img/posts/YDkWQ3T.png)](/img/posts/YDkWQ3T.png "Screenshot of babel transpiling button component")
 
 Your `./dist/` directory should now contain the transpiled `index.js` file:
 
-```shell
-$ tree -C ../dist
+```cli
+tree -C ../dist
 ```
 
-![SCreenshot of the "dist" directory listing](https://imgur.com/qIeoay7.png)
+[![Screenshot of the "dist" directory listing](/img/posts/qIeoay7.png)](/img/posts/qIeoay7.png "Screenshot of the "dist" directory listing")
 
 The `./dist/index.js` file should contain your transpiled code, like this:
 
@@ -447,7 +451,7 @@ describe('Button Component', function() {
 })
 ```
 
-> Note: we installed `babel-core@7.0.0-bridge.0` and `babel-jest` earlier to make Babel 7 code compatible with Jest. (See: [Install Common Dependencies](install-common-depenencies))
+> **Note:** we installed `babel-core@7.0.0-bridge.0` and `babel-jest` earlier to make Babel 7 code compatible with Jest. (See: [Install Common Dependencies](install-common-depenencies))
 
 Add the following "jest" section to your root `package.json`:
 
@@ -503,20 +507,19 @@ const Adapter = require('enzyme-adapter-react-16');
 enzyme.configure({ adapter: new Adapter() });
 ```
 
-> Note: we deliberately use the older require syntax here, so that s`etupTests.js` is loadable without additional babel configuration.
+> **Note:** we deliberately use the older require syntax here, so that `setupTests.js` is loadable without additional Babel configuration.
 
 Now lets run Jest to see the spec working:
 
-```shell
+```cli
 lerna run jest
 ```
 
-> Note: We are using `jest` and not `test` to reserve the word "test" for running all tests, including End to End, linting, etc.
- 
-![Screenshot of Jest React Test passing with Babel 7](https://imgur.com/zIzdDfH.png)
+> **Note:** We are using `jest` and not `test` to reserve the word "test" for running all tests, including End to End, linting, etc.
 
+[![Screenshot of Jest React Test passing with Babel 7](/img/posts/zIzdDfH.png)](/img/posts/zIzdDfH.png "Screenshot of Jest React Test passing with Babel 7")
 
-# Add a Story for Your React Component
+## Add a Story for Your React Component
 
 Now lets create a Storybook story for our new Button component:
 
@@ -543,7 +546,8 @@ storiesOf('Button', module)
     <Button onClick={action('clicked')}>Button</Button>
   ))
 ```
-**Reconfigure Storybook**
+
+### Reconfigure Storybook
 
 We will now need to configure Storybook to load stories from all the `packages/**` directories, instead of loading `stories/` from your Monorepo root.
 
@@ -563,22 +567,22 @@ configure(loadStories, module);
 
 It's now safe to delete the `stories/` directory at the Monorepo root.
 
-```shell
-$ cd ~/repos/monorepo-react/
-$ sudo rm -r stories
+```cli
+cd ~/repos/monorepo-react/
+sudo rm -r stories
 ```
 
 Lets check that the Storybook still loads with your `comp-button` Story:
 
-```shell
-$ npm run storybook
+```cli
+npm run storybook
 ```
 
 You should now be able to see your button component Story which was built from your `packages/comp-button` directory:
 
-![Screenshot of Storybook displaying your Button component Story](https://imgur.com/YLqC2Fi.png)
+[![Screenshot of Storybook displaying your Button component Story](/img/posts/YLqC2Fi.png)](/img/posts/YLqC2Fi.png "Screenshot of Storybook displaying your Button component Story")
 
-# Crosslink Your Dependencies with Lerna
+## Crosslink Your Dependencies with Lerna
 
 Add the following dependency to your `packages/my-react-app/package.json`:
 
@@ -623,13 +627,13 @@ Your `packages/my-react-app/package.json` should now look like this:
 
 We can now crosslink our packages using `lerna bootstrap`.
 
-```shell
-$ lerna bootstrap
+```cli
+lerna bootstrap
 ```
 
 You should see the following success message:
 
-![Screenshot of the Lerna Bootstrap success message](https://imgur.com/XZzyCaw.png)
+[![Screenshot of the Lerna Bootstrap success message](/img/posts/XZzyCaw.png)](/img/posts/XZzyCaw.png "Screenshot of the Lerna Bootstrap success message")
 
 # Use Your Component in The React App
 
@@ -677,25 +681,25 @@ export default App;
 
 Now start your app:
 
-```shell
-$ npm run start
+```cli
+npm run start
 ```
 
 You should see the following error:
 
-![Screenshot of React Start error](https://imgur.com/LfNmtHp.png)
+[![Screenshot of React Start error](/img/posts/LfNmtHp.png)](/img/posts/LfNmtHp.png "Screenshot of React Start error")
 
 The React App is failing to compile because Create-React-App's Webpack config is unaware of the any external modules. This means Webpack can not tell Babel-Loader about your component directories, and the sources do not get transpiled.
 
 It seems like this will problem may go away with future versions of Create-React-App, although this may require Yarn Workspaces. So make sure you check the GitHub Issue [Create-React-App-Lerna-Support] to see if this feature os landed before using the following work-around.
 
-# Rewire Your React App for Lerna
+## Rewire Your React App for Lerna
 
 I created a small Work-around Node Module to override Create-React-App Webpack configs inside Lerna projects, called [Babel-Loader-Lerna-CRA]. It's pretty simple. It just updates the Webpack paths for Babel-Loader.
 
 You can install this package using NPM:
 
-```shell
+```cli
 npm i -D babel-loader-lerna-cra
 ```
 
@@ -748,29 +752,29 @@ Your `package.json` should now look like this:
 }
 ```
 
-- The **`imports`** refer to components that the React app will neeed to transpile.
-- The **`apps`** inform `babel-loader-lerna-cra` where the Webpack overrides will need to happen.
+- The `imports` refer to components that the React app will neeed to transpile.
+- The `apps` inform `babel-loader-lerna-cra` where the Webpack overrides will need to happen.
 
 Now lets bootstrap the Webpack configs in our React app with `babel-loader-lerna-cra`:
 
-```shell
-$ npx babel-loader-lerna-cra
+```cli
+npx babel-loader-lerna-cra
 ```
 
 You should see the following output:
 
-![Screenshot of babel-loader-lerna-cra bootstrapping Create-React-App's Webpack config in the CLI](https://imgur.com/zpGHfZY.png)
+[![Screenshot of babel-loader-lerna-cra bootstrapping Create-React-App's Webpack config in the CLI](/img/posts/zpGHfZY.png)](/img/posts/zpGHfZY.png "Screenshot of babel-loader-lerna-cra bootstrapping Create-React-App's Webpack config in the CLI")
 
 Now lets try running your React App again:
 
-```shell
-$ cd ~/repos/monorepo-react/packages/my-react-app
-$ npm run start
+```cli
+cd ~/repos/monorepo-react/packages/my-react-app
+npm run start
 ```
 
 You should now see the React App launch in a browser with your `CompButton` component rendering with the text "Foorbar!"
 
-![Screenshot of the React app running with a Lerna sibling component](https://imgur.com/gBfC9IH.png)
+[![Screenshot of the React app running with a Lerna sibling component](/img/posts/gBfC9IH.png)](/img/posts/gBfC9IH.png "Screenshot of the React app running with a Lerna sibling component")
 
 ## So what did we get out of this work-around?
 
@@ -784,13 +788,13 @@ You should now see the React App launch in a browser with your `CompButton` comp
 
   Here is our `CompButton` component being Hot-Reloaded as it is being updated:
 
-  ![Five second animated screencast of Hot Reloading using babel-loeader-lerna-cra](https://imgur.com/ukPvQbS.gif)
+  [![Five second animated screencast of Hot Reloading using babel-loeader-lerna-cra](/img/posts/ukPvQbS.gif)](/img/posts/ukPvQbS.gif "Five second animated screencast of Hot Reloading using babel-loeader-lerna-cra")
 
 - **Storybook Hot Reloading**
   
   Nothing special here, but it's worth noting that our Storybook still hot-reloads too.
 
-  ![Screenshot of Storybook after hot-reloading our Button component](https://imgur.com/qrtY6qd.png)
+  [![Screenshot of Storybook after hot-reloading our Button component](/img/posts/qrtY6qd.png)](/img/posts/qrtY6qd.png "Screenshot of Storybook after hot-reloading our Button component")
 
 # Conclusion
 

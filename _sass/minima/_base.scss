@@ -158,35 +158,39 @@ a {
  * Blockquotes
  */
 blockquote {
-  // padding: 8px 12px;
-  border-left: $su/2 solid $col-a;
-  padding: $spacing-unit;
+  &::before {
+    content: open-quote;
+    content: '❯';
+    // line-height: 100%;
+    margin-left: -1.8em;
+    position: absolute;
+    color: #313232;
+    font-weight: bold;
+  }
+
+  line-height: $su * 1.2;
+  border-left: $su solid $col-a;
+  padding: $spacing-unit / 2;
   margin: $su * 1.5 0;
-  
-  // @include relative-font-size();
-  // letter-spacing: -1px;
-  // font-style: italic;
-  // font-family: 'Encode Sans Expanded', sans-serif;
-  // line-height: $base-line-height * 1.5;
-  // font-family: 'Lora', serif;
-  // font-family: 'Indie Flower', cursive;
-  // font-family: 'Bitter', serif;
   font-weight: 100;
   box-shadow: $su/2 $su/2 $su/16 rgba(0, 0, 0, 0.2);
   background:rgba(0, 0, 0, 0.8);
-  
   font-family: 'IBM Plex Sans', sans-serif;
-  // font-family: 'VT323', monospace;
-  // font-family: Hack, monospace;
   font-size: $spacing-unit / 1.6;
   color: $col-b;
-  // font-style: italic;
-  // text-shadow: 2px 2px $col-a;
-  // box-shadow: 8px 8px $col-b;
 
   > :last-child {
     margin-bottom: 0;
   }
+
+  h2:last-child {
+    margin-top: -$su;
+  }
+
+  > :first-child {
+    margin-top: 0;
+  }
+
 
   h1, h2, h3, h4, h5, h6 {
     color: $col-b;
@@ -204,24 +208,20 @@ blockquote {
   }
 
   p > code, li > code {
-    // background: none;
-    // color: $col-c;
-    // border: 0.5px solid $col-c;
-    // padding: $su / 8;
-
-    font-size: 0.7em;
-    font-weight: 400!important;
+    color: $col-b;
+    padding: $su/8 $su/4;
+    // font-size: 0.7em;
+    font-weight: 200!important;
     font-family: inherit;
-
+    font-size: inherit;
+    border: 0.5px solid #555;
     border-radius: 3px;
-
-    color: #000;
-    background: $col-c;
-    border: none;
-    
+    // background: $col-a;
+    background: #444;
     margin: 0 $su / 8;
   }
 }
+
 @import url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css');
 
 /**
@@ -272,32 +272,37 @@ p > code, li > code {
   // border: 1px solid rgba(200, 200, 200, 0.5);
 }
 
+li .highlighter-rouge {
+  margin-bottom: $su;
+  background-color: #EEE;
+  overflow-x: scroll;
+  
+  .highlight {
+    padding: $su/2;
+    margin-bottom: 0;
+
+    .highlight {
+    }
+    
+    > code {
+      padding-right: $su!important;
+      border: 0;
+      padding-left: 0;
+      padding-bottom: 0;
+    }
+  }
+}
 
 .post-content > .highlighter-rouge {
-  // width: 100vw;
-  // position: relative;
-  // left: 50%;
-  // right: 50%;
-  // margin-left: -50vw;
-  // margin-right: -50vw;
-  // text-align: center;
-
-  // background-color: #1B2B34;
   background-color: #EEE;
   margin-top: $spacing-unit;
   margin-bottom: $spacing-unit;
   padding-top: $spacing-unit;
-  // padding-bottom: $spacing-unit/4;
 }
 
 $code-0x: #fff;
 
-
 .post-content > blockquote > .highlighter-rouge > .highlight > .highlight{
-  // width: 100%;
-  
-  // white-space: pre-wrap;
-  // word-break: keep-all;
   white-space: pre-wrap;       /* css-3 */
   white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
   white-space: -pre-wrap;      /* Opera 4-6 */
@@ -308,23 +313,15 @@ $code-0x: #fff;
   .ld {color: $code-0x!important;}
 }
 
-.post-content > .highlighter-rouge > .highlight > pre.highlight {
-  // width: calc(#{$content-width} - #{$spacing-unit});
-  // width: 100%;
+.post-content > .highlighter-rouge > .highlight > pre.highlight,
+code.language-cli {
   margin-left: auto;
   margin-right: auto;
   text-align: left;
-  // margin-left: 300px;
-  // position: relative;
-  // margin-left: 50vw;
-  // left: 50%;
-  // width: $spacing-unit;
   padding: 0px $su;
-  padding-bottom: $spacing-unit ;
+  padding-bottom: $spacing-unit;
   overflow-x: scroll;
-  // background-color: rgba(200, 200, 200 , 0.25);
   border-radius: 3px;
-  // @include full-width();
 
   > code {
     border: 0;
