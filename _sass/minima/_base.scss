@@ -127,8 +127,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: $base-font-weight;
 }
 
-
-
 /**
  * Links
  */
@@ -256,23 +254,43 @@ p > code, li > code {
   // box-shadow: $su / 8 $su / 8 $su / 8 $col-a;
 }
 
-.post-tags {
-  // float: right;
-  // display:block;
-} 
+.search-tag {
+  font-family: 'Fira Code', monospace;
+  font-weight: 100;
+  @include relative-font-size(0.7);
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: black;
+  padding: 2px 6px;
+  background: $col-c;
+  margin-bottom: 8px;
+}
+
 .post-date {
+  font-family: 'Fira Code', monospace;
+  font-weight: 100;
+  @include relative-font-size(0.7);
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: black;
+  padding: 2px 6px;
+  background: rgba(0, 0, 0, 0.1);
+  margin-bottom: 8px;
+  margin-right: 4px;
 }
 
 .post-tag {
-  // font-family: 'Fira Code', monospace;
+  margin-right: 4px;
+  font-family: 'Fira Code', monospace;
   font-weight: 100;
   @include relative-font-size(0.7);
-  // background: rgba(200, 200, 200, 0.2);
-  // border-radius: 3px;
-  // border: 1px solid rgba(200, 200, 200, 0.5);
+  background: $col-b;
+  border-radius: 3px;
+  padding: 2px 6px;
+  border: 1px solid $col-b;
 }
 
-li .highlighter-rouge {
+li .highlighter-rouge .highlight {
   margin-bottom: $su;
   background-color: #EEE;
   overflow-x: scroll;
@@ -280,9 +298,6 @@ li .highlighter-rouge {
   .highlight {
     padding: $su/2;
     margin-bottom: 0;
-
-    .highlight {
-    }
     
     > code {
       padding-right: $su!important;
@@ -390,7 +405,13 @@ code.language-cli {
   }
 }
 
-
+input, a, button {
+  outline-color: $col-b;
+  // outline-width: 8px;
+  // &:focus {
+  //   outline-style: solid;
+  // }
+}
 
 /**
  * Tables

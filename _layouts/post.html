@@ -8,16 +8,28 @@ layout: default
   </div> 
 
   <header class="post-header">
-    <!-- <img class="feature-image" src="{{page.feature_img }}"/> -->
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
+
     <p class="post-meta">
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+        {%- assign date_format = site.minima.date_format | default: "%B %-d, %Y" -%}
         {{ page.date | date: date_format }}
       </time>
+      
+      <span class="post-tags">
+        {% for tag in page.tags limit:page.tags.length %}
+        <span class="post-tag"><a href="/search.html?term={{ tag }}">{{ tag }}</a></span>
+        {% endfor %}
+        
+        {% for tag in page.tags limit:1 offset:page.tags.length %}
+        <span class="post-tag"><a href="/search.html?term={{ tag }}">{{ tag }}</a></span>
+        {% endfor %}
+      </span>
+
       {%- if page.author -%}
         • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
-      {%- endif -%}</p>
+      {%- endif -%}
+    </p>
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">

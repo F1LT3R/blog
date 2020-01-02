@@ -449,7 +449,7 @@ npm run e2e
 
 [![Screenshot of unit tests passing in the CLI](/img/posts/1__ZHSNImC-In4gnImtm832w.png)](/img/posts/1__ZHSNImC-In4gnImtm832w.png "Screenshot of unit tests passing in the CLI")
 
-> **Note:** you must have run \`npm run build\` before e2e tests can pass.
+> **Note:** you must have run `npm run build` before e2e tests can pass.
 
 ## Conclusion
 
