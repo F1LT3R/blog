@@ -17,11 +17,7 @@ layout: default
       </time>
       
       <span class="post-tags">
-        {% for tag in page.tags limit:page.tags.length %}
-        <span class="post-tag"><a href="/search.html?term={{ tag }}">{{ tag }}</a></span>
-        {% endfor %}
-        
-        {% for tag in page.tags limit:1 offset:page.tags.length %}
+        {% for tag in page.tags %}
         <span class="post-tag"><a href="/search.html?term={{ tag }}">{{ tag }}</a></span>
         {% endfor %}
       </span>
