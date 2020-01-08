@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  AWS SNS Push Notify with Cordova
+permalink: aws-sns-push-notifications-with-apache-cordova-android-ios
 feature_img: /img/feature/sns-push-notifications-with-apache-cordova.jpeg
 date: '2018-01-24 11:00:00'
 featured: false
@@ -12,7 +13,7 @@ tags:
 - Cordova
 - Amazon
 - AWS
-- mobile
+- Mobile
 - JavaScript
 - Apache
 - Setup

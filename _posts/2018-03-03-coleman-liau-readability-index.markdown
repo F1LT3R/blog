@@ -1,17 +1,19 @@
 ---
 layout: post
 title: Coleman-Liau Readability Index
+permalink: coleman-liau-readability-index
 feature_img: https://images.unsplash.com/photo-1521714161819-15534968fc5f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80
 date: '2018-03-03 17:38:51'
 featured: false
 categories:
 - article
 tags:
-- coleman-liau
-- readability
-- writing
-- readable-io
-- node-js
+- Coleman-Liau
+- Readability
+- Writing
+- Readable-io
+- Node.js
+- JavaScript
 ---
 
 I became fascinated with the Coleman-Liau readability index while testing various writing tools. Read about how I reverse engineered the Coleman-Liau algorithm to score the readability sentences.

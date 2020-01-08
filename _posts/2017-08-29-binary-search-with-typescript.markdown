@@ -1,19 +1,18 @@
 ---
 layout: post
 title: Binary Search with Typescript
+permalink: binary-search-with-typescript
 feature_img: https://media2.giphy.com/media/deD6sPhPdGbRojquw4/giphy.gif?cid=790b76115d0cf91a30653259679665c5&rid=giphy.gif
 featured: false
 date: '2017-08-29 01:38:10'
 categories:
 - article
 tags:
-- binary
-- search
-- typescript
-- javascript
-- computer-science
-- code
-- demo
+- Binary
+- Search
+- TypeScript
+- JavaScript
+- Computer-Science
 ---
 
 "What is a Binary Search?", I was asked this week. “I have no idea!”, I replied. I was interested to see if I could understand what a Binary Search was and whether I could write a Binary Search with Typescript.

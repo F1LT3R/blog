@@ -1,6 +1,7 @@
 ---
 layout: post
 title: The Unstated React Service Pattern
+permalink: unstated-react-service-pattern
 feature_img: /img/feature/unstated-react-service-pattern.png
 date: '2018-05-15 02:50:23'
 featured: false
@@ -10,9 +11,10 @@ tags:
 - React
 - Context API
 - Service
-- props
-- state
+- Props
+- State
 - JavaScript
+- Pattern
 ---
 
 This guide demonstrates a React Pattern for sharing global state, without requiring any techniques like 😒 Prop-Drilling, 💲 MobX, or tools like 🏀 Apollo Link State or 🔥 Redux.

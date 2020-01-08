@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Hybrid Mobile Setup - Vue + Cordova
+permalink: hybrid-mobile-platform-setup-vue-cordova-webpack-nightwatch
 feature_img: /img/feature/hybrid-mobile-app-setup-vue-js-apache-cordova.jpg
 featured: true
 date: '2018-02-01 01:38:10'
@@ -15,10 +16,9 @@ tags:
 - iOS
 - iPhone
 - Android
-- mobile
-- app
+- Mobile
+- App
 - Cordova
-- guide
 --- 
 
 Learn to setup a Hybrid App Development Platform to create mobile apps using web technologies. Use Vue.js, Apache Cordova and Nightwatch tests to build apps for distribution on Apple and Android app stores.

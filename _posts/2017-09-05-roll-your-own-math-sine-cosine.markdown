@@ -1,15 +1,20 @@
 ---
 layout: post
 title: Roll Your Own Math - Sine & Cosine
+permalink: roll-your-own-math-sine-cosine
 featured: false
 date: '2017-09-05 17:48:55'
 categories:
 - article
 tags:
-- javascript
-- math
-- sine
-- cosine
+- JavaScript
+- Math
+- Sine
+- Cosine
+- Power
+- Factorials
+- Infinite Series
+- Circle
 # feature_img: /img/feature/roll-your-own-math-sine-cosine-cover.png
 feature_img: https://media1.giphy.com/media/3Omg3IWyAVqZq/giphy.gif?cid=790b76115d0cf9c4647862436b9be218&rid=giphy.gif
 ---

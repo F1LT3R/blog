@@ -1,22 +1,24 @@
 ---
 layout: post
 title: Setup a Create React App Monorepo
+permalink: create-react-app-monorepo-with-lerna-storybook-jest
 date: '2018-10-27 05:34:54'
 feature_img: https://images.unsplash.com/photo-1499334650700-42e4f7ffc63d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80
 featured: true
 categories:
 - guide
 tags:
-- react
-- monorepo
-- lerna
-- create-react-app
-- cra
-- jest
-- babel
-- babel-loader
-- babel-loader-lerna-cra
-- transpile
+- React
+- MonoRepo
+- Lerna
+- Create-React-App
+- Storybook
+- CRA
+- Jest
+- Babel
+- Babel-Loader
+- Babel-Loader-Lerna-CRA
+- Transpile
 ---
 
 Learn how to scaffold a Monorepo to manage multiple [Create React App]()'s that share a common component library using [Lerna](https://github.com/lerna/lerna) and [Yarn Workspaces](https://yarnpkg.com/lang/en/docs/workspaces/). We will setup [Storybook](https://storybook.js.org) and [Jest](https://jestjs.io/) to work well in the Monorepo environment.
