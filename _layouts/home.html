@@ -19,6 +19,7 @@ layout: default
 
     <ul class="post-list">
       {%- for post in site.posts -%}
+      {% if post.featured %}
       <li>
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
         <div class="post-item-head">
@@ -50,6 +51,43 @@ layout: default
         </div>
           <div class="excerpt">{{ post.excerpt }}</div>
       </li>
+      {% endif %}
+      {%- endfor -%}
+
+      {%- for post in site.posts -%}
+      {% unless post.featured %}
+      <li>
+        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+        <div class="post-item-head">
+          <h3>
+            <a class="post-link" href="{{ post.url | relative_url }}">
+              {{ post.title | escape }}
+            </a>
+          </h3>
+          
+          <div class="post-image">
+            <a href="{{ post.url | relative_url }}">
+              <div class="img" style="background-image: url('{{ post.feature_img }}')"></div>
+            </a>
+          </div>
+                
+          <span class="post-meta">
+            <span class="post-tags">
+              {% for tag in post.tags limit:2 %}
+              <span class="post-tag"><a href="/search.html?term={{ tag }}">{{ tag }}</a></span>
+              {% endfor %}
+            </span>
+
+            <span class="post-tags">
+              {% for category in post.categories limit:1 %}
+              <span class="post-category"><a href="/search.html?term={{ category }}">{{ category }}</a></span>
+              {% endfor %}
+            </span>
+          </span>
+        </div>
+          <div class="excerpt">{{ post.excerpt }}</div>
+      </li>
+      {% endunless %}
       {%- endfor -%}
     </ul>
 

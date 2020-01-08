@@ -3,7 +3,7 @@ layout: post
 title: The Unstated React Service Pattern
 feature_img: /img/feature/unstated-react-service-pattern.png
 date: '2018-05-15 02:50:23'
-featured: true
+featured: false
 categories:
 - guide
 tags:

@@ -3,7 +3,7 @@ layout: post
 title:  AWS SNS Push Notify with Cordova
 feature_img: /img/feature/sns-push-notifications-with-apache-cordova.jpeg
 date: '2018-01-24 11:00:00'
-featured: true
+featured: false
 category:
 - guide
 tags:
@@ -391,4 +391,6 @@ Navigate to the [Add Mobile interface](https://developers.google.com/mobile/add]
 > `Settings` > `Apps` > `YourApp` > `Force Stop`
 >  
 > Source: [Stack Overflow](https://stackoverflow.com/questions/23580069/android-push-plugin-getting-registered-but-not-receiving-any-message)
+
+[![Navigate to the Add Mobile interface, and begin setting up Google Cloud Messaging for your mobile application.](/img/posts/1_aIUGzXRwAU29zbuE4mxegQ.jpeg)](/img/posts/1_aIUGzXRwAU29zbuE4mxegQ.jpeg "Navigate to the Add Mobile interface, and begin setting up Google Cloud Messaging for your mobile application.")
 
