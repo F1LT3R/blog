@@ -467,7 +467,7 @@ setInterval(draw, 40)
 
 Here is a CodePen example of all these functions together in action:
 
-<p data-height="360" data-theme-id="dark" data-slug-hash="ZJZvOM" data-default-tab="js,result" data-user="F1LT3R" data-embed-version="2" data-pen-title="Roll Your Own Math - Sine & Cosine (Circle)" class="codepen">See the Pen <a href="https://codepen.io/F1LT3R/pen/ZJZvOM/">Roll Your Own Math - Sine & Cosine (Circle)</a> by f1lt3r (<a href="https://codepen.io/F1LT3R">@F1LT3R</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<p data-height="360" data-sandbox data-theme-id="dark" data-slug-hash="ZJZvOM" data-default-tab="js,result" data-user="F1LT3R" data-embed-version="2" data-pen-title="Roll Your Own Math - Sine & Cosine (Circle)" class="codepen">See the Pen <a href="https://codepen.io/F1LT3R/pen/ZJZvOM/">Roll Your Own Math - Sine & Cosine (Circle)</a> by f1lt3r (<a href="https://codepen.io/F1LT3R">@F1LT3R</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
 So that is how to Roll Your Own Sine and Cosine.

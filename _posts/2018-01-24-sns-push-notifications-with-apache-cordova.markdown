@@ -15,7 +15,7 @@ tags:
 - mobile
 - JavaScript
 - Apache
-- setup
+- Setup
 ---
 
 This guide walks you though creating a Cordova app for Push Notifications on iOS and Android. We will use the Apache Cordova platform and the Amazon SNS service to build and test our Push Notifications.

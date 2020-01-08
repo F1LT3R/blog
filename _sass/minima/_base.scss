@@ -220,11 +220,15 @@ blockquote {
   }
 }
 
-iframe {
-  padding: $spacing-unit / 16;
+iframe[src^="https://codepen.io"],
+iframe[src^="https://codesandbox.io"],
+{
   margin-bottom: $su;
   box-shadow: $su/2 $su/2 $su/16 rgba(0, 0, 0, 0.2);
-  background:rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.8);
+}
+iframe[src^="https://codesandbox.io"] {
+  padding: 4px;
 }
 
 /**
