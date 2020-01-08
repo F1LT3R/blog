@@ -4,7 +4,7 @@ title: Roll Your Own Math - Sine & Cosine
 featured: true
 date: '2017-09-05 17:48:55'
 categories:
-- floobian
+- article
 tags:
 - javascript
 - math

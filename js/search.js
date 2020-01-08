@@ -11,7 +11,7 @@
 */
 
 (function() {
-  const tagsTemplate = tags => {
+  const tagsTemplate = (tags, categories) => {
     let tagsOutput = '';
     const limit = 2;
 
@@ -19,9 +19,13 @@
     tags = tags.slice(0, limit);
 
     tags.forEach((tag, index) => {
-        tagsOutput += `<span class="post-tag"><a href="/search.html?term=${tag}">${tag}</a></span>`
+        tagsOutput += `<span class="post-tag"><a href="/search.html?term=${tag}">${tag}</a></span> `;
     });
-    tagsOutput += `<span class="post-tag"><a href="/search.html?term=${lastTag}">${lastTag}</a></span>`
+    
+    if (categories && categories.length > 0) {
+      const mainCat = categories[0];
+      tagsOutput += `<span class="post-category"><a href="/search.html?term=${mainCat}">${mainCat}</a></span> `;
+    }
 
     return `<span class="post-tags">${tagsOutput}</span>`;
   }
@@ -42,12 +46,8 @@
             
       <span class="post-meta">
         <span class="post-tags">
-          ${tagsTemplate(post.tags)}
+          ${tagsTemplate(post.tags, post.category)}
         </tag>
-
-        <span class="post-date">
-          ${post.date}
-        </span>
       </span>
 
       <div class="excerpt">${post.content.slice(0, 150)}</div>

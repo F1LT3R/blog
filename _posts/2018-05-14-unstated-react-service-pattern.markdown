@@ -2,10 +2,10 @@
 layout: post
 title: The Unstated React Service Pattern
 feature_img: /img/feature/unstated-react-service-pattern.png
-featured: true
 date: '2018-05-15 02:50:23'
+featured: true
 categories:
-- code
+- guide
 tags:
 - React
 - Context API
@@ -15,12 +15,7 @@ tags:
 - JavaScript
 ---
 
-This guide demonstrates a React Pattern for sharing global state, without requiring any of the following:
-
-- 😒 Prop-Drilling
-- 🔥 Redux
-- 💲 MobX
-- 🏀 Apollo Link State
+This guide demonstrates a React Pattern for sharing global state, without requiring any techniques like 😒 Prop-Drilling, 💲 MobX, or tools like 🏀 Apollo Link State or 🔥 Redux.
 
 > The above emojis were auto-selected by [Emoj](https://github.com/sindresorhus/emoj).
 

@@ -3,22 +3,24 @@ layout: post
 title: Node BDD Cookie Cutter
 # feature_img: /img/feature/node-bdd-cookie-cutter.png
 feature_img: https://images.unsplash.com/photo-1452860606245-08befc0ff44b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80
-
 date: '2017-09-18 05:30:32'
+featured: false
+categories:
+- article
 tags:
-- tdd
-- node
-- bdd
-- mocha
-- coveralls
-- istanbul
+- TDD
+- Node.js
+- BDD
+- Mocha
+- Coveralls
+- Istanbul
 - bugs
 - testing
-- chai
-- travis
-- github
-- es6
-- esnext
+- Chai
+- Travis
+- GitHub
+- ES6
+- ESNext
 ---
 
 Learn how to setup a Behavioral Driven Development pattern in a [Node.js](https://nodejs.org/en/) project. Using [Mocha](https://github.com/mochajs/mocha) and [NYC](https://github.com/istanbuljs/nyc), we will setup a watcher that will run unit tests on the fly and produce coverage results when you `pre-commit` code using [Husky](https://github.com/typicode/husky).

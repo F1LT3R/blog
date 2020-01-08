@@ -2,9 +2,10 @@
 layout: post
 title: Coleman-Liau Readability Index
 feature_img: https://images.unsplash.com/photo-1521714161819-15534968fc5f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80
-
-# feature_img: /img/feature/coleman-liau-readability-index.jpg
 date: '2018-03-03 17:38:51'
+featured: false
+categories:
+- article
 tags:
 - coleman-liau
 - readability

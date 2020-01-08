@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Hybrid Mobile Setup - Vue + Cordova
-
 feature_img: /img/feature/hybrid-mobile-app-setup-vue-js-apache-cordova.jpg
-
-# feature_img: /img/feature/binary-search-typescript-cover.png
 featured: true
 date: '2018-02-01 01:38:10'
+featured: false
+categories:
+- guide
 tags:
 - Vue
 - Vue.js

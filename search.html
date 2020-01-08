@@ -21,7 +21,7 @@ layout: search
         "feature_img": "{{ post.feature_img }}",
         "date": "{{ post.date | date: '%b %-d, %Y' }}",
         "tags": {{ post.tags | jsonify }},
-        "category": "{{ post.category | xml_escape }}",
+        "category": {{ post.categories | jsonify }},
         "content": {{ post.content | strip_html | strip_newlines | jsonify }},
         "url": "{{ post.url | xml_escape }}"
       }

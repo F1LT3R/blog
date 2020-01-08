@@ -36,17 +36,15 @@ layout: default
                 
           <span class="post-meta">
             <span class="post-tags">
-              {% for tag in post.tags limit:1 %}
-              <span class="post-tag"><a href="/search.html?term={{ tag }}">{{ tag }}</a></span>
-              {% endfor %}
-              
-              {% for tag in post.tags limit:1 offset:2 %}
+              {% for tag in post.tags limit:2 %}
               <span class="post-tag"><a href="/search.html?term={{ tag }}">{{ tag }}</a></span>
               {% endfor %}
             </span>
 
-            <span class="post-date">
-              {{ post.date | date: '%Y-%m-%d' }}
+            <span class="post-tags">
+              {% for category in post.categories limit:1 %}
+              <span class="post-category"><a href="/search.html?term={{ category }}">{{ category }}</a></span>
+              {% endfor %}
             </span>
           </span>
         </div>

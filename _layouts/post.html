@@ -20,6 +20,10 @@ layout: default
         {% for tag in page.tags %}
         <span class="post-tag"><a href="/search.html?term={{ tag }}">{{ tag }}</a></span>
         {% endfor %}
+
+        {% for category in page.categories limit:1 %}
+        <span class="post-category"><a href="/search.html?term={{ category }}">{{ category }}</a></span>
+        {% endfor %}
       </span>
 
       {%- if page.author -%}

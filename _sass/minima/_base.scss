@@ -259,40 +259,66 @@ p > code, li > code {
   // box-shadow: $su / 8 $su / 8 $su / 8 $col-a;
 }
 
-.search-tag {
+.post-category {
+  background: white;
+  border: 1px solid $col-a;
+  text-transform: capitalize;
   font-family: 'Fira Code', monospace;
   font-weight: 100;
   @include relative-font-size(0.7);
   border-radius: 3px;
+  padding: 2px 6px;
+  margin-bottom: 8px;
+  margin-right: 4px;
+  &:hover, &:focus {
+    background: $col-a;
+    a {
+      color: white;
+    }
+  }
+}
+
+.post-tag {
+  background: $col-b;
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: black;
+  margin-right: 4px;
+  font-family: 'Fira Code', monospace;
+  font-weight: 100;
+  @include relative-font-size(0.7);
+  border-radius: 3px;
   padding: 2px 6px;
+  &:hover, &:focus {
+    background: $col-a;
+    a {
+      color: white;
+    }
+  }
+}
+
+.search-tag {
   background: $col-c;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: black;
+  font-family: 'Fira Code', monospace;
+  font-weight: 100;
+  @include relative-font-size(0.7);
+  border-radius: 3px;
+  padding: 2px 6px;
   margin-bottom: 8px;
 }
 
 .post-date {
-  font-family: 'Fira Code', monospace;
-  font-weight: 100;
-  @include relative-font-size(0.7);
-  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(0, 0, 0, 0.1);
   color: black;
-  padding: 2px 6px;
-  background: rgba(0, 0, 0, 0.1);
-  margin-bottom: 8px;
-  margin-right: 4px;
-}
-
-.post-tag {
-  margin-right: 4px;
   font-family: 'Fira Code', monospace;
   font-weight: 100;
   @include relative-font-size(0.7);
-  background: $col-b;
   border-radius: 3px;
   padding: 2px 6px;
-  border: 1px solid $col-b;
+  margin-bottom: 8px;
+  margin-right: 4px;
 }
 
 li .highlighter-rouge .highlight {

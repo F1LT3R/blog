@@ -104,20 +104,40 @@ $code-0: #444;
     margin-bottom: $su*2;
     font-weight: 100;
     box-shadow: $su/2 $su/2 $su/16 rgba(0, 0, 0, 0.2);
-    background:rgba(0, 0, 0, 0.8);
     font-size: $spacing-unit / 1.6;
     color: $col-b;
+
     > :last-child {
       margin-bottom: 0;
     }
+
+    background:
+        linear-gradient(to right, rgba(49,50,50,1) 60px, rgba(49,50,50,0) 60px) 100% 100%, 
+        url(/img/site/ellipsis.svg),
+       rgba(49,50,50,1);
+    background-repeat: no-repeat;
+	background-size: 20px 100%, 24px 20px;
+    background-attachment: local, scroll;
+    background-position: right, right bottom;
 }
 
 code.language-cli {
     @include cli;
+    // text-overflow: fade;
+    white-space: pre;
 }
 
 code.language-cli-wrap {
     @include cli;
     white-space: pre-wrap; 
+    &::after {
+        content: "↵";
+        margin-right: -0.3em;
+        position: relative;
+        color: $col-b;
+        font-weight: bold;
+        line-height: 0;
+        float: right;
+    }
 }
 
