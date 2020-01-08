@@ -394,3 +394,158 @@ Navigate to the [Add Mobile interface](https://developers.google.com/mobile/add]
 
 [![Navigate to the Add Mobile interface, and begin setting up Google Cloud Messaging for your mobile application.](/img/posts/1_aIUGzXRwAU29zbuE4mxegQ.jpeg)](/img/posts/1_aIUGzXRwAU29zbuE4mxegQ.jpeg "Navigate to the Add Mobile interface, and begin setting up Google Cloud Messaging for your mobile application.")
 
+Click on "Pick a Platform", then click on "Android App".
+
+[![Click on "Pick a Platform", then click on "Android App".](/img/posts/1_BIbbLFJvwEyKaEX_m8zfwg.jpeg)](/img/posts/1_BIbbLFJvwEyKaEX_m8zfwg.jpeg "Click on "Pick a Platform", then click on "Android App".")
+
+Name your mobile app appropriately, then click "Choose and configure services".
+
+> **Note:** You will need to pick a valid package name for you app. The package name is the same as the Widget Id from your `config.xml` file. For example if your `config.xml` file looks like this:  
+>  
+> ```xml  
+> <?xml version=’1.0' encoding=’utf-8'?>  
+> <widget id=”org.apache.cordova.RemotePushNotificationsApp” version=”1.0.0" xmlns=”http://www.w3.org/ns/widgets" xmlns:cdv=”http://cordova.apache.org/ns/1.0">  
+> ```  
+> ...then use “org.apache.cordova.RemotePushNotificationsApp” as your package name.
+
+Click on “Generate Configuration Files”.
+
+[![Click on “Generate Configuration Files”.](/img/posts/1_cDIuuvE-nmdzfeTHLOnNaw.jpeg)](/img/posts/1_cDIuuvE-nmdzfeTHLOnNaw.jpeg "Click on “Generate Configuration Files”.")
+
+You should now see a link to download your `google-services.json` file as well as your Server API Key and Sender ID. You will need all of these to send notifications to your app.
+
+First, click on the on the “Download google-services.json” button. Save this file to your `~/Downloads` folder.
+
+[![First, click on the on the “Download google-services.json” button. Save this file to your ~/Downloads folder.](/img/posts/1_813TGw59MDHi9bL-VTagqw.jpeg)](/img/posts/1_813TGw59MDHi9bL-VTagqw.jpeg "First, click on the on the “Download google-services.json” button. Save this file to your ~/Downloads folder.")
+
+Copy `google-services.json` into your `platforms/android` directory, so that it can be picked up by the Cordova Android build process.
+
+```cli-wrap
+cp ~/Downloads/google-services.json platforms/android/google-services.json
+```
+
+You will need to add your Sender Id to the `www/js/index.js` file so that Google can connect your app to the notifications endpoint.
+
+```js
+onDeviceReady: function() {
+    this.receivedEvent('deviceready');
+    var push = PushNotification.init({
+        android: {
+            // Add your Google Mobile App SenderId here
+            senderID: 24XXXXXXXXX0
+        },
+        browser: {
+            pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+        },
+        ios: {
+            alert: "true",
+            badge: "true",
+            sound: "true"
+        },
+        windows: {}
+    });
+    ...
+}
+```
+
+### Update Android Studio Dependencies
+
+Open Android Studio and make sure you have Android Support Repository installed. Don’t forget to check for Android Studio Updates and installed them!
+
+<!-- missing image: cordova-remote-push-notifications-android-sdk-support-repo.jpg -->
+
+```cli
+cp ~/Downloads/google-services.json platforms/android
+```
+
+### Build The Android App
+
+You should now be ready to build your Android app.
+
+```cli
+cordova build android
+cordova run android
+```
+
+When your app starts you should see an Alert with your device’s `registrationId` (Device Token).
+
+[![When your app starts you should see an Alert with your device’s registrationId (Device Token).](/img/posts/1_q3wodYk23t-eyz8vMM_VRg.jpeg)](/img/posts/1_q3wodYk23t-eyz8vMM_VRg.jpeg "When your app starts you should see an Alert with your device’s registrationId (Device Token).")
+
+> ### ⚠️ &nbsp;Important
+> Copy and save the `registrationId` from your Chrome Inspect console.
+
+[![You will need your registrationId to test push notifications on your device.](/img/posts/1_qmbJYtAIkIAPGd1k1Uxn8Q.jpeg)](/img/posts/1_qmbJYtAIkIAPGd1k1Uxn8Q.jpeg "You will need your registrationId to test push notifications on your device.")
+
+You will need your `registrationId` to test push notifications on your device.
+
+### Create Your Amazon SNS App and Test Push Notifications
+
+Navigate to your [Amazon SNS App Console](https://console.aws.amazon.com/sns/v2/home?region=us-east-1#/applications).
+
+[![Navigate to your Amazon SNS App Console.](/img/posts/1_-Ub3dSPGMjMHf3o-frg07w.jpeg)](/img/posts/1_-Ub3dSPGMjMHf3o-frg07w.jpeg "Navigate to your Amazon SNS App Console.")
+
+Click "Create platform application" and fill out the form. Your API Key is the Service API Key from the [Add Mobile interface](https://developers.google.com/mobile/add). Click the following "Create platform application" button to continue.
+
+[![Click “Create platform application” and fill out the form. Your API Key is the Service API Key from the Add Mobile interface. Click “Create platform application” to continue.](/img/posts/1_-z9XcNbCQXGRAyupaHv4Ug.jpeg)](/img/posts/1_-z9XcNbCQXGRAyupaHv4Ug.jpeg "Click “Create platform application” and fill out the form. Your API Key is the Service API Key from the Add Mobile interface. Click “Create platform application” to continue.")
+
+Select the Amazon SNS app you just created. Then click "Create platform endpoint".
+
+[![Select the Amazon SNS app you just created. Then click "Create platform endpoint".](/img/posts/1_FX7Abr4f4IOjOUvqsgn02g.jpeg)](/img/posts/1_FX7Abr4f4IOjOUvqsgn02g.jpeg "Select the Amazon SNS app you just created. Then click "Create platform endpoint".")
+
+Fill our the form. The "Device token" is the same `registrationId` that you copied from the Chrome Inspect console in a previous step. Click the "Add endpoint" button to continue.
+
+[![Fill our the form. The "Device token" is the same registrationId that you copied from the Chrome Inspect console in a previous step. Click the "Add endpoint" button to continue.](/img/posts/1_idJ4iJaM-BCmfPrE1Mva2g.jpeg)](/img/posts/1_idJ4iJaM-BCmfPrE1Mva2g.jpeg "Fill our the form. The "Device token" is the same registrationId that you copied from the Chrome Inspect console in a previous step. Click the "Add endpoint" button to continue.")
+
+Back in the Applications list, click on the ARN for the Android App you created.
+
+[![Back in the Applications list, click on the ARN for the Android App you created.](/img/posts/1_untbIlZGOEfcxgNoGyoz6w.jpeg)](/img/posts/1_untbIlZGOEfcxgNoGyoz6w.jpeg "Back in the Applications list, click on the ARN for the Android App you created.")
+
+Select the endpoint you want to push a notification to, and click "Publish to endpoint".
+
+[![Select the endpoint you want to push a notification to, and click "Publish to endpoint".](/img/posts/1_SIm38C2lxMd_LgPzVL7scg.jpeg)](/img/posts/1_SIm38C2lxMd_LgPzVL7scg.jpeg "Select the endpoint you want to push a notification to, and click "Publish to endpoint".")
+
+> ### ⚠️ &nbsp;Important
+> 
+> **You must close the app on your device** to test the push notification is received when the user does not have your app loaded.
+
+After you have closed the app, create and send the following test message in JSON format and click the "Publish message" button.
+
+```js
+// INCEPTION:
+// You would be right in thinking this JSON looks strange. 
+// AWS requies your GCM data to be a Stringified JSON object.
+{
+    "GCM": "{ \"notification\": { \"text\": \"test message\" } }"
+}
+```
+> **Note:** Android platforms lower than 8.0 may require a different JSON payload, where notifications is swapped for data. You can read more about this issue [on Github](https://github.com/phonegap/phonegap-plugin-push/issues/2158), and [on StackOverflow](https://stackoverflow.com/questions/38300450/fcm-with-aws-sns). 
+>  
+> ```json
+> {  
+> "GCM": “{ \"data\": { \"text\": \"test message\" } }"  
+> }  
+> ```  
+
+[![After you have closed the app, create and send the following test message in JSON format and click the "Publish message" button.](/img/posts/1_e4xA1QqK-CoRaa5-_PhM-A.jpeg)](/img/posts/1_e4xA1QqK-CoRaa5-_PhM-A.jpeg "After you have closed the app, create and send the following test message in JSON format and click the "Publish message" button.")
+
+You should see confirmation starting with: "Message published…"
+
+[![You should see confirmation starting with: "Message published…"](/img/posts/1_QN6g8GB-fEWHNhD3jYTB0Q.jpeg)](/img/posts/1_QN6g8GB-fEWHNhD3jYTB0Q.jpeg "You should see confirmation starting with: "Message published…")
+
+Within seconds, you should see a badge appear above your app's home-screen Icon. Also, notice the white square in the top left? This is an indicator that you have a new notification for your app. usually you would replace this with your app Icon.
+
+[![Within seconds, you should see a badge appear above your app's home-screen Icon.](/img/posts/1_Gs3oHWyC0M-xAucKIdVHgQ.jpeg)](/img/posts/1_Gs3oHWyC0M-xAucKIdVHgQ.jpeg "Within seconds, you should see a badge appear above your app's home-screen Icon.")
+
+If you roll down the notification blind, you will see the notification in the list. Notice the little grey square on the left? That is where your app Icon should go.
+
+[![If you roll down the notification blind, you will see the notification in the list. Notice the little grey square on the left? That is where your app Icon should go.](/img/posts/1_vwTPEgT6Orx2AuZ05efJXw.jpeg)](/img/posts/1_vwTPEgT6Orx2AuZ05efJXw.jpeg "If you roll down the notification blind, you will see the notification in the list. Notice the little grey square on the left? That is where your app Icon should go.")
+
+If you tap on the notification, it will take you into the app. If you remember the iOS steps, your push notification would be replayed inside your app. This is not happening in Android. Instead, you will have to send a second notification.
+
+Now that the app is open, if you send the same payload as you did in the step above, you should see the following alert showing you the notification message that you pushed from Amazon SNS.
+
+> **Note:** This is a caveat of using `notification` instead of `data` in the SNS push notification payload. I am currently learning how to work around this and I plan to update this document when I have a solution to push a single notification to an Android 8.0 device and make it register in both the background, and the foreground.
+
+## Congrats!
+
+You can now send remote push notifications to Android and iOS from your Amazon SNS Console!

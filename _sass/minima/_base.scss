@@ -339,6 +339,8 @@ li .highlighter-rouge .highlight {
   }
 }
 
+// blockquote > .highlighter-rouge[class^="language-"]
+
 .post-content > .highlighter-rouge {
   background-color: #EEE;
   margin-top: $spacing-unit;
