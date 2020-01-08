@@ -2,7 +2,7 @@
 layout: post
 title: Node BDD Cookie Cutter
 permalink: node-bdd-cookie-cutter
-feature_img: https://images.unsplash.com/photo-1452860606245-08befc0ff44b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80
+feature_img: /img/feature/node-bdd-cookie-cutter.jpeg
 date: '2017-09-18 05:30:32'
 featured: false
 categories:

@@ -15,8 +15,7 @@ tags:
 - Factorials
 - Infinite Series
 - Circle
-# feature_img: /img/feature/roll-your-own-math-sine-cosine-cover.png
-feature_img: https://media1.giphy.com/media/3Omg3IWyAVqZq/giphy.gif?cid=790b76115d0cf9c4647862436b9be218&rid=giphy.gif
+feature_img: /img/feature/roll-your-own-math-sine-cosine.gif
 ---
 
 

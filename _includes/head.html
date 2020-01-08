@@ -15,5 +15,5 @@
   {%- endif -%}
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
   <meta property="og:image" content="{{ site.url }}/{{ page.feature_img }}" />
-  <meta property="og:description" content="{{ page.excerpt }}" />
+  <meta property="og:description" content="{{ page.excerpt | strip_html }}" />
 </head>
