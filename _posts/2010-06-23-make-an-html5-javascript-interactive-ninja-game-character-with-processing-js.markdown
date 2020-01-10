@@ -400,7 +400,7 @@ void setup(){
 int ninjaX=width/2; ninjaY=height/2;
 float trackAngle=0, trackX=0, trackY=0;
 
-// Main Looping Draw Rountine
+// Main Looping Draw Routine
 void draw(){
   style({ background:#555658, noStroke:true, fill:#3e3e40 });
   rect(0, height/2, width, height);
@@ -408,34 +408,48 @@ void draw(){
 };
 
 void mouseMoved(){
-  trackX = mouseX-ninjaX; trackY = mouseY-ninjaY; // Track Ninja to Mouse
-  trackAngle = -atan2(trackX, trackY); // Set the Track Angle
+  // Track Ninja to Mouse
+  trackX = mouseX-ninjaX; trackY = mouseY-ninjaY;
+  // Set the Track Angle
+  trackAngle = -atan2(trackX, trackY);
 };
 
 void drawNinja(){
-  armL.restX = trackX; armL.restY = trackY; // Apply Tracking to Left Arm
-  armR.restX = trackX; armR.restY = trackY; // Apply Tracking to Right Arm
-  legL.restX = -25-sin(trackAngle); // Apply Tracking to Left Leg
-  legR.restX = 25-sin(trackAngle); // Apply Tracking to Right Leg
+  // Apply Tracking to Left Arm
+  armL.restX = trackX; armL.restY = trackY;
+  // Apply Tracking to Right Arm
+  armR.restX = trackX; armR.restY = trackY;
+  // Apply Tracking to Left Leg
+  legL.restX = -25-sin(trackAngle);
+  // Apply Tracking to Right Leg
+  legR.restX = 25-sin(trackAngle);
   pushMatrix();
     translate(ninjaX, ninjaY);
     fill(#3a3a3c);
-    ellipse(0+sin(trackAngle)*2, 80, 160, 30); // Shadow
-    drawLimbs([legL, legR]); // Draw Legs
+    // Shadow [on floor under the ninja]
+    ellipse(0+sin(trackAngle)*2, 80, 160, 30);
+    // Draw Legs
+    drawLimbs([legL, legR]);
     pushMatrix();
-      translate(-sin(trackAngle)*4,0); // Offset Ninja by Tracking Angle
-      ninjaStyle(function(){ rect(-20, 0, 40, 40); }); // Draw Body Box
+      // Offset Ninja by Tracking Angle
+      translate(-sin(trackAngle)*4,0);
+      // Draw Body Box
+      ninjaStyle(function(){ rect(-20, 0, 40, 40); });
       pushMatrix(); // Draw Mask
         translate(-sin(trackAngle), -40);
-        ninjaStyle(function(){ arc(0, 0, 60, 0, TWO_PI, false); }); // Draw Head
+        // Draw Head
+        ninjaStyle(function(){ arc(0, 0, 60, 0, TWO_PI, false); });
         style({ fill:#eac89e, stroke:#2a2a2b, strokeWeight:3 });
-        beginShape(); // Draw Skin on Face
+        // Draw Skin on Face
+        beginShape();
           bezierVertex(-30, 0, -60, 0, -25, 25);
           bezierVertex(-15, 30, 25, 25, 30, 0);
         endShape();
         style({ fill:#000000, stroke:#caab8e, strokeWeight:3 });
-        arc(-10-sin(trackAngle)*7, 8, 6, 6, TWO_PI, 0); // Draw Left Eye
-        arc( 10-sin(trackAngle)*7, 8, 6, 6, TWO_PI, 0); // Draw Right Eye
+        // Draw Left Eye
+        arc(-10-sin(trackAngle)*7, 8, 6, 6, TWO_PI, 0);
+        // Draw Right Eye
+        arc( 10-sin(trackAngle)*7, 8, 6, 6, TWO_PI, 0);
         popMatrix();
         drawLimbs([armL, armR]);
     popMatrix();
