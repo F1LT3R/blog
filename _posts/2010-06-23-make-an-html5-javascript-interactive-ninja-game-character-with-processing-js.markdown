@@ -23,7 +23,7 @@ I was asked back at the start of the year by [.NET Magazine](https://www.creativ
 
 ## 🕹Try The Demo!
 
-<iframe width="500" height="350" style="overflow: hidden; border: none; margin-left: auto; margin-right: auto; display: block; margin-bottom: 2em;" src="/code/pjs-ninja/ninja-final-game"></iframe>
+<iframe width="436" height="350" style="overflow: hidden; border: none; margin-left: auto; margin-right: auto; display: block; margin-bottom: 2em;" src="/code/pjs-ninja/ninja-final-game"></iframe>
  
 Is your foo strong enough to beat the clock?
 
@@ -229,10 +229,37 @@ Transformation matrices are powerful tools. It’s far easier to calculate geome
   
   Sometimes, you don’t have the luxury of redefining every coordinate in your matrix this way, in which case you can combine `translate()` and `rotate()` to get the job done. To rotate a 100-pixel box around its center, shift the matrix like so:
 
-  | No Rotation | Rotate Top-Left | Rotate Center |  
-  | --- | --- | --- |  
-  | ![No Rotation](/img/posts/pjs-ninja-rotate-zero2.png) | ![Rotate Top-Left](/img/posts/pjs-ninja-rotate-point-five.png) | ![Rotate Top-Left](/img/posts/pjs-ninja-rotate-translate.png) |
-  | `rotate(0)` | `box (0x, 0y) rotate(0.5)` | `translate(50, 50); rotate(0.5); translate(-50, -50);` |
+  #### No Rotation  
+  
+  ![No Rotation](/img/posts/pjs-ninja-rotate-zero2.png)
+
+  For no rotation of the box:
+
+  ```java
+  rotate(0);
+  ```  
+  
+  #### Rotate Top-Left
+
+  ![Rotate Top-Left](/img/posts/pjs-ninja-rotate-point-five.png)
+
+  To rotate around origin of box [defaults origin is] `(0x, 0y)`:
+  
+  ```java
+  rotate(0.5);
+  ```
+  
+  ####  Rotate Center
+  
+  ![Rotate Center](/img/posts/pjs-ninja-rotate-translate.png)
+
+  To translate the origin to `(50x, 50y)` [and rotate around the center]:
+  
+  ```java
+  translate(50, 50);
+  rotate(0.5);
+  translate(-50, -50);
+  ```
 
 - `scale(x, y)`
   
@@ -433,7 +460,7 @@ void ninjaStyle(Object callBack){
 };
 ```
 
-<iframe class="lifted" width="400" height="300"
+<iframe class="lifted" width="436" height="300"
   src="/code/pjs-ninja/ninja-step-by-step/ninja-step-8">
 </iframe>
 
