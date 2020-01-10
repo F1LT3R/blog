@@ -1,0 +1,168 @@
+// JAVASCRIPT NINJA!!
+// a processing.js game by F1LT3R
+// Is your foo strong enough to beat the clock?
+// Note: This code has not been optimized for performance so the best experience
+//       is in Firefox. This game works in Firefox, Safari, Opera and Chrome.
+
+// Set Ninja Classes
+Spring head = new Spring({ x:0, y:0, s:60, d:0.80, m:8, k_in:9.1 });
+Limb armL = new Limb({ x: -30, y: 0, restX: 0, restY: 0, boneLength: 30 });
+Limb armR = new Limb({ x:  30, y: 0, restX: 400, restY: 0, boneLength: 30 });
+Limb legL = new Limb({ x: -65, y: 75, restX: 25, restY: 40, boneLength: 30 });
+Limb legR = new Limb({ x:  65, y: 75, restX: 25, restY: 40, boneLength: 30 });
+
+// Set Hit Star & Punch Bags
+Star kapow = new Star({ x:100, y:100, size:0, life:0 });
+Spring bagL = new Spring({ x:85, y:150, s:30, d:0.36, m:2, k_in:9.1 });
+Spring bagR = new Spring({ x:315, y:250, s:30, d:0.36, m:2, k_in:9.1 });
+
+// Setup Screen
+void setup(){
+  frameRate(60);
+  size(400, 300);
+};
+
+// Set Variables
+int ninjaX=width/2; ninjaY=height/2, targetScore=10000, timeAllowed=31;
+int hitForce=60, chiGainLow=10, chiGainHigh=40, maxChi=1000, points=0, start=0;
+float trackAngle=0, trackX=0, trackY=0, momentum=0, chi=0, chiLoss=0.0123;
+boolean gameOver=false;
+Object pointsElem = document.getElementById('points');
+Object restart = document.getElementById('restart')
+  .addEventListener('click', function(){
+    points=0;
+    start=millis();
+    gameOver=false;
+  }, false);
+
+// Main Looping Draw Rountine
+void draw(){  
+  // Draw Background
+  style({ background:#555658, noStroke:true, fill:#3e3e40 });
+  rect(0, height/2, width, height); 
+  drawNinja();
+  drawPunchBags([bagL, bagR]);
+  drawChiMeter();
+  kapow.draw();
+  scoreHTML();
+};
+
+// Draw Chi Force Meter - chi is built up by fluid kung-foovement
+void drawChiMeter(){
+  chi = constrain(chi-=chiLoss*chi, 0, maxChi); // Drain Chi Over Time
+  style({ fill:#666666, stroke:#222222, strokeWeight:1.5 });
+  rect(9, height-21, width-18, 12);
+  noStroke();
+  fill( lerpColor(#00ff00, #ff0000, chi/maxChi) );
+  rect(10, height-20, (width-20)/maxChi*chi, 10);
+  style({ noFill:true, stroke:#222222, strokeWeight:0.5 });
+  rect((width-20)/maxChi * 900,height-20,1,10);
+};
+
+void drawPunchBags(Object punchBags){
+  for (var i=0, l=punchBags.length; i < l; i++){
+    thisBag = punchBags[i];
+    thisBag.update();
+    style({ fill:#000000, noStroke:true });
+    rect(thisBag.x-5, 210, 10, 25);
+    rect(thisBag.x-15, 235, 30, 5);  
+    float angle = atan2(thisBag.tempxpos-thisBag.x, 200-100);
+    style({ noFill:true, stroke:#440000, strokeWeight:thisBag.size });
+    line(thisBag.x, 210, thisBag.x+sin(angle)*100, 210-cos(angle)*100);
+    style({ noFill:true, stroke:#880000, strokeWeight:thisBag.size-10 });
+    line(thisBag.x, 210, thisBag.x+sin(angle)*100, 210-cos(angle)*100);
+  }
+};
+
+// Update HTML Document with Score
+void scoreHTML(float updatePoints){
+  if (updatePoints && !gameOver) {
+    points = int(constrain(points+updatePoints, 0, targetScore));
+  }
+  int countDown = int(timeAllowed-(millis()-start)/1000);
+  pointsElem.innerHTML = '<b>Points: </b>'+points+'/'+targetScore+', '+
+    '<b>Time: </b>'+countDown;
+  if (countDown<1 && points < targetScore) {
+    gameOver = true;
+    pointsElem.innerHTML = "YOUR FOO IS WEAK!";
+  } else if (points == targetScore) {
+    gameOver = true;
+    pointsElem.innerHTML = "THE FOO IS STRONG IN YOU!";
+  }
+  
+};
+
+void mouseMoved(){
+  trackX = mouseX-ninjaX; trackY = mouseY-ninjaY; // Track Ninja to Mouse
+  trackAngle = -atan2(trackX, trackY); // Set the Track Angle
+  // If the arms are are thrown to full extent fast enough...
+  momentum = dist(mouseX, mouseY, pmouseX, pmouseY);
+  if (momentum >= hitForce && dist(mouseX, mouseY, ninjaX, ninjaY) > 60) {
+    float armAngle = atan2(mouseX-ninjaX, mouseY-ninjaY);
+    if (mouseX < ninjaX) { Object obj = armL; } else { Object obj = armR; }
+    int powX = ninjaX+obj.x + sin(armAngle) * obj.boneLength*2.2;
+    int powY = ninjaY+obj.y + cos(armAngle) * obj.boneLength*2.2;
+    // ...replace and resize a Star named KAPOW!
+    kapow.set({ x:powX, y:powY, size:chi/30, life:10 });
+    checkHitZone(dist(kapow.x, kapow.y, ninjaX, ninjaY-40) < 70, head, chi/10);
+    checkHitZone(kapow.x < bagL.x+bagL.size, bagL, chi/10);
+    checkHitZone(kapow.x > bagR.x-bagR.size, bagR, chi/10);
+    chi = 0; // Even if you hit nothing, you loose your chi when you punch
+  } else if (momentum >= chiGainLow && momentum <= chiGainHigh) {
+    chi = constrain(chi += momentum, 0, maxChi); // Build Up Chi
+  }
+};
+
+void checkHitZone(boolean hit, Object gameObject, float pointResult){
+  if (hit) { // If gameObject gets hit, activate spring force & update points
+    gameObject.move = true;
+    gameObject.update(chi/10);
+    gameObject.released(chi/10);
+    scoreHTML(chi > 900 ? maxChi : pointResult);
+  }
+}
+
+void drawNinja(){ 
+  armL.restX = trackX; armL.restY = trackY; // Apply Tracking to Left Arm
+  armR.restX = trackX; armR.restY = trackY; // Apply Tracking to Right Arm
+  legL.restX = -25-sin(trackAngle); // Apply Tracking to Left Leg
+  legR.restX =  25-sin(trackAngle); // Apply Tracking to Right Leg
+  pushMatrix();
+  translate(ninjaX, ninjaY);
+    fill(#3a3a3c);
+    ellipse(0+sin(trackAngle)*2, 80, 160, 30); // Shadow
+    drawLimbs([legL, legR]); // Draw Legs
+    pushMatrix()
+      head.update(); // Calculate Head Position
+      translate(-sin(trackAngle)*4,0); // Offset Ninja by Tracking Angle
+      ninjaStyle(function(){ rect(-20, 0, 40, 40); }); // Draw Body Box
+      pushMatrix(); // Draw Mask
+        translate(-sin(trackAngle) + head.tempxpos,-40 + head.tempypos);
+        ninjaStyle(function(){ arc(0, 0, 60, 0, TWO_PI, false); }); // Draw Head
+        style({ fill:#eac89e, stroke:#2a2a2b, strokeWeight:3 });
+        beginShape(); // Draw Skin on Face
+          bezierVertex(-30,  0, -60,  0, -25, 25);
+          bezierVertex(-15, 30,  25, 25,  30,  0);
+        endShape();
+        style({ fill:#000000, stroke:#caab8e, strokeWeight:3 });
+        arc(-10-sin(trackAngle)*7, 8, 6, 6, TWO_PI, 0); // Draw Left Eye
+        arc( 10-sin(trackAngle)*7, 8, 6, 6, TWO_PI, 0); // Draw Right Eye    
+      popMatrix();
+      drawLimbs([armL, armR]);
+    popMatrix();
+  popMatrix();
+};
+
+void drawLimbs(Object limbs){
+  for (var i=0, l=limbs.length; i < l; i++) {
+    limbs[i].calc();
+    ninjaStyle(function(){ limbs[i].draw(); });   
+  }
+};
+
+// Apply Common Styles Before Draw Callbacks
+void ninjaStyle(Object callBack){
+  style({ noFill:true, stroke:#000000, strokeWeight:20.5 }); callBack();
+  style({ stroke:#2a2a2b, strokeWeight:15 }); callBack();
+  style({ strokeJoin:ROUND, fill:#1d1d1e, stroke:#1d1d1e, strokeWeight:10 }); callBack();
+};

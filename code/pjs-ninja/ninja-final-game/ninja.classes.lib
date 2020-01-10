@@ -1,0 +1,159 @@
+//
+(function(){
+ 
+  Processing.lib.ninjaClasses = function(){
+    with( this ){
+      
+      var applicate  = function( obj, props ){
+        for (var i in props) {
+          for (var j in props[i]) {
+            obj[j] = props[i][j];
+          }
+        }
+      };
+      
+      //// LIMB ////////////////////////////////////////////////////////////////
+      // Adapted from Processing.js Example: Reach1 by Keith Peters: bit-101.com
+      this.Limb = function Limb( props ) {
+        applicate(this, [props, {
+          mx: 0, my: 0,
+          tx: 0, ty: 0,
+          dx: 0, dy: 0,
+          angle1: 0,
+          angle2: 0,
+        }]);
+      };
+      
+      this.Limb.prototype.bone = function bone(x,y,a,l){
+        pushMatrix();
+        translate(x, y);
+        rotate(a);
+        line(0, 0, l, 0);
+        popMatrix();        
+      };
+
+      this.Limb.prototype.calc = function cal(){
+        with(this){
+          dx = restX - mx,
+          dy = restY - my;
+          angle1 = atan2(dy, dx);      
+          tx = restX - cos(angle1) * boneLength,
+          ty = restY - sin(angle1) * boneLength;
+          dx = tx - x; dy = ty - y;
+          angle2 = atan2(dy, dx);  
+          mx = x + cos(angle2) * boneLength;
+          my = y + sin(angle2) * boneLength;
+
+        }
+      };
+
+      this.Limb.prototype.draw = function draw(){
+        with(this){
+          bone(mx, my, angle1, boneLength); 
+          bone(x, y, angle2, boneLength);
+        }
+      };                 
+
+
+      //// STAR ////////////////////////////////////////////////////////////////
+      // @F1LT3R
+      this.Star = function Star( props ) {
+        applicate(this, [props]);
+      };
+      
+      this.Star.prototype.draw = function star(){
+        with(this){
+          if( life > 0 ){
+            var alpha = 255/maxLife*life;
+            fill(255,255,0,alpha);
+            stroke(100,100,0,alpha);
+            strokeWeight(4);
+            var points = random(8)+8;
+            var px = 0, py = 0;
+            beginShape();
+              for(var i=0; i < points; i++){
+                px = x+ sin(TWO_PI/points*i)*(size/2+ ((i%2)*size));
+                py = y+ cos(TWO_PI/points*i)*(size/2+ ((i%2)*size));
+                vertex(px, py);
+              }
+            endShape();
+            life--;
+          }
+        }
+      };
+
+      this.Star.prototype.set = function set(props){
+        applicate(this, [props, {maxLife:props.life}]);
+      };
+
+      //// SPRING //////////////////////////////////////////////////////////////
+       // Adapted from Processing.js Example: Springs by Ben Fry & Casey Reas
+      this.Spring = function Spring( props ) {
+        applicate(this, [props, {
+          xpos: 0, ypos: 0, tempxpos: 0, tempypos: 0, 
+          size: 20, isOver: false, move: false, 
+  
+          mass: 0, k: 0.2, damp: 0,
+          rest_posx: 0, rest_posy: 0,
+          velx: 0, vely: 0,
+          accel: 0, force: 0,
+          me:0
+        }]);
+        with(this){
+          xpos = tempxpos = x; 
+          ypos = tempypos = y;
+          rest_posx = x;
+          rest_posy = y;
+          size = s;
+          damp = d; 
+          mass = m; 
+          k = k_in;
+        }     
+      };
+      
+      this.Spring.prototype.update = function update(setX, setY){
+        with(this){
+          if (move) {
+            rest_posx = x+setX||0;
+            rest_posy = y+setY||0;
+          }
+          force = -k * (tempypos - rest_posy);  // f=-ky 
+          accel = force / mass;                 // Set the acceleration, f=ma == a=f/m 
+          vely = damp * (vely + accel);         // Set the velocity 
+          tempypos = tempypos + vely;           // Updated position 
+          force = -k * (tempxpos - rest_posx);  // f=-ky 
+          accel = force / mass;                 // Set the acceleration, f=ma == a=f/m 
+          velx = damp * (velx + accel);         // Set the velocity 
+          tempxpos = tempxpos + velx;           // Updated position          
+          if ( move ) {
+            isOver = true; 
+          } else {
+            isOver = false; setX || random(-10, 10)
+          }
+        }
+      };
+     
+      this.Spring.prototype.released = function released(){
+        with(this){
+          move = false; 
+          rest_posx = xpos;
+          rest_posy = ypos;
+        }
+      };
+    
+      //// QUICK-STYLE /////////////////////////////////////////////////////////
+      // @F1LT3R
+      this.style = function(){
+        with( this ){
+          this.style = function style(props){
+            for(var i in props){
+              this[i]( props[i] );
+            }
+          }; 
+        }
+      };
+
+    }
+  };
+
+})();

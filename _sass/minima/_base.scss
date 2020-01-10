@@ -220,6 +220,17 @@ blockquote {
   }
 }
 
+iframe.lifted {
+  margin-bottom: $su;
+  box-shadow: $su/2 $su/2 $su/16 rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.8);  
+  padding: 4px;
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
 iframe[src^="https://codepen.io"],
 iframe[src^="https://codesandbox.io"],
 {

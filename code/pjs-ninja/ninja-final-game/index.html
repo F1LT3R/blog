@@ -1,0 +1,19 @@
+<style>
+  * {margin: 0; padding: 0; font-family: Consolas,MonoSpace,Console; }
+  /* body{font-size: 110%;} */
+  #wrapper{width:400px;margin:0 auto;}
+  canvas{margin-bottom:16px;}
+  #points{width:300px;float:left; margin-top: 5px;}
+  button{float:right;font-family:Consolas,MonoSpace,Console; padding: 4px 8px; font-size: inherit;}
+  .info{margin-top:40px;background:#ccc;padding:10px 20px;color:black;border:5px dashed #888;}
+</style>
+<script src="processing.js"></script>
+<script src="ninja.classes.lib"></script>
+
+<div id="wrapper">
+  <canvas data-src="ninja.pjs" width="400" height="300">
+    <a href="http://getfirefox.com">Get Firefox!</a>
+  </canvas>
+  <div id="points"></div>
+  <button id="restart">Restart</button>
+</div>

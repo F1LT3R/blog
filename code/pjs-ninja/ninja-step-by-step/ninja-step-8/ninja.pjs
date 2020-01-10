@@ -1,0 +1,70 @@
+// Something to hit with...
+Limb armL = new Limb({ x: -30, y: 0, restX: 0, restY: 0, boneLength: 30 });
+Limb armR = new Limb({ x:  30, y: 0, restX: 400, restY: 0, boneLength: 30 });
+Limb legL = new Limb({ x: -65, y: 75, restX: 25, restY: 40, boneLength: 30 });
+Limb legR = new Limb({ x:  65, y: 75, restX: 25, restY: 40, boneLength: 30 });
+
+// Setup Screen
+void setup(){
+  frameRate(60);
+  size(400, 300);
+};
+
+int ninjaX=width/2; ninjaY=height/2;
+float trackAngle=0, trackX=0, trackY=0;
+
+// Main Looping Draw Rountine
+void draw(){
+  style({ background:#555658, noStroke:true, fill:#3e3e40 });
+  rect(0, height/2, width, height); 
+  drawNinja();  
+};
+
+void mouseMoved(){
+  trackX = mouseX-ninjaX; trackY = mouseY-ninjaY; // Track Ninja to Mouse
+  trackAngle = -atan2(trackX, trackY); // Set the Track Angle
+};
+
+void drawNinja(){ 
+  armL.restX = trackX; armL.restY = trackY; // Apply Tracking to Left Arm
+  armR.restX = trackX; armR.restY = trackY; // Apply Tracking to Right Arm
+  legL.restX = -25-sin(trackAngle); // Apply Tracking to Left Leg
+  legR.restX =  25-sin(trackAngle); // Apply Tracking to Right Leg
+  pushMatrix();
+  translate(ninjaX, ninjaY);
+    fill(#3a3a3c);
+    ellipse(0+sin(trackAngle)*2, 80, 160, 30); // Shadow
+    drawLimbs([legL, legR]); // Draw Legs
+    pushMatrix()
+      translate(-sin(trackAngle)*4,0); // Offset Ninja by Tracking Angle
+      ninjaStyle(function(){ rect(-20, 0, 40, 40); }); // Draw Body Box
+      pushMatrix(); // Draw Mask
+        translate(-sin(trackAngle), -40);
+        ninjaStyle(function(){ arc(0, 0, 60, 0, TWO_PI, false); }); // Draw Head
+        style({ fill:#eac89e, stroke:#2a2a2b, strokeWeight:3 });
+        beginShape(); // Draw Skin on Face
+          bezierVertex(-30,  0, -60,  0, -25, 25);
+          bezierVertex(-15, 30,  25, 25,  30,  0);
+        endShape();
+        style({ fill:#000000, stroke:#caab8e, strokeWeight:3 });
+        arc(-10-sin(trackAngle)*7, 8, 6, 6, TWO_PI, 0); // Draw Left Eye
+        arc( 10-sin(trackAngle)*7, 8, 6, 6, TWO_PI, 0); // Draw Right Eye    
+      popMatrix();
+      drawLimbs([armL, armR]);
+    popMatrix();
+  popMatrix();
+};
+
+void drawLimbs(Object limbs){
+  for (var i=0, l=limbs.length; i < l; i++) {
+    limbs[i].calc();
+    ninjaStyle(function(){ limbs[i].draw(); });   
+  }
+};
+
+// Apply Common Styles Before Draw Callbacks
+void ninjaStyle(Object callBack){
+  style({ noFill:true, stroke:#000000, strokeWeight:20.5 }); callBack();
+  style({ stroke:#2a2a2b, strokeWeight:15 }); callBack();
+  style({ strokeJoin:ROUND, fill:#1d1d1e, stroke:#1d1d1e, strokeWeight:10 }); callBack();
+};
