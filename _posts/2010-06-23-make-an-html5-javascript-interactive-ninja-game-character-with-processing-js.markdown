@@ -23,7 +23,10 @@ I was asked back at the start of the year by [.NET Magazine](https://www.creativ
 
 ## 🕹Try The Demo!
 
-<iframe width="436" height="350" style="overflow: hidden; border: none; margin-left: auto; margin-right: auto; display: block; margin-bottom: 2em;" src="/code/pjs-ninja/ninja-final-game"></iframe>
+<iframe width="436" height="350" 
+  style="max-width: 400px; width: 100%; overflow: hidden; border: none; margin-left: auto; margin-right: auto; display: block; margin-bottom: 2em;"
+  src="/code/pjs-ninja/ninja-final-game">
+</iframe>
  
 Is your foo strong enough to beat the clock?
 
@@ -474,7 +477,8 @@ void ninjaStyle(Object callBack){
 };
 ```
 
-<iframe class="lifted" width="436" height="300"
+<iframe class="lifted" width="400" height="300"
+  style="max-width: 400px; width: 100%;" 
   src="/code/pjs-ninja/ninja-step-by-step/ninja-step-8">
 </iframe>
 
