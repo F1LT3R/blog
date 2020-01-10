@@ -10,6 +10,7 @@ category:
 tags:
 - SNS
 - Notifications
+- Push
 - Cordova
 - Amazon
 - AWS
@@ -19,7 +20,7 @@ tags:
 - Setup
 ---
 
-This guide walks you though creating a Cordova app for Push Notifications on iOS and Android. We will use the Apache Cordova platform and the Amazon SNS service to build and test our Push Notifications.
+This guide walks you though creating a [Cordova](https://cordova.apache.org/) app for Push Notifications on iOS and Android. We will use the Apache Cordova platform and the [Amazon SNS](https://aws.amazon.com/sns/) service to build and test our Push Notifications.
 
 The guide is split into four main sections:
 

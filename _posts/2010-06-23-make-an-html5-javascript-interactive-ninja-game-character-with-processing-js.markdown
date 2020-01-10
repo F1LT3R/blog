@@ -19,7 +19,9 @@ tags:
 - Games
 ---
 
-I was asked back at the start of the year by [.NET Magazine](https://www.creativebloq.com/net-magazine) to write a JavaScript article on the subject of my choice. .NET Magazine (called "Practical Web Design" in the USA), kindly agreed to let me reprint the article. So here it is, complete with working code examples:
+I was asked at the start of the year by [.NET Magazine](https://www.creativebloq.com/net-magazine) to write a JavaScript article on the subject of my choice. I decided it would be fun to introduce people to [Processing.js](http://processingjs.org/) by writing a article on how to build your own interactive Ninja character on the HTML5 [Canvas](https://www.w3schools.com/html/html5_canvas.asp) element.
+
+.NET Magazine (called "Practical Web Design" in the USA), kindly agreed to let me reprint the article. So here it is, complete with working code examples:
 
 ## 🕹Try The Demo!
 

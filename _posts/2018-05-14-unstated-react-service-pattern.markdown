@@ -17,7 +17,7 @@ tags:
 - Pattern
 ---
 
-This guide demonstrates a React Pattern for sharing global state, without requiring any techniques like 😒 Prop-Drilling, 💲 MobX, or tools like 🏀 Apollo Link State or 🔥 Redux.
+This guide demonstrates a React pattern for sharing global state, without requiring any techniques like 😒 Prop-Drilling, 💲 [MobX](https://mobx.js.org), or tools like 🏀 [Apollo Link State](https://www.apollographql.com/docs/link/links/state/) and 🔥 [Redux](https://redux.js.org/).
 
 > The above emojis were auto-selected by [Emoj](https://github.com/sindresorhus/emoj).
 

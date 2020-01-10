@@ -16,7 +16,7 @@ tags:
 - JavaScript
 ---
 
-I became fascinated with the Coleman-Liau readability index while testing various writing tools. Read about how I reverse engineered the Coleman-Liau algorithm to score the readability sentences.
+I became fascinated with the [Coleman-Liau readability index](https://en.wikipedia.org/wiki/Coleman%E2%80%93Liau_index) while testing various writing tools. Read about how I reverse engineered the Coleman-Liau algorithm to score the readability sentences.
 
 During a spell of frequent writing, I tested a multitude of software tools promising to make my writing better.
 

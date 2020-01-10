@@ -19,9 +19,10 @@ tags:
 - Mobile
 - App
 - Cordova
+- Nightwatch.js
 --- 
 
-Learn to setup a Hybrid App Development Platform to create mobile apps using web technologies. Use Vue.js, Apache Cordova and Nightwatch tests to build apps for distribution on Apple and Android app stores.
+Learn to setup a Hybrid App Development Platform to create mobile apps using web technologies. Use [Vue.js](https://vuejs.org/), Apache [Cordova](https://cordova.apache.org/) and [Nightwatch.js](https://nightwatchjs.org/) tests to build apps for distribution on Apple and Android app stores.
 
 This includes:
 

@@ -15,7 +15,7 @@ tags:
 - Computer-Science
 ---
 
-"What is a Binary Search?", I was asked this week. “I have no idea!”, I replied. I was interested to see if I could understand what a Binary Search was and whether I could write a Binary Search with Typescript.
+"What is a [Binary Search](https://en.wikipedia.org/wiki/Binary_search_algorithm)?", I was asked this week. “I have no idea!”, I replied. I was interested to see if I could understand what a Binary Search was and whether I could write a Binary Search with [Typescript](https://www.typescriptlang.org/).
 
 ## TLDR;
 
