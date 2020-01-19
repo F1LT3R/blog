@@ -1,0 +1,8 @@
+[submodule "drafts"]
+	path = drafts
+	url = git@github.com:F1LT3R/drafts.git
+	branch = master
+[submodule "_drafts"]
+	path = _drafts
+	url = git@github.com:F1LT3R/drafts.git
+	branch = master
