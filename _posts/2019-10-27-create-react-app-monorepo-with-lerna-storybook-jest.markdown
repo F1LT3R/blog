@@ -2,7 +2,7 @@
 layout: post
 title: Setup a Create React App Monorepo
 permalink: create-react-app-monorepo-with-lerna-storybook-jest
-date: '2018-10-27 05:34:54'
+date: '2019-10-27 05:34:54'
 feature_img: /img/feature/create-react-app-monorepo-with-lerna-storybook-jest.feature.jpeg
 featured: true
 categories:
