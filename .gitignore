@@ -89,3 +89,5 @@ gh-pages/
 pkg/
 test/dest
 tmp/*
+
+.DS_Store
