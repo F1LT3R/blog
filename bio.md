@@ -47,7 +47,7 @@ const tools = [
 
 <p>I'll never forget the day my Dad brought home the Matrix, and jacked in.</p>
 
-<p>So I started programming back in the early 1980s, making computer games on the beloved [BBC Microcomputer](https://en.wikipedia.org/wiki/BBC_Micro) - my only true escape from the ravages of growing up on the wrong side of the track. I made an unsung vow back then, to never get too close to a database, just in case I got dragged _all the way in_.</p>
+<p>I started programming back in the early 1980s, making computer games on the beloved <a href="https://en.wikipedia.org/wiki/BBC_Micro">BBC Microcomputer</a> - my only true escape from the ravages of growing up on the wrong side of the track. I made an unsung vow back then, to never get too close to a database, just in case I got dragged <i>all the way in</i>.</p>
 
 <p>So far, so good.</p>
 
