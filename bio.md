@@ -37,11 +37,15 @@ const tools = [
 
 <div class="cols-3">
 
+<h3>Career</h3>
+
 <p>I have been developing web sites and mobile applications for twenty years. I experiment with low-power computing, build mechanical keyboards, and contribute to Open Source software. I use React, monorepos, Behavior Driven Development, and Dev-Ops integrations, to engineer user interfaces that scale across multiple teams and products.</p>
 
 <p>In my early career, I focused on accelerating the bleeding edge of the web browser. Data visualization with <a href="https://mozilla.com">Mozilla</a> and <a href="https://www.newsweek.com/">Newsweek</a>, Audio Working Group Chair at The <a href="https://www.w3.org/Consortium/">W3C</a>, Educational HTML5 Games Development for <a href="https://concord.org/">The Concord Consortium</a>, Node.js Streaming Platform project lead for Red Bull Studios, wrote about JavaScript animation for popular British tech magazine .NET (no relation to the language). I have spoken about JavaScript APIs and Frameworks at over 20 conferences and meetups, and I organized the <a href="https://www.meetup.com/boston_JS/">Boston JavaScript Meetup Group</a> from 2010-2012.</p>
 
 <p>In recent years I have focused on using technology to help solve social problems. I was Software Architect and Scrum Master for a Web Accessibility company and a Lead Developer for two mobile healthcare apps. I am currently creating user interfaces for an awesome autonomous vehicle company in the trucking space, <a href="https://isee.ai">isee.ai</a></p>
+
+<h3>Personal</h3>
 
 <p>I have been bashing computer keys since I was a wee lad. My Dad joined the dark side, and became a database programmer (for a Japanse education company), and thank God, he brought those glorious machines home where they belonged.</p>
 
