@@ -2,7 +2,7 @@
 layout: page
 title: Bio
 permalink: /bio/
-date: '2017-08-31 17:25:55'
+date: "2017-08-31 17:25:55"
 ---
 
 <p><center><a href="https://github.com/f1lt3r">Github</a> | <a 
@@ -37,11 +37,23 @@ const tools = [
 
 <div class="cols-3">
 
-<p>I have been using JavaScript to develop websites and mobile applications for 20 years. I eat, sleep and dream in code. I experiment with low-power computing, build keyboards and contribute to Open Source software. I am a passionate advocate for Behavior Driven Development, DevOps and Agile without drama. I have co-founded a company and been the first employee at a tech start-up three times.</p>
+I have been developing web sites and mobile applications for twenty years. I experiment with low-power computing, build mechanical keyboards, and contribute to Open Source software. I use React, monorepos, Behavior Driven Development, and Dev-Ops integrations, to engineer user interfaces that scale across multiple teams and products.
 
-<p>In my early career, I focused on pushing the bleeding-edge of web technology. I was a Technical Lead for Mozilla, chaired the Audio Working Group at The W3C, worked on data visualization for Newsweek, developed a Node.js platform for RedBull Studios and wrote an article for the .NET magazine about JavaScript animation. In recent years I have focused on using technology to help solve social problems. I was a Software Architect and Scrum Master for a Web Accessibility company and a Lead Developer for two mobile healthcare apps.</p>
+In my early career, I focused on accelerating the bleeding edge of the web browser. Data visualization with [Mozilla](https://mozilla.com) and [Newsweek](https://www.newsweek.com/), Audio Working Group Chair at The [W3C](https://www.w3.org/Consortium/), Educational HTML5 Games Development for [Concord Consortium](https://concord.org/), Node.js Streaming Platform project lead for Red Bull Studios, wrote about JavaScript animation for popular British tech magazine .NET (no relation to the language). I have spoken about JavaScript APIs and Frameworks at over 20 conferences and meetups, and I organized the [Boston JavaScript Meetup Group](https://www.meetup.com/boston_JS/) from 2010-2012.
 
-<p>I have been programming since the early 1980's making computer games on a BBC Microcomputer. I started designing and building websites for work during the early 2000's and began mixing web technology with live video performance in London in the mid-2000's</p>
+In recent years I have focused on using technology to help solve social problems. I was Software Architect and Scrum Master for a Web Accessibility company and a Lead Developer for two mobile healthcare apps. I am currently creating user interfaces for an awesome autonomous vehicle company in the trucking space, [isee.ai](https://isee.ai)
+
+I have been bashing computer keys since I was a wee lad. My Dad joined the dark side, and became a database programmer (for a Japanse education company), and thank God, he brought those glorious machines home where they belonged.
+
+I'll never forget the day my Dad brought home the Matrix, and jacked in.
+
+So I started programming back in the early 1980s, making computer games on the beloved [BBC Microcomputer](https://en.wikipedia.org/wiki/BBC_Micro) - my only true escape from the ravages of growing up on the wrong side of the track. I made an unsung vow back then, to never get too close to a database, just in case I got dragged _all the way in_.
+
+So far, so good.
+
+When I was about 12 years old, my friend's mom paid me to develop a book keeping app for her business. She had a Windows 3.1 PC. I wrote it in [QBasic](https://en.wikipedia.org/wiki/QBasic#:~:text=QBasic%2C%20a%20short%20form%20of,which%20are%20based%20on%20QuickBASIC.).
+
+<p>I began designing and building websites for companies back in 1999 and started mixing web technology with live video performance in London clubs and festivals in 2004.</p>
 
 <p>I studied Music Technology, Production & Performance at Langley College in England, where my teacher jokingly nicknamed me <b>"Doctor Filter"</b>, because a) every musician was pre-pending their name with "Dr." back then, (E.g., Dr. Dre), and b), because I would apply <a href="https://en.wikipedia.org/wiki/Cutoff_frequency">Frequency Cutoff Filters</a> to every channel of the electronic music I produced.</p>
 
