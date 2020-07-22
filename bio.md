@@ -37,23 +37,23 @@ const tools = [
 
 <div class="cols-3">
 
-I have been developing web sites and mobile applications for twenty years. I experiment with low-power computing, build mechanical keyboards, and contribute to Open Source software. I use React, monorepos, Behavior Driven Development, and Dev-Ops integrations, to engineer user interfaces that scale across multiple teams and products.
+<p>I have been developing web sites and mobile applications for twenty years. I experiment with low-power computing, build mechanical keyboards, and contribute to Open Source software. I use React, monorepos, Behavior Driven Development, and Dev-Ops integrations, to engineer user interfaces that scale across multiple teams and products.</p>
 
-In my early career, I focused on accelerating the bleeding edge of the web browser. Data visualization with [Mozilla](https://mozilla.com) and [Newsweek](https://www.newsweek.com/), Audio Working Group Chair at The [W3C](https://www.w3.org/Consortium/), Educational HTML5 Games Development for [Concord Consortium](https://concord.org/), Node.js Streaming Platform project lead for Red Bull Studios, wrote about JavaScript animation for popular British tech magazine .NET (no relation to the language). I have spoken about JavaScript APIs and Frameworks at over 20 conferences and meetups, and I organized the [Boston JavaScript Meetup Group](https://www.meetup.com/boston_JS/) from 2010-2012.
+</p>In my early career, I focused on accelerating the bleeding edge of the web browser. Data visualization with <a href="https://mozilla.com">Mozilla</a> and <a href="https://www.newsweek.com/">Newsweek</a>, Audio Working Group Chair at The <a href="https://www.w3.org/Consortium/">W3C</a>, Educational HTML5 Games Development for <a href="https://concord.org/">The Concord Consortium</a>, Node.js Streaming Platform project lead for Red Bull Studios, wrote about JavaScript animation for popular British tech magazine .NET (no relation to the language). I have spoken about JavaScript APIs and Frameworks at over 20 conferences and meetups, and I organized the <a href="https://www.meetup.com/boston_JS/">Boston JavaScript Meetup Group</a> from 2010-2012.</p>
 
-In recent years I have focused on using technology to help solve social problems. I was Software Architect and Scrum Master for a Web Accessibility company and a Lead Developer for two mobile healthcare apps. I am currently creating user interfaces for an awesome autonomous vehicle company in the trucking space, [isee.ai](https://isee.ai)
+<p>In recent years I have focused on using technology to help solve social problems. I was Software Architect and Scrum Master for a Web Accessibility company and a Lead Developer for two mobile healthcare apps. I am currently creating user interfaces for an awesome autonomous vehicle company in the trucking space, <a href="https://isee.ai">isee.ai</a></p>
 
-I have been bashing computer keys since I was a wee lad. My Dad joined the dark side, and became a database programmer (for a Japanse education company), and thank God, he brought those glorious machines home where they belonged.
+<p>I have been bashing computer keys since I was a wee lad. My Dad joined the dark side, and became a database programmer (for a Japanse education company), and thank God, he brought those glorious machines home where they belonged.</p>
 
-I'll never forget the day my Dad brought home the Matrix, and jacked in.
+<p>I'll never forget the day my Dad brought home the Matrix, and jacked in.</p>
 
-So I started programming back in the early 1980s, making computer games on the beloved [BBC Microcomputer](https://en.wikipedia.org/wiki/BBC_Micro) - my only true escape from the ravages of growing up on the wrong side of the track. I made an unsung vow back then, to never get too close to a database, just in case I got dragged _all the way in_.
+<p>So I started programming back in the early 1980s, making computer games on the beloved [BBC Microcomputer](https://en.wikipedia.org/wiki/BBC_Micro) - my only true escape from the ravages of growing up on the wrong side of the track. I made an unsung vow back then, to never get too close to a database, just in case I got dragged _all the way in_.</p>
 
-So far, so good.
+<p>So far, so good.</p>
 
-When I was about 12 years old, my friend's mom paid me to develop a book keeping app for her business. She had a Windows 3.1 PC. I wrote it in [QBasic](https://en.wikipedia.org/wiki/QBasic#:~:text=QBasic%2C%20a%20short%20form%20of,which%20are%20based%20on%20QuickBASIC.).
+<p>When I was about 12 years old, my friend's mom paid me to develop a book keeping app for her business. She had a Windows 3.1 PC. I wrote it in <a href="https://en.wikipedia.org/wiki/QBasic#:~:text=QBasic%2C%20a%20short%20form%20of,which%20are%20based%20on%20QuickBASIC.">QBasic</a>. And that was my first commercial bug fixing experience.</p>
 
-<p>I began designing and building websites for companies back in 1999 and started mixing web technology with live video performance in London clubs and festivals in 2004.</p>
+<p>I began designing and building websites for companies back in 1999 and started mixing interactive HTML5 visualizations with live video performances for London clubs and festivals in 2004.</p>
 
 <p>I studied Music Technology, Production & Performance at Langley College in England, where my teacher jokingly nicknamed me <b>"Doctor Filter"</b>, because a) every musician was pre-pending their name with "Dr." back then, (E.g., Dr. Dre), and b), because I would apply <a href="https://en.wikipedia.org/wiki/Cutoff_frequency">Frequency Cutoff Filters</a> to every channel of the electronic music I produced.</p>
 
