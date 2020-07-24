@@ -16,10 +16,10 @@ tags:
 - Node.js
 ---
 
-JavaScript! Why?
-
-1. Better composability
-2. Faster development
+> JavaScript! Why?  
+>  
+> 1. Better composability
+> 2. Faster development
 
 ### Type Safety Bugs
 
