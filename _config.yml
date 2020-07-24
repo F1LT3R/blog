@@ -13,10 +13,10 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: 'F1LT3R'
+title: 'F1LT3R - UI Engineer'
 email: 'al@pwn.io'
 description: >- # this means to ignore newlines until "baseurl:"
-  UI Engineer
+   have been developing web sites and mobile applications for twenty years. I experiment with low-power computing, build mechanical keyboards, and contribute to Open Source software. I use React, monorepos, Behavior Driven Development, and Dev-Ops integrations, to engineer user interfaces that scale across multiple teams and products.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://f1lt3r.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  'f1lt3r'
