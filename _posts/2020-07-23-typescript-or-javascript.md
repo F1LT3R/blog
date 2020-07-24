@@ -62,7 +62,7 @@ Let's compose...
 ```js
 // Counters.mjs
 
-import Counter from './Counter.mjs';
+import { Counter } from './Counter.mjs';
 
 export const Counters = (...counters) => ({
   add: () => counters.map((counter) => counter.add()),
@@ -117,7 +117,7 @@ Let's extend...
 ```js
 // Manager.mjs
 
-import Employee from './Employee.mjs'
+import { Employee } from './Employee.mjs'
 
 const accept = () => ({
   accept({ role, productivity }) {
