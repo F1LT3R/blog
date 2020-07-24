@@ -16,8 +16,6 @@ tags:
 - Node.js
 ---
 
-### TypeScript is JavaScript's Aircraft Carrier
-
 To draw an analogy, JavaScript is a jump-jet and TypeScript is an aircraft carrier; And even though TypeScript is safe, it's still not safe enough to run a nuclear power plant.
 
 I choose JavaScript! Why?  
