@@ -176,7 +176,7 @@ console.log(al.product); // 2
 
 ### Anti-Fragile
 
-Object composition in Vanilla JavaScript is anti-fragile. I don't have to keep changing my code when the language's class API surface shifts. I don't have to get things working again when packages in [TypeScript's Node ecosystem deliver breaking changes](https://github.com/Microsoft/TypeScript/issues/14116) in exchange for fancier features or security enhancements. (This is not an anti-security statement).
+Object composition in Vanilla JavaScript is anti-fragile. I don't have to keep changing my code when the language's class API surface shifts. I don't have to get things working again when packages in [TypeScript's Node ecosystem delivers breaking changes](https://github.com/Microsoft/TypeScript/issues/14116) in exchange for fancier features or security enhancements. (This is not an anti-security statement).
 
 #### Keep The Web Simple
 
