@@ -68,7 +68,7 @@ const tools = [
 - 2019-06-16: **React MonoRepos** - React Meetup, Boston
 - 2018-05-05: **React Context API** - Frontend Meetup at HMH, Boston
 - 2018-06-01: **ESNext & React Training Course** - Five day course at HMH, Boston
-- 2012-10-15: **Web Audio** - Wakanday JavaScript Conference, Boston
+- 2012-10-15: [**Web Audio** - Wakanday JavaScript Conference, Boston](https://youtu.be/kFQalQj6JjE), Boston
 - 2011-08-17: **Blender to WebGL** - HTML5 Game Development Meetup, Boston
 - 2011-06-17: **WebGL Demo Workshop** - [AT]Party Demoscene Event, Harvard
 - 2011-01-20: **Web Audio APIs** - HTML5 Game Development Meetup, Boston
@@ -81,7 +81,7 @@ const tools = [
 - 2010-07-08: **The Future of Web Audio** - Mozilla Summit 2010, Whistler, Canada
 - 2010-05-12: **The Future of Web Audio** - Bocoup Loft, Boston
 - 2010-04-28: **Audio Data API** - WWW2010, North Carolina
-- 2010-04-17: **WebGL Demo Overload** - JSConf, DC
+- 2010-04-17: [**WebGL Demo Overload** - JSConf, DC](https://youtu.be/ABXcIuKEhiY)
 - 2010-04-02: **Keynote JavaScript Motion Graphics** - Motion Graphics Festival, MA
 - 2010-03-17: **UI Mechanics** - Bocoup Loft, Boston
 - 2009-11-21: **Processing.js Workshop x2** - Music Hack Day, Boston
