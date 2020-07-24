@@ -16,20 +16,20 @@ tags:
 - Node.js
 ---
 
-> JavaScript! Why?  
->  
-> 1. Better composability
-> 2. Faster development
+### TypeScript is JavaScript's Aircraft Carrier
+
+To draw an analogy, JavaScript is a jump-jet and TypeScript is an aircraft carrier; And even though TypeScript is safe, it's still not safe enough to run a nuclear power plant.
+
+I choose JavaScript! Why?  
+  
+1. Better composability
+2. Faster development
 
 ### Type Safety Bugs
 
 I spend about 1% of my time dealing with types and type related bugs in JavaScript. To be fair, I use Prettier, ESLint, & BDD with VS Code, so most type safety bugs get knocked down before production anyway.
 
 Eric Elliot has a good post on this called, [The TypeScript Tax](https://medium.com/javascript-scene/the-typescript-tax-132ff4cb175b).
-
-### TypeScript is JavaScript's Aircraft Carrier
-
-To draw an analogy, JavaScript is a jump-jet and TypeScript is an aircraft carrier; And even though TypeScript is safe, it's still not safe enough to run a nuclear power plant.
 
 ### Classes
 
