@@ -21,6 +21,7 @@ const tools = [
 
 ## History
 
+<!--
 <p>
 <center>
 <iframe  src="https://www.youtube.com/embed/xX61L36SyzU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -34,6 +35,7 @@ const tools = [
 <iframe src="https://www.youtube.com/embed/jShJQMtajVI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
 </p>
+-->
 
 <div class="cols-3">
 
@@ -43,13 +45,12 @@ const tools = [
 
 <p>In recent years I have focused on using technology to help solve social problems. I was Software Architect and Scrum Master for a Web Accessibility company and a Lead Developer for two mobile healthcare apps. I am currently creating user interfaces for an awesome autonomous vehicle company in the trucking space, <a href="https://isee.ai">isee.ai</a></p>
 
+
 <p>On a more personal note, I have been bashing computer keys since I was a wee lad. My Dad joined the dark side, and became a database programmer (for a Japanse education company), and thank God, he brought those glorious machines home where they belonged.</p>
 
-<p>I'll never forget the day my Dad brought home the Matrix, and jacked in.</p>
+<blockquote>I'll never forget the day my Dad brought home his WANG Terminal in the 1980s, plugged into phone line and started working remotely. </blockquote>
 
-<p>I started programming back in the early 1980s, making computer games on the beloved <a href="https://en.wikipedia.org/wiki/BBC_Micro">BBC Microcomputer</a> - my only true escape from the ravages of growing up on the wrong side of the track. I made an unsung vow back then, to never get too close to a database, just in case I got dragged <i>all the way in</i>.</p>
-
-<p>So far, so good.</p>
+<p>I started programming back in the early 1980s, making computer games on the beloved <a href="https://en.wikipedia.org/wiki/BBC_Micro">BBC Microcomputer</a> - my only escape from the realities of growing up on the wrong side of the tracks. I made an unsung vow back then, to never get too close to a database, just in case I got dragged <i>all the way in</i>.</p>
 
 <p>When I was about 12 years old, my friend's mom paid me to develop a book keeping app for her business. She had a Windows 3.1 PC. I wrote it in <a href="https://en.wikipedia.org/wiki/QBasic#:~:text=QBasic%2C%20a%20short%20form%20of,which%20are%20based%20on%20QuickBASIC.">QBasic</a>. And that was my first commercial bug fixing experience.</p>
 
