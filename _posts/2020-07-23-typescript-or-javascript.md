@@ -55,7 +55,7 @@ counter.add();
 console.log(counter.count); // 4
 ```
 
-This kind of object composition is easier to reason about. It is more performant, and has a lighter memory footprint.
+This kind of object composition is easier to reason about. The [memory footprint and CPU load of Object Composition](https://github.com/F1LT3R/js-oop-perf) is identical to Classes and Prototypes.
 
 Let's compose...
 
@@ -182,7 +182,7 @@ Object composition in Vanilla JavaScript is anti-fragile. I don't have to keep c
 
 I often wonder how many frontend engineers learn frameworks, libraries and supersets, yet never realize the awesome power of modern JavaScript. 
 
-I love writing pure, enclosed objects, wrapped in the lexical scopes of first class functions, all the way down.; There's Very little magic, and a whole lot of beauty.
+I love writing pure, enclosed objects, wrapped in the lexical scopes of first class functions, all the way down; There's Very little magic, and a whole lot of beauty.
 
 If you want learn more about the inner workings of the code patterns above, read Kyle Simpson's excellent book series called, [You Don't Know JS (Yet)](https://github.com/getify/You-Dont-Know-JS).
 
