@@ -16,7 +16,7 @@
 title: 'F1LT3R'
 email: 'al@pwn.io'
 description: >- # this means to ignore newlines until "baseurl:"
-   I am a Senior User Interface Engineer at https://isee.ai
+   JavaScript Developer - Web & Mobile
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://f1lt3r.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  'f1lt3r'

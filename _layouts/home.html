@@ -19,6 +19,7 @@ layout: default
 
     <ul class="post-list">
       {%- for post in site.posts -%}
+      {% unless post.hidden %}
       {% if post.featured %}
       <li>
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
@@ -52,9 +53,11 @@ layout: default
           <div class="excerpt">{{ post.excerpt }}</div>
       </li>
       {% endif %}
+      {% endunless %}
       {%- endfor -%}
 
       {%- for post in site.posts -%}
+      {% unless post.hidden %}
       {% unless post.featured %}
       <li>
         {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
@@ -87,6 +90,7 @@ layout: default
         </div>
           <div class="excerpt">{{ post.excerpt }}</div>
       </li>
+      {% endunless %}
       {% endunless %}
       {%- endfor -%}
     </ul>
