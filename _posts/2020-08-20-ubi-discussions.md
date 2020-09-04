@@ -35,4 +35,4 @@ Economies have energy-wells, or hurdles. When economic shortwaves propagate thro
 
 Heating your home from only one side of the house, would require much more energy than putting a heater in each room. Our economy is like a house heated on one side. The pipes are creaking and banging, and steam is spewing out of the radiators.
 
-Welfare is not an adequate stimulation of the economy, because the many disincentives it adds, outweigh the benefits.
+Welfare is not an adequate stimulation of the economy, because of the disincentives it adds outweigh the benefits.
