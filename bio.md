@@ -43,7 +43,9 @@ const tools = [
 
 <p>In my early career, I focused on accelerating the bleeding edge of the web browser. Data visualization with <a href="https://mozilla.com">Mozilla</a> and <a href="https://www.newsweek.com/">Newsweek</a>, Audio Working Group Chair at The <a href="https://www.w3.org/Consortium/">W3C</a>, Educational HTML5 Games Development for <a href="https://concord.org/">The Concord Consortium</a>, Node.js Streaming Platform project lead for Red Bull Studios, wrote about JavaScript animation for popular British tech magazine .NET (no relation to the language). I have spoken about JavaScript APIs and Frameworks at over 20 conferences and meetups, and I organized the <a href="https://www.meetup.com/boston_JS/">Boston JavaScript Meetup Group</a> from 2010-2012.</p>
 
-<p>In recent years I have focused on using technology to help solve social problems. I was Software Architect and Scrum Master for a Web Accessibility company and a Lead Developer for two mobile healthcare apps. I am currently creating user interfaces for an awesome autonomous vehicle company in the trucking space, <a href="https://isee.ai">isee.ai</a></p>
+<p>In recent years I have focused on using technology to help solve social problems.  I was Software Architect and Scrum Master for web accessibility company, AI Squared, and a Lead Developer for two mobile healthcare apps, Radial Analytics and Mya Health.</p>
+
+<p>I am current working on the <a href="https://groupincome.org/">Group Income</a> project at <a href="https://okturtles.org/">The okTurtles Foundation</a>.</p>
 
 
 <p>On a more personal note, I have been bashing computer keys since I was a wee lad. My Dad joined the dark side, and became a database programmer (for a Japanse education company), and thank God, he brought those glorious machines home where they belonged.</p>
