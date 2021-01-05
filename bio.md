@@ -45,9 +45,6 @@ const tools = [
 
 <p>In recent years I have focused on using technology to help solve social problems.  I was Software Architect and Scrum Master for web accessibility company, AI Squared, and a Lead Developer for two mobile healthcare apps, Radial Analytics and Mya Health.</p>
 
-<p>I am current working on the <a href="https://groupincome.org/">Group Income</a> project at <a href="https://okturtles.org/">The okTurtles Foundation</a>.</p>
-
-
 <p>On a more personal note, I have been bashing computer keys since I was a wee lad. My Dad joined the dark side, and became a database programmer (for a Japanse education company), and thank God, he brought those glorious machines home where they belonged.</p>
 
 <blockquote>I'll never forget the day my Dad brought home his WANG Terminal in the 1980s, plugged into phone line and started working remotely. </blockquote>
