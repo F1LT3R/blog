@@ -18,15 +18,15 @@ email: 'al@pwn.io'
 description: >- # this means to ignore newlines until "baseurl:"
    JavaScript Developer - Web & Mobile
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://f1lt3r.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://f1lt3r.me" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  'f1lt3r'
 linkedin_username:  'f1lt3r'
 soundcloud_username:  'f1lt3r'
 instagram_username: 'f1lt3r'
 rss: 'RSS'
 disqus:
-  shortname: 'f1lt3r-io'
-  url: 'https://f1lt3r.io'
+  shortname: 'f1lt3r-me'
+  url: 'https://f1lt3r.me'
   
 author: 'Alistair MacDonald'
 
